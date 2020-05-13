@@ -3,64 +3,69 @@ const jwt = require('jsonwebtoken')
 const User = require('../models/User')
 const serverKey = require('./.keyEnv')
 
-
 const validateInputs = (username, email, password) => {
   const usernameRegex = /\W/i
   const emailRegex = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/
-  if(username.length < 6 || username.length > 30 || usernameRegex.test(username)) return false
-  if(emailRegex.test(email.toLowerCase()) === false) return false
-  if(!password) return false 
+  if (username.length < 6 || username.length > 30 || usernameRegex.test(username)) return false
+  if (emailRegex.test(email.toLowerCase()) === false) return false
+  if (!password) return false
   return true
 }
 
-const register = async(req, res) => {
-  try{
-    const {username, email, password} = req.body
-    if(!validateInputs(username, email, password)) throw "Invalid Username, Email, or Password."
+const register = async (req, res) => {
+  try {
+    const { username, email, password } = req.body
+    if (!validateInputs(username, email, password)) throw Error('Invalid Username, Email, or Password.')
     const saltRounds = 7
     const hashedPassword = await bcrypt.hash(password, saltRounds)
     User.addUser(username, email, hashedPassword)
-    const token = jwt.sign({username: username, password: hashedPassword}, serverKey)
+    const token = jwt.sign({ username: username, password: hashedPassword }, serverKey)
     res.cookie('safeToken', token)
-  }
-  catch(err) {
+  } catch (err) {
     res.send('err')
   }
 }
 
-const login = async(req, res) => {
-  try{
-    const {username, password} = req.body
+const login = async (req, res) => {
+  try {
+    const { username, password } = req.body
     const user = await User.getByUsername(username)
-    if(!user){
+    if (!user) {
       return res.status(401).send('User Does Not Exist.')
     }
-    
+
     const isValidPassword = await bcrypt.compare(password, user.hashedPassword)
-    
-    if(isValidPassword){
-      const token = jwt.sign({username: user.username, email: user.email, password: user.hashedPassword})
+
+    if (isValidPassword) {
+      const token = jwt.sign({ username: user.username, email: user.email, password: user.hashedPassword })
       res.cookie('safeToken', token)
     }
-  }
-  catch (err) {
+  } catch (err) {
     res.send('err')
   }
 }
 
-const deleteAccount = async(req, res) => {
-  try{
-    const {username, email, password} = req.body
+const deleteAccount = async (req, res) => {
+  try {
+    const { username, email, password } = req.body
     const user = await User.getByUsername(username)
-    if(!user.email === email) throw "Incorrect credentials"
+    if (!user.email === email) throw Error('Incorrect credentials')
     const isValidPassword = await bcrypt.compare(password, user.hashedPassword)
-    if(isValidPassword){
+    if (isValidPassword) {
       User.deleteAccount(email)
     }
-  }
-  catch(err){
+  } catch (err) {
     res.send(err)
   }
-  
-  
+}
+
+const logout = (req, res) => {
+  res.clearCookie('safeToken')
+}
+
+module.exports = {
+  register,
+  login,
+  logout,
+  deleteAccount
 }
