@@ -64,4 +64,15 @@ This project adheres to the [StandardJS Style Guide](https://github.com/standard
 
 ## Entity-Relationship Diagram
 
-![](./diagram.png)
+![Entity relationship diagram](./diagram.png)
+
+## Front-End Wireframe
+
+![Wireframe for webpage](./wireframe.png)
+
+### Respective Front-End Routes
+
+Login - `/` If logged out
+Sign Up - `/signup`
+Homepage - `/` If logged in
+Post Form - `/add-post`
