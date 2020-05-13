@@ -61,3 +61,7 @@ See [CONTRIBUTING.md](CONTRIBUTING.md) for contribution guidelines.
 ## Style Guide
 
 This project adheres to the [StandardJS Style Guide](https://github.com/standard/standard).
+
+## Entity-Relationship Diagram
+
+![](./diagram.png)
