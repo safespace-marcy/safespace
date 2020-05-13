@@ -72,7 +72,7 @@ This project adheres to the [StandardJS Style Guide](https://github.com/standard
 
 ### Respective Front-End Routes
 
-Login - `/` If logged out
-Sign Up - `/signup`
-Homepage - `/` If logged in
-Post Form - `/add-post`
+* Login - `/` If logged out
+* Sign Up - `/signup`
+* Homepage - `/` If logged in
+* Post Form - `/add-post`
