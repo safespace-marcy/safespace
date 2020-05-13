@@ -1,6 +1,6 @@
 # Safe Space
 
-> Many people have had traumatic events occur in their life that lingers with them for years. Being unable to share how we feel, or not having the resources to do so with professionals, we risk having to deal with these experiences on our own. Survivor Network provides a platform for individuals seeking a safe community where they can share their feelings and experiences. A place that they can find relief and talk to those who can relate.
+Many people have had traumatic events occur in their life that lingers with them for years. Being unable to share how we feel, or not having the resources to do so with professionals, we risk having to deal with these experiences on our own. Survivor Network provides a platform for individuals seeking a safe community where they can share their feelings and experiences. A place that they can find relief and talk to those who can relate.
 
 
 ## Team
