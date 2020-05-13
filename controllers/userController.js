@@ -47,3 +47,20 @@ const login = async(req, res) => {
     res.send('err')
   }
 }
+
+const deleteAccount = async(req, res) => {
+  try{
+    const {username, email, password} = req.body
+    const user = await User.getByUsername(username)
+    if(!user.email === email) throw "Incorrect credentials"
+    const isValidPassword = await bcrypt.compare(password, user.hashedPassword)
+    if(isValidPassword){
+      User.deleteAccount(email)
+    }
+  }
+  catch(err){
+    res.send(err)
+  }
+  
+  
+}
