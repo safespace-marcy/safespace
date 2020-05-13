@@ -1,7 +1,7 @@
 const db = require('../db')
 
 class User {
-  static createUser (username, email, password) {
+  static addUser(username, email, password) {
     const queryText = 'INSERT INTO users (username, email, password) VALUES ($1, $2, $3)'
     return db.query(queryText, [username, email, password])
   }
@@ -27,9 +27,9 @@ class User {
     return db.query('SELECT * FROM users;')
   }
 
-  static deleteUser (userId) {
-    const queryText = 'SELECT * FROM users WHERE id = $1;'
-    return db.query(queryText, [userId])
+  static deleteAccount (email) {
+    const queryText = 'SELECT * FROM users WHERE email = $1;'
+    return db.query(queryText, [email])
   }
 
   static updatePassword (userId, newPassword) {
