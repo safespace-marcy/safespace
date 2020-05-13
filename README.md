@@ -64,7 +64,7 @@ This project adheres to the [StandardJS Style Guide](https://github.com/standard
 
 ## Entity-Relationship Diagram
 
-![](./diagram.png)
+![Entity relationship diagram](./diagram.png)
 
 ## Table Definitions
 
@@ -78,13 +78,13 @@ CREATE TABLE users(
 
 CREATE TABLE communities(
   id SERIAL PRIMARY KEY,
-  username varchar(32) UNIQUE NOT NULL
+  name varchar(32) UNIQUE NOT NULL
 );
 
 CREATE TABLE posts(
   id SERIAL PRIMARY KEY,
-  id integer REFERENCES users NOT NULL,
-  id integer REFERENCES communities NOT NULL,
+  user_id integer REFERENCES users (id) NOT NULL,
+  community_id integer REFERENCES communities (id) NOT NULL,
   content text, 
   time_made timestamp NOT NULL
 );
@@ -96,3 +96,14 @@ CREATE TABLE community_users(
 );
 
 ```
+
+## Front-End Wireframe
+
+![Wireframe for webpage](./wireframe.png)
+
+### Respective Front-End Routes
+
+* Login - `/` If logged out
+* Sign Up - `/signup`
+* Homepage - `/` If logged in
+* Post Form - `/add-post`
