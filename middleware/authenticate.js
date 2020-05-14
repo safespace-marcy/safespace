@@ -9,20 +9,19 @@ const serverKey = require('./.keyEnv')
 * @param {object} next - The next function used to pass the req to the next middleware function
 */
 const authenticate = async (req, res, next) => {
-  try{
+  try {
     const token = req.cookies.safeToken
-    if(!token) return res.status(401).send('Token not found, please login.')
+    if (!token) return res.status(401).send('Token not found, please login.')
 
     const username = await jwt.verify(token, serverKey, (err, decoded) => {
-      if(err) throw Error('Failed to authenticate token')
+      if (err) throw Error('Failed to authenticate token')
       return decoded
     })
     const user = await User.getByUsername(username)
-    if(user) return res.status(404).send("No user found.")
+    if (user) return res.status(404).send('No user found.')
     req.userId = user.id
     next()
-  }
-  catch(err){
+  } catch (err) {
     res.send(err)
   }
 }
