@@ -33,7 +33,7 @@ const register = async (req, res) => {
     const token = jwt.sign({ username: username }, serverKey)
     res.cookie('safeToken', token)
   } catch (err) {
-    res.send(err)
+    res.status(401).send(err)
   }
 }
 
@@ -57,7 +57,7 @@ const login = async (req, res) => {
       res.cookie('safeToken', token)
     }
   } catch (err) {
-    res.send('err')
+    res.status(500).send(err)
   }
 }
 
@@ -76,7 +76,7 @@ const deleteAccount = async (req, res) => {
       User.deleteAccount(email)
     }
   } catch (err) {
-    res.send(err)
+    res.status(500).send(err)
   }
 }
 
@@ -97,10 +97,10 @@ const logout = (req, res) => {
 const getUser = async (req, res) => {
   try {
     const userId = req.userId
-    const user = User.getById(userId)
+    const user = await User.getById(userId)
     res.send(user)
   } catch (err) {
-    res.send(err)
+    res.status(404).send(err)
   }
 }
 
