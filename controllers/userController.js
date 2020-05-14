@@ -30,7 +30,7 @@ const register = async (req, res) => {
     const saltRounds = 7
     const hashedPassword = await bcrypt.hash(password, saltRounds)
     User.add(username, email, hashedPassword)
-    const token = jwt.sign({ username: username}, serverKey)
+    const token = jwt.sign({ username: username }, serverKey)
     res.cookie('safeToken', token)
   } catch (err) {
     res.send(err)
@@ -53,7 +53,7 @@ const login = async (req, res) => {
     const isValidPassword = await bcrypt.compare(password, user.password)
 
     if (isValidPassword) {
-      const token = jwt.sign({ username: user.username})
+      const token = jwt.sign({ username: user.username })
       res.cookie('safeToken', token)
     }
   } catch (err) {
@@ -89,9 +89,25 @@ const logout = (req, res) => {
   res.clearCookie('safeToken')
 }
 
+/**
+* Retrieves a user from the database and send it to the client
+* @param {object} req - The request object containing users credentials
+* @param {object} res - The response object used to send a repsonse back to the client
+*/
+const getUser = async (req, res) => {
+  try {
+    const userId = req.userId
+    const user = User.getById(userId)
+    res.send(user)
+  } catch (err) {
+    res.send(err)
+  }
+}
+
 module.exports = {
   register,
   login,
   logout,
-  deleteAccount
+  deleteAccount,
+  getUser
 }

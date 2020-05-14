@@ -1,7 +1,7 @@
 const db = require('../db')
 
 class User {
-  static add(username, email, password) {
+  static add (username, email, password) {
     const queryText = 'INSERT INTO users (username, email, password) VALUES ($1, $2, $3)'
     return db.query(queryText, [username, email, password])
   }
