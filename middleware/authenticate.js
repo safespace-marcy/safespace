@@ -1,18 +1,19 @@
 const jwt = require('jsonwebtoken')
 const User = require('../models/User')
-
+const serverKey = require('./.keyEnv')
 
 /**
 * Verifies authenticity of user's JWT and attaches user to request object
 * @param {object} req - The request object containing users credentials
 * @param {object} res - The response object used to send a repsonse back to the client
+* @param {object} next - The next function used to pass the req to the next middleware function
 */
 const authenticate = async (req, res, next) => {
   try{
     const token = req.cookies.safeToken
-    if(!safeToken) return res.status(401).send('Token not found, please login.')
+    if(!token) return res.status(401).send('Token not found, please login.')
 
-    const username = await jwt.verify(safeToken, serverKey, (err, decoded) => {
+    const username = await jwt.verify(token, serverKey, (err, decoded) => {
       if(err) throw Error('Failed to authenticate token')
       return decoded
     })
