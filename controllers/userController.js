@@ -3,6 +3,12 @@ const jwt = require('jsonwebtoken')
 const User = require('../models/User')
 const serverKey = require('./.keyEnv')
 
+/**
+* Validates users registration credentials
+* @param {string} username - The user's chosen tagname
+* @param {string} email - The user's email address
+* @param {string} password - The user's password (to be hashed client-side and server-side)
+*/
 const validateInputs = (username, email, password) => {
   const usernameRegex = /\W/i
   const emailRegex = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/
@@ -12,6 +18,11 @@ const validateInputs = (username, email, password) => {
   return true
 }
 
+/**
+* Registers user's credentials, adding them to the database using the User model
+* @param {object} req - The request object containing users credentials
+* @param {object} res - The response object used to send a repsonse back to the client
+*/
 const register = async (req, res) => {
   try {
     const { username, email, password } = req.body
@@ -22,10 +33,15 @@ const register = async (req, res) => {
     const token = jwt.sign({ username: username, password: hashedPassword }, serverKey)
     res.cookie('safeToken', token)
   } catch (err) {
-    res.send('err')
+    res.send(err)
   }
 }
 
+/**
+* Gives the user a token after verifying user's entered credentials
+* @param {object} req - The request object containing users credentials
+* @param {object} res - The response object used to send a repsonse back to the client
+*/
 const login = async (req, res) => {
   try {
     const { username, password } = req.body
@@ -45,6 +61,11 @@ const login = async (req, res) => {
   }
 }
 
+/**
+* Deletes user's account after verifying user's entered credentials
+* @param {object} req - The request object containing users credentials
+* @param {object} res - The response object used to send a repsonse back to the client
+*/
 const deleteAccount = async (req, res) => {
   try {
     const { username, email, password } = req.body
@@ -59,6 +80,11 @@ const deleteAccount = async (req, res) => {
   }
 }
 
+/**
+* Clears the user's cookie containing the token that verifies their identity
+* @param {object} req - The request object containing users credentials
+* @param {object} res - The response object used to send a repsonse back to the client
+*/
 const logout = (req, res) => {
   res.clearCookie('safeToken')
 }
