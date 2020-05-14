@@ -1,21 +1,10 @@
 const Post = require('../models/Post');
 
-const deletePost = (req, res) => {
-  const { postId } = req.params;
-
-  Post.delete(postId)
-    .then((data) => res.json(data.rows))
-    .catch((err) => {
-      console.log(err);
-      res.status(500).send(err);
-    });
-};
-
-const createPost = (req, res) => {
+const create = (req, res) => {
   const { content } = req.body;
   const { communityId, userId } = req.params;
 
-  Post.create(communityId, userId, content)
+  Post.create(userId, communityId, content)
     .then((data) => res.json(data.rows))
     .catch((err) => {
       console.log(err);
@@ -23,10 +12,10 @@ const createPost = (req, res) => {
     });
 };
 
-const getCommunityPosts = (req, res) => {
-  const { communityId } = req.params;
-  
-  Post.getCommunityPosts(communityId)
+const deletePost = (req, res) => {
+  const { id } = req.params;
+
+  Post.delete(id)
     .then((data) => res.json(data.rows))
     .catch((err) => {
       console.log(err);
@@ -34,23 +23,11 @@ const getCommunityPosts = (req, res) => {
     });
 };
 
-const viewUsersPosts = (req, res) => {
-  const { userId } = req.params;
-
-  Post.getUsersPosts(userId)
-    .then((data) => res.status(200).json(data.rows))
-    .catch((err) => {
-      console.log(err);
-      res.status(500).json({ error: '500 Internal Server Error' });
-    });
-};
-
-
-const updatePost = (req, res) => {
+const update = (req, res) => {
   const { id } = req.params;
   const { content } = req.body;
 
-  Post.updatePost(id, content)
+  Post.update(content, id)
     .then((data) => res.status(200).json(data.rows))
     .catch((err) => {
       console.log(err);
@@ -58,19 +35,41 @@ const updatePost = (req, res) => {
     });
 };
 
-const getPostById = (req, res) => {
+const getById = (req, res) => {
   const { id } = req.params;
 
-  Post.getPostById(id)
+  Post.getById(id)
     .then((data) => res.json(data.rows[0]))
     .catch((err) => res.send(err));
 };
 
+const getUser = (req, res) => {
+  const { userId } = req.params;
+
+  Post.getAllByUser(userId)
+    .then((data) => res.status(200).json(data.rows))
+    .catch((err) => {
+      console.log(err);
+      res.status(500).json({ error: '500 Internal Server Error' });
+    });
+};
+
+const getCommunity = (req, res) => {
+  const { communityId } = req.params;
+  
+  Post.getAllByCommunity(communityId)
+    .then((data) => res.json(data.rows))
+    .catch((err) => {
+      console.log(err);
+      res.status(500).send(err);
+    });
+};
+
 module.exports = {
-  createPost,
-  getCommunityPosts,
+  create,
   deletePost,
-  updatePost,
-  viewUsersPosts,
-  getPostById,
+  update,
+  getById,
+  getUser,
+  getCommunity,
 };
