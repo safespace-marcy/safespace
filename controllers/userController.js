@@ -29,8 +29,8 @@ const register = async (req, res) => {
     if (!validateInputs(username, email, password)) throw Error('Invalid Username, Email, or Password.')
     const saltRounds = 7
     const hashedPassword = await bcrypt.hash(password, saltRounds)
-    User.addUser(username, email, hashedPassword)
-    const token = jwt.sign({ username: username, password: hashedPassword }, serverKey)
+    User.add(username, email, hashedPassword)
+    const token = jwt.sign({ username: username}, serverKey)
     res.cookie('safeToken', token)
   } catch (err) {
     res.send(err)
@@ -50,10 +50,10 @@ const login = async (req, res) => {
       return res.status(401).send('User Does Not Exist.')
     }
 
-    const isValidPassword = await bcrypt.compare(password, user.hashedPassword)
+    const isValidPassword = await bcrypt.compare(password, user.password)
 
     if (isValidPassword) {
-      const token = jwt.sign({ username: user.username, email: user.email, password: user.hashedPassword })
+      const token = jwt.sign({ username: user.username})
       res.cookie('safeToken', token)
     }
   } catch (err) {
