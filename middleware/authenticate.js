@@ -1,6 +1,6 @@
 const jwt = require('jsonwebtoken')
 const User = require('../models/User')
-const serverKey = require('./.keyEnv')
+require('dotenv').config()
 
 /**
 * Verifies authenticity of user's JWT and attaches user to request object
@@ -13,7 +13,7 @@ const authenticate = async (req, res, next) => {
     const token = req.cookies.safeToken
     if (!token) return res.status(401).send('Token not found, please login.')
 
-    const username = await jwt.verify(token, serverKey, (err, decoded) => {
+    const username = await jwt.verify(token, process.env.AUTH_KEY, (err, decoded) => {
       if (err) throw Error('Failed to authenticate token')
       return decoded
     })

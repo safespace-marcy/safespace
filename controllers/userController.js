@@ -1,7 +1,7 @@
 const bcrypt = require('bcrypt')
 const jwt = require('jsonwebtoken')
 const User = require('../models/User')
-const serverKey = require('./.keyEnv')
+require('dotenv').config()
 
 /**
 * Validates users registration credentials
@@ -27,10 +27,10 @@ const register = async (req, res) => {
   try {
     const { username, email, password } = req.body
     if (!validateInputs(username, email, password)) throw Error('Invalid Username, Email, or Password.')
-    const saltRounds = 7
+    const saltRounds = process.env.SALT_ROUNDS
     const hashedPassword = await bcrypt.hash(password, saltRounds)
     User.add(username, email, hashedPassword)
-    const token = jwt.sign({ username: username }, serverKey)
+    const token = jwt.sign({ username: username }, process.env.AUTH_KEY)
     res.cookie('safeToken', token)
   } catch (err) {
     res.status(401).send(err)
@@ -53,7 +53,7 @@ const login = async (req, res) => {
     const isValidPassword = await bcrypt.compare(password, user.password)
 
     if (isValidPassword) {
-      const token = jwt.sign({ username: user.username })
+      const token = jwt.sign({ username: user.username }, process.env.AUTH_KEY)
       res.cookie('safeToken', token)
     }
   } catch (err) {
