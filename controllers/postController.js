@@ -1,11 +1,10 @@
-const Post = require('../models/Post')
+const Post = require('../models/Posts')
 
 const create = (req, res) => {
-  const { content } = req.body
-  const { communityId, userId } = req.params
+  const { content, communityId, userId } = req.body
 
   Post.create(userId, communityId, content)
-    .then((data) => res.json(data.rows))
+    .then(() => res.sendStatus(201))
     .catch((err) => {
       console.log(err)
       res.status(500).json({ error: '500 Internal Server Error' })
@@ -28,7 +27,7 @@ const update = (req, res) => {
   const { content } = req.body
 
   Post.update(content, id)
-    .then((data) => res.status(200).json(data.rows))
+    .then((data) => res.sendStatus(200))
     .catch((err) => {
       console.log(err)
       res.status(500).json({ error: '500 Internal Server Error' })
@@ -39,40 +38,32 @@ const getById = (req, res) => {
   const { id } = req.params
 
   Post.getById(id)
-    .then((data) => res.json(data.rows[0]))
+    .then((post) => res.json(post))
     .catch((err) => res.send(err))
 }
 
-const getUser = (req, res) => {
-  const { userId } = req.params
+const getAllByUser = (req, res) => {
+  const { userId } = req
+  console.log(userId)
 
   Post.getAllByUser(userId)
-    .then((data) => res.status(200).json(data.rows))
+    .then((data) => res.status(200).json(data))
     .catch((err) => {
       console.log(err)
       res.status(500).json({ error: '500 Internal Server Error' })
     })
 }
 
-const getCommunity = (req, res) => {
-  const { communityId } = req.params
+const getAllByCommunity = (req, res) => {
+  const { id } = req.params
 
-  Post.getAllByCommunity(communityId)
-    .then((data) => res.json(data.rows))
+  Post.getAllByCommunity(id)
+    .then((data) => {
+      return res.json(data)
+    })
     .catch((err) => {
       console.log(err)
       res.status(500).send(err)
-    })
-}
-
-const getCommunityUser = (req, res) => {
-  const { userId, communityId } = req.params
-
-  Post.getAllByCommunityUser(userId, communityId)
-    .then((data) => res.status(200).json(data.rows))
-    .catch((err) => {
-      console.log(err)
-      res.status(500).json({ error: '500 Internal Server Error' })
     })
 }
 
@@ -81,7 +72,6 @@ module.exports = {
   deletePost,
   update,
   getById,
-  getUser,
-  getCommunity, 
-  getCommunityUser
+  getAllByUser,
+  getAllByCommunity
 }
