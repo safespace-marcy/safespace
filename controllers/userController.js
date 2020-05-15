@@ -14,7 +14,7 @@ const validateInputs = (username, email, password) => {
   const emailRegex = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/
   if (username.length < 6 || username.length > 30 || usernameRegex.test(username)) return false
   if (emailRegex.test(email.toLowerCase()) === false) return false
-  if (!password) return false
+  if (password.length < 8) return false
   return true
 }
 
@@ -26,12 +26,13 @@ const validateInputs = (username, email, password) => {
 const register = async (req, res) => {
   try {
     const { username, email, password } = req.body
-    if (!validateInputs(username, email, password)) throw Error('Invalid Username, Email, or Password.')
-    const saltRounds = process.env.SALT_ROUNDS
+
+    if (validateInputs(username, email, password) === false) throw Error('Invalid Username, Email, or Password.')
+    const saltRounds = 7
     const hashedPassword = await bcrypt.hash(password, saltRounds)
     User.add(username, email, hashedPassword)
     const token = jwt.sign({ username: username }, process.env.AUTH_KEY)
-    res.cookie('safeToken', token)
+    res.cookie('safeToken', token).sendStatus(200)
   } catch (err) {
     res.status(401).send(err)
   }
@@ -46,6 +47,7 @@ const login = async (req, res) => {
   try {
     const { username, password } = req.body
     const user = await User.getByUsername(username)
+
     if (!user) {
       return res.status(401).send('User Does Not Exist.')
     }
@@ -54,7 +56,7 @@ const login = async (req, res) => {
 
     if (isValidPassword) {
       const token = jwt.sign({ username: user.username }, process.env.AUTH_KEY)
-      res.cookie('safeToken', token)
+      res.cookie('safeToken', token).sendStatus(200)
     }
   } catch (err) {
     res.status(500).send(err)
@@ -70,12 +72,16 @@ const deleteAccount = async (req, res) => {
   try {
     const { username, email, password } = req.body
     const user = await User.getByUsername(username)
-    if (!user.email === email) throw Error('Incorrect credentials')
-    const isValidPassword = await bcrypt.compare(password, user.hashedPassword)
+
+    if (user.email !== email) throw Error('Incorrect Credentials')
+
+    const isValidPassword = await bcrypt.compare(password, user.password)
+
     if (isValidPassword) {
       User.deleteAccount(email)
-      res.status(200).send('Account Successfully Deleted')
+      return res.sendStatus(200)
     }
+    res.sendStatus(401)
   } catch (err) {
     res.status(500).send(err)
   }
@@ -87,7 +93,7 @@ const deleteAccount = async (req, res) => {
 * @param {object} res - The response object used to send a repsonse back to the client
 */
 const logout = (req, res) => {
-  res.clearCookie('safeToken')
+  res.clearCookie('safeToken').sendStatus(200)
 }
 
 /**
@@ -99,6 +105,7 @@ const getUser = async (req, res) => {
   try {
     const userId = req.userId
     const user = await User.getById(userId)
+    if (!user) throw Error('User Does Not Exist')
     res.send(user)
   } catch (err) {
     res.status(404).send(err)
