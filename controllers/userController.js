@@ -74,6 +74,7 @@ const deleteAccount = async (req, res) => {
     const isValidPassword = await bcrypt.compare(password, user.hashedPassword)
     if (isValidPassword) {
       User.deleteAccount(email)
+      res.status(200).send('Account Successfully Deleted')
     }
   } catch (err) {
     res.status(500).send(err)
