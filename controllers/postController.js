@@ -1,32 +1,77 @@
-const Post = require('../models/post');
+const Post = require('../models/Posts')
 
-const add = (req, res) => {
-  const { userId,communityId,content,date,hour } = req.body
-  Post.create(userId,communityId,content,date,hour)
+const create = (req, res) => {
+  const { content, communityId, userId } = req.body
+
+  Post.create(userId, communityId, content)
+    .then(() => res.sendStatus(201))
+    .catch((err) => {
+      console.log(err)
+      res.status(500).json({ error: '500 Internal Server Error' })
+    })
 }
 
 const deletePost = (req, res) => {
   const { id } = req.params
-  Post.delete(postId)
+
+  Post.delete(id)
+    .then((data) => res.json(data.rows))
+    .catch((err) => {
+      console.log(err)
+      res.status(500).send(err)
+    })
 }
 
 const update = (req, res) => {
-  const { content } = req.body
   const { id } = req.params
-  postId.update(content,postId)
+  const { content } = req.body
+
+  Post.update(content, id)
+    .then((data) => res.sendStatus(200))
+    .catch((err) => {
+      console.log(err)
+      res.status(500).json({ error: '500 Internal Server Error' })
+    })
 }
 
-const read = (req, res) => {
+const getById = (req, res) => {
   const { id } = req.params
-  Post.read(id)
+
+  Post.getById(id)
+    .then((post) => res.json(post))
+    .catch((err) => res.send(err))
 }
 
 const getAllByUser = (req, res) => {
-  const { id } = req.params
-  Post.getAllByUser(id)
+  const { userId } = req
+  console.log(userId)
+
+  Post.getAllByUser(userId)
+    .then((data) => res.status(200).json(data))
+    .catch((err) => {
+      console.log(err)
+      res.status(500).json({ error: '500 Internal Server Error' })
+    })
 }
 
 const getAllByCommunity = (req, res) => {
-  const { communityId } = req.params
-  Post.getAllByCommunity(communityId)
+  const { id } = req.params
+
+  Post.getAllByCommunity(id)
+    .then((data) => {
+      return res.json(data)
+    })
+    .catch((err) => {
+      console.log(err)
+      res.status(500).send(err)
+    })
+}
+
+module.exports = {
+  create,
+  deletePost,
+  update,
+  getById,
+  getAllByUser,
+  getAllByCommunity
 }
