@@ -65,11 +65,23 @@ const getCommunity = (req, res) => {
     })
 }
 
+const getCommunityUser = (req, res) => {
+  const { userId, communityId } = req.params
+
+  Post.getAllByCommunityUser(userId, communityId)
+    .then((data) => res.status(200).json(data.rows))
+    .catch((err) => {
+      console.log(err)
+      res.status(500).json({ error: '500 Internal Server Error' })
+    })
+}
+
 module.exports = {
   create,
   deletePost,
   update,
   getById,
   getUser,
-  getCommunity
+  getCommunity, 
+  getCommunityUser
 }
