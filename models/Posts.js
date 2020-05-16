@@ -1,9 +1,9 @@
 const db = require('../db')
 
 class Post {
-  static create (userId, communityId, content) {
-    const queryText = 'INSERT INTO posts (user_id, community_id, content) VALUES ($1, $2, $3);'
-    return db.query(queryText, [userId, communityId, content])
+  static create (userId, communityId, content, title) {
+    const queryText = 'INSERT INTO posts (user_id, community_id, content, title) VALUES ($1, $2, $3, $4);'
+    return db.query(queryText, [userId, communityId, content, title])
   }
 
   static delete (postId) {
