@@ -2,7 +2,8 @@ import React from 'react'
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom'
 import Login from './components/Login'
 import Landing from './components/Landing'
-import NavBar from './components/NavBar'
+import NavBar from './components/Navbar'
+import Register from './components/Register'
 
 function App () {
   return (
@@ -10,6 +11,9 @@ function App () {
       <div>
         <NavBar />
         <Switch>
+          <Route path='/register'>
+            <Register />
+          </Route>
           <Route path='/login'>
             <Login />
           </Route>
