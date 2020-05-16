@@ -11,6 +11,7 @@ function WritePostForm () {
 
   function handleTitleChange (e) {
     const currentTitle = e.target.value
+    // as long as 2 commit messages
     if (title.length === 72 * 2) return
     setTitle(currentTitle)
   }
@@ -35,7 +36,9 @@ function WritePostForm () {
       body: JSON.stringify({ title, body, community })
     }
     const res = await fetch('/posts', newPostInit)
-    if (res.status === 401) { return warn('Connection Error. Please try again later!') }
+    if (res.status === 401) {
+      return warn('Connection Error. Please try again later!')
+    }
     if (res.status === 500) {
       return warn(
         'Our computers are feeling down, please try again in a few moments.'
