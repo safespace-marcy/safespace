@@ -1,7 +1,8 @@
 const Post = require('../models/Posts')
 
 const create = (req, res) => {
-  const { content, communityId, userId } = req.body
+  const { content, communityId } = req.body
+  const { userId } = req
 
   Post.create(userId, communityId, content)
     .then(() => res.sendStatus(201))
