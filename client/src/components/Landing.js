@@ -1,8 +1,11 @@
 import React from 'react'
-import { Form, Navbar, Button, Nav, NavDropdown, FormControl } from 'react-bootstrap'
 
 const Landing = () => {
-  
+  return (
+    <div>
+      <h1>This is the landing page placeholder!</h1>
+    </div>
+  )
 }
 
 export default Landing

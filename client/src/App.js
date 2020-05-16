@@ -1,20 +1,19 @@
 import React from 'react'
-import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom"
+import { BrowserRouter as Router, Switch, Route } from 'react-router-dom'
 import Login from './components/Login'
 import Landing from './components/Landing'
-import Navbar from './components/Navbar'
+import NavBar from './components/NavBar'
 
 function App () {
   return (
     <Router>
       <div>
-        <Navbar />
-
+        <NavBar />
         <Switch>
-          <Route path="/login">
+          <Route path='/login'>
             <Login />
           </Route>
-          <Route path="/">
+          <Route path='/'>
             <Landing />
           </Route>
         </Switch>

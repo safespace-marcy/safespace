@@ -1,24 +1,38 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { Form, Button, Container } from 'react-bootstrap'
 
 const Login = () => {
-  return (
-    <Container>
-      <Form>
-        <Form.Group controlId="formBasicEmail">
-          <Form.Label>Email address</Form.Label>
-          <Form.Control type="email" placeholder="Enter email" />
-          <Form.Text className="text-muted">
-            We'll never share your email with anyone else.
-          </Form.Text>
-        </Form.Group>
+  const [username, setUsername] = useState('')
+  const [password, setPassword] = useState('')
 
-        <Form.Group controlId="formBasicPassword">
-          <Form.Label>Password</Form.Label>
-          <Form.Control type="password" placeholder="Password" />
+  const sendCredentials = (username, password) => {
+    const data = { username: username, password: password }
+
+    fetch('/login', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(data)
+    })
+      .then(response => console.log('Status:', response.status))
+      .catch((error) => {
+        console.error('Error:', error)
+      })
+  }
+  return (
+    <Container className='justify-content-md-center' fluid='lg'>
+      <Form>
+        <Form.Group controlId='formBasicEmail'>
+          <Form.Label>Username</Form.Label>
+          <Form.Control type='text' placeholder='Enter username' value={username} onChange={(e) => setUsername(e.target.value)} />
         </Form.Group>
-        <Button variant="primary" type="submit">
-          Submit
+        <Form.Group controlId='formBasicPassword'>
+          <Form.Label>Password</Form.Label>
+          <Form.Control type='password' placeholder='Password' value={password} onChange={(e) => setPassword(e.target.value)} />
+        </Form.Group>
+        <Button onClick={() => sendCredentials(username, password)} variant='primary'>
+          Login
         </Button>
       </Form>
     </Container>
