@@ -83,6 +83,7 @@ CREATE TABLE posts(
   id SERIAL PRIMARY KEY,
   user_id integer REFERENCES users (id) NOT NULL,
   community_id integer REFERENCES communities (id) NOT NULL,
+  title varchar(72) NOT NULL,
   content text,
   created_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP
 );
