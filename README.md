@@ -93,6 +93,20 @@ CREATE TABLE community_users(
   community_id integer REFERENCES communities (id) NOT NULL
 );
 
+INSERT INTO users (username, email, password)
+VALUES ('johnDoe','@gmail','pick22'),
+('janeDoe','@aol','donut');
+
+INSERT INTO communities (name)
+VALUES ('domestic'),
+('alcohol');
+
+INSERT INTO posts (user_id, community_id, content)
+VALUES (1,1,'had a good day today'),
+(1,2,'had a bad day today');
+
+INSERT INTO community_users(user_id, community_id)
+VALUES (1,1),(1,2);
 ```
 
 ## Front-End Wireframe

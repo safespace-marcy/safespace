@@ -1,11 +1,13 @@
 import React from 'react'
+import Button from 'react-bootstrap/Button';
 
-function App () {
+function NewsFeed () {
+  // const communityId = 1
   return (
     <div className='App'>
-      hello
+      hello bitchhh
     </div>
   )
 }
 
-export default App
+export default NewsFeed
