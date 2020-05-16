@@ -3,7 +3,7 @@ import { BrowserRouter as Router, Switch, Route } from 'react-router-dom'
 import Register from './components/RegisterForm'
 import Login from './components/Login'
 import Landing from './components/Landing'
-import NavBar from './components/NavBar'
+import NavBar from './components/Navbar'
 
 function App () {
   return (
