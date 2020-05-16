@@ -19,18 +19,18 @@ class User {
   }
 
   static getByUsername (username) {
-    const queryText = 'SELECT * FROM users WHERE username = $1'
+    const queryText = 'SELECT * FROM users WHERE username = $1;'
     return db.query(queryText, [username])
       .then((data) => data.rows[0])
   }
 
   static getAllUsers () {
-    return db.query('SELECT * FROM users')
+    return db.query('SELECT * FROM users;')
       .then((data) => data.rows)
   }
 
   static deleteAccount (email) {
-    const queryText = 'DELETE FROM users WHERE email = $1'
+    const queryText = 'DELETE * FROM users WHERE email = $1;'
     return db.query(queryText, [email])
   }
 
@@ -40,7 +40,7 @@ class User {
   }
 
   static updateEmail (userId, newEmail) {
-    const queryText = 'UPDATE users SET email = $1 WHERE id = $2'
+    const queryText = 'UPDATE users SET email = $ 1 WHERE id = $2'
     return db.query(queryText, [newEmail, userId])
   }
 
