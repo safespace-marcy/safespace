@@ -1,14 +1,14 @@
 const express = require('express')
 const postRouter = express.Router()
 const postController = require('../controllers/postController')
-const authenticate = require('../middleware/authenticate')
+const auth = require('../middleware/authenticate')
 
 // API post controller paths
-postRouter.post('/add-post', authenticate, postController.add)
-postRouter.delete('/delete-post:id', postController.deletePost)
-postRouter.put('/update-post:id', postController.update)
-postRouter.get('/read-post:id', authenticate, postController.read)
-postRouter.get('/getBy-user:id', authenticate, postController.getAllByUser)
-postRouter.get('/getBy-community:id', authenticate, postController.getAllByCommunity)
+postRouter.post('/posts', auth, postController.create)
+postRouter.delete('/posts/:id', auth, postController.deletePost)
+postRouter.put('/posts/:id', auth, postController.update)
+postRouter.get('/posts/:id', auth, postController.getById)
+postRouter.get('/posts-user', auth, postController.getAllByUser)
+postRouter.get('/posts-community/:id', auth, postController.getAllByCommunity)
 
 module.exports = postRouter
