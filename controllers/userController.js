@@ -26,6 +26,9 @@ const validateInputs = (username, email, password) => {
 const register = async (req, res) => {
   try {
     const { username, email, password } = req.body
+    
+    console.log(username)
+    
     if (!validateInputs(username, email, password)) throw Error('Invalid Username, Email, or Password.')
     const saltRounds = process.env.SALT_ROUNDS
     const hashedPassword = await bcrypt.hash(password, saltRounds)
@@ -33,7 +36,7 @@ const register = async (req, res) => {
     const token = jwt.sign({ username: username }, process.env.AUTH_KEY)
     res.cookie('safeToken', token)
   } catch (err) {
-    res.status(401).send(err)
+    res.status(500).send(err)
   }
 }
 

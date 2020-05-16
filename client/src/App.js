@@ -1,5 +1,5 @@
 import React from 'react'
-import Register from './RegisterForm'
+import Register from './components/RegisterForm'
 
 function App () {
   return (

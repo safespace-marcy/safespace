@@ -9,12 +9,11 @@ function Register () {
     e.preventDefault()
 
     async function registerUser () {
-      await fetch('/user',
+      fetch('/user',
         {
           method: 'POST',
           headers: {
-            'Content-Type': 'application/json',
-            Accept: 'application/json'
+            'Content-Type': 'application/json'
           },
           body: JSON.stringify({
             username: username,
@@ -22,6 +21,7 @@ function Register () {
             password: password
           })
         })
+        
     }
 
     registerUser()
