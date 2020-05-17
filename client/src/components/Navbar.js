@@ -22,6 +22,9 @@ const NavBar = () => {
               <LinkContainer to='/account'>
                 <Nav.Link>My Account</Nav.Link>
               </LinkContainer>
+              <LinkContainer to='/news'>
+                <Nav.Link>News Feed</Nav.Link>
+              </LinkContainer>
               <Logout />
             </>
           ) : (

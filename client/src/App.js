@@ -5,8 +5,9 @@ import Login from './components/Login'
 import Landing from './components/Landing'
 import NavBar from './components/Navbar'
 import Register from './components/Register'
+import NewsFeed from './components/NewsFeed'
 
-function App () {
+const App = () => {
   return (
     <Router>
       <UserProvider>
@@ -19,8 +20,11 @@ function App () {
             <Route path='/login'>
               <Login />
             </Route>
-            <Route path='/'>
+            <Route exact path='/'>
               <Landing />
+            </Route>
+            <Route path='/news'>
+              <NewsFeed />
             </Route>
           </Switch>
         </div>
