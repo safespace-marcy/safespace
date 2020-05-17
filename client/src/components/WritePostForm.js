@@ -6,7 +6,7 @@ import Alert from 'react-bootstrap/Alert'
 function WritePostForm () {
   const [title, setTitle] = useState('')
   const [body, setBody] = useState('')
-  const [community, setCommunity] = useState('')
+  const [community, setCommunity] = useState(1)
   const [alert, setAlert] = useState(null)
 
   function handleTitleChange (e) {
@@ -33,7 +33,7 @@ function WritePostForm () {
       headers: {
         'Content-Type': 'application/json'
       },
-      body: JSON.stringify({ title, body, community })
+      body: JSON.stringify({ title, body, community: Number(community) })
     }
     const res = await fetch('/posts', newPostInit)
     if (res.status === 401) {
