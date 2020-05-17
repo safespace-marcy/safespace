@@ -25,7 +25,7 @@ class User {
   }
 
   static getAllUsers () {
-    return db.query('SELECT * FROM users;')
+    return db.query('SELECT * FROM users')
       .then((data) => data.rows)
   }
 

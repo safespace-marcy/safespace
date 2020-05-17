@@ -27,7 +27,7 @@ const register = async (req, res) => {
   try {
     const { username, email, password } = req.body
     
-     if (!validateInputs(username, email, password)) throw Error('Invalid Username, Email, or Password.')
+    if (validateInputs(username, email, password) === false) throw Error('Invalid Username, Email, or Password.')
     const saltRounds = 7
     const hashedPassword = await bcrypt.hash(password, saltRounds)
     User.add(username, email, hashedPassword)
@@ -105,6 +105,7 @@ const getUser = async (req, res) => {
   try {
     const userId = req.userId
     const user = await User.getById(userId)
+    if (!user) throw Error('User Does Not Exist')
     res.send(user)
   } catch (err) {
     res.status(404).send(err)
