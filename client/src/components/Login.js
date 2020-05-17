@@ -1,9 +1,13 @@
-import React, { useState } from 'react'
+import React, { useState, useContext } from 'react'
+import { UserContext } from '../contexts/userContext'
 import { Form, Button, Container } from 'react-bootstrap'
 
 const Login = () => {
   const [username, setUsername] = useState('')
   const [password, setPassword] = useState('')
+  const { setUser } = useContext(UserContext)
+
+  const getUser = async () => fetch('/user').then(res => res.json())
 
   const sendCredentials = (username, password) => {
     const data = { username: username, password: password }
@@ -15,8 +19,10 @@ const Login = () => {
       },
       body: JSON.stringify(data)
     })
-      .then(response => console.log('Status:', response.status))
-      .catch((error) => {
+      .then(response => {
+        if (response.status === 200) getUser().then(user => setUser(user))
+      })
+      .catch(error => {
         console.error('Error:', error)
       })
   }
@@ -25,13 +31,26 @@ const Login = () => {
       <Form>
         <Form.Group controlId='formBasicEmail'>
           <Form.Label>Username</Form.Label>
-          <Form.Control type='text' placeholder='Enter username' value={username} onChange={(e) => setUsername(e.target.value)} />
+          <Form.Control
+            type='text'
+            placeholder='Enter username'
+            value={username}
+            onChange={e => setUsername(e.target.value)}
+          />
         </Form.Group>
         <Form.Group controlId='formBasicPassword'>
           <Form.Label>Password</Form.Label>
-          <Form.Control type='password' placeholder='Password' value={password} onChange={(e) => setPassword(e.target.value)} />
+          <Form.Control
+            type='password'
+            placeholder='Password'
+            value={password}
+            onChange={e => setPassword(e.target.value)}
+          />
         </Form.Group>
-        <Button onClick={() => sendCredentials(username, password)} variant='primary'>
+        <Button
+          onClick={() => sendCredentials(username, password)}
+          variant='primary'
+        >
           Login
         </Button>
       </Form>

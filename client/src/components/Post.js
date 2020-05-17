@@ -1,20 +1,17 @@
 import React, { useState } from 'react'
-import Card from 'react-bootstrap/Card';
+import Card from 'react-bootstrap/Card'
 
-function Post () {
-  const [title, setTitle] = useState('')
-  const [body, setBody] = useState('')
+function Post (props) {
 
-  
   return (
     <Card>
       <Card.Body>
-  <Card.Title>${title}</Card.Title>
+        <Card.Title>{props.data.title}</Card.Title>
         <Card.Text>
-          ${body}
+          {props.data.content}
         </Card.Text>
-        <Card.Link href="#">Like</Card.Link>
-        <Card.Link href="#">Comment</Card.Link>
+        <Card.Link href='#'>Like</Card.Link>
+        <Card.Link href='#'>Comment</Card.Link>
       </Card.Body>
     </Card>
   )

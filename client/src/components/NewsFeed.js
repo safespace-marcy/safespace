@@ -1,44 +1,30 @@
 import React from 'react'
-import { BrowserRouter as Router, Switch, Route } from 'react-router-dom'
-import Login from './components/Login'
-import Landing from './components/Landing'
-import NavBar from './components/Navbar'
-import Post from './components/Card'
-import Spinner from 'react-bootstrap/Spinner';
+import Post from './Post'
+import Spinner from 'react-bootstrap/Spinner'
 
 function NewsFeed () {
   const [response, setResponse] = React.useState(null)
-  
-  const getPost = async() =>{
+
+  const getPost = async () => {
     const req = await fetch('/posts-community/1')
-    const response = req.json()
+    const response = await req.json()
+    console.log(response)
     setResponse(response)
   }
 
   React.useEffect(
-    getPost(),[]
+    () => { getPost() }, []
+
   )
 
+  console.log('working hoe')
   return (
-    <Router>
-      <div>
-        <NavBar />
-        <Switch>
-          <Route path='/login'>
-            <Login />
-          </Route>
-          <Route path='/'>
-            <Landing />
-          </Route>
-        </Switch>
-      </div>
-      {response === null ? <Spinner animation="border" role="status">
-      <span className="sr-only">Loading...</span>
-      </Spinner>
-      :response.map(res => (
-      <Post data={res} />
-      ))}
-    </Router>
+
+    response === null ? <h1>Loading</h1>
+      : response.map(res => (
+        <Post data={res} />
+      ))
+
   )
 }
 

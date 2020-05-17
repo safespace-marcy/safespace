@@ -1,45 +1,36 @@
 import React from 'react'
+import { UserProvider } from './contexts/userContext'
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom'
 import Login from './components/Login'
 import Landing from './components/Landing'
 import NavBar from './components/Navbar'
-import Post from './components/Card'
-import Spinner from 'react-bootstrap/Spinner';
+import Register from './components/Register'
+import NewsFeed from './components/NewsFeed'
 
-function NewsFeed () {
-  const [response, setResponse] = React.useState(null)
-  
-  const getPost = async() =>{
-    const req = await fetch('/posts-community/1')
-    const response = req.json()
-    setResponse(response)
-  }
-
-  React.useEffect(
-    getPost(),[]
-  )
-
+const App = () => {
   return (
     <Router>
-      <div>
-        <NavBar />
-        <Switch>
-          <Route path='/login'>
-            <Login />
-          </Route>
-          <Route path='/'>
-            <Landing />
-          </Route>
-        </Switch>
-      </div>
-      {response === null ? <Spinner animation="border" role="status">
-      <span className="sr-only">Loading...</span>
-      </Spinner>
-      :response.map(res => (
-      <Post data={res} />
-      ))}
+      <UserProvider>
+        <div>
+          <NavBar />
+          <Switch>
+            <Route path='/register'>
+              <Register />
+            </Route>
+            <Route path='/login'>
+              <Login />
+            </Route>
+            <Route exact path='/'>
+              <Landing />
+            </Route>
+            <Route path='/news'>
+              <NewsFeed />
+            </Route>
+          </Switch>
+        </div>
+      </UserProvider>
     </Router>
   )
 }
 
-export default NewsFeed
+export default App
