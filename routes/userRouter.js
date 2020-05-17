@@ -4,7 +4,7 @@ const userController = require('../controllers/userController')
 const authenticate = require('../middleware/authenticate')
 
 // API user controller paths
-userRouter.get('/login', userController.login)
+userRouter.post('/login', userController.login)
 userRouter.post('/user', userController.register)
 userRouter.get('/logout', userController.logout)
 userRouter.delete('/user', authenticate, userController.deleteAccount)

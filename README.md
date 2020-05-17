@@ -83,6 +83,7 @@ CREATE TABLE posts(
   id SERIAL PRIMARY KEY,
   user_id integer REFERENCES users (id) NOT NULL,
   community_id integer REFERENCES communities (id) NOT NULL,
+  title varchar(72) NOT NULL,
   content text,
   created_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP
 );
@@ -101,9 +102,9 @@ INSERT INTO communities (name)
 VALUES ('domestic'),
 ('alcohol');
 
-INSERT INTO posts (user_id, community_id, content)
-VALUES (1,1,'had a good day today'),
-(1,2,'had a bad day today');
+INSERT INTO posts (user_id, community_id, title, content)
+VALUES (1,1,'post1','had a good day today'),
+(1,2,'post2','had a bad day today');
 
 INSERT INTO community_users(user_id, community_id)
 VALUES (1,1),(1,2);
