@@ -30,7 +30,7 @@ class User {
   }
 
   static deleteAccount (email) {
-    const queryText = 'DELETE * FROM users WHERE email = $1'
+    const queryText = 'DELETE FROM users WHERE email = $1'
     return db.query(queryText, [email])
   }
 
