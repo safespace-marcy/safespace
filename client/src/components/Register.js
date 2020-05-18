@@ -1,9 +1,12 @@
 import React, { useState } from 'react'
+import { Container } from 'react-bootstrap'
+import { Redirect } from 'react-router-dom'
 
 function Register () {
   const [username, setUsername] = useState('')
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
+  const [isSubmitted, setIsSubmitted] = useState(false)
 
   async function registerUser () {
     fetch('/user', {
@@ -18,14 +21,21 @@ function Register () {
       })
     })
   }
+  
+  function redirectToLogin(){
+    if(isSubmitted){
+      return <Redirect to='/login'/>
+    }
+  }
 
   function submitForm (e) {
     e.preventDefault()
     registerUser()
+    setIsSubmitted(true)
   }
 
   return (
-    <div>
+    <Container className='justify-content-md-center' fluid='lg'>
       <form onSubmit={submitForm} className='registerForm'>
         <div className='form-group'>
           <label htmlFor='username'>Username:</label>
@@ -36,6 +46,7 @@ function Register () {
             onChange={e => setUsername(e.target.value)}
             id='username'
           />
+          <small id="emailHelp" class="form-text text-muted">Must be longer than 6 characters</small>
         </div>
 
         <div className='form-group'>
@@ -58,13 +69,15 @@ function Register () {
             onChange={e => setPassword(e.target.value)}
             id='password'
           />
+          <small id="emailHelp" class="form-text text-muted">Must be longer than 8 characters</small>
         </div>
 
         <button type='submit' className='btn btn-primary'>
           Sign-up
         </button>
       </form>
-    </div>
+      {isSubmitted ? redirectToLogin() : ''}
+    </Container>
   )
 }
 
