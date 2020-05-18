@@ -2,9 +2,9 @@ const Post = require('../models/Posts')
 
 const create = (req, res) => {
   const { userId } = req
-  const { content, communityId, title } = req.body
+  const { body, community, title } = req.body
 
-  Post.create(userId, communityId, content, title)
+  Post.create(userId, community, body, title)
     .then(() => res.sendStatus(201))
     .catch(err => {
       console.log(err)

@@ -1,6 +1,6 @@
 import React from 'react'
 import Post from './Post'
-import Spinner from 'react-bootstrap/Spinner'
+import NewPostModal from './NewPostModal'
 
 function NewsFeed () {
   const [response, setResponse] = React.useState(null)
@@ -8,23 +8,22 @@ function NewsFeed () {
   const getPost = async () => {
     const req = await fetch('/posts-community/1')
     const response = await req.json()
-    console.log(response)
     setResponse(response)
   }
 
-  React.useEffect(
-    () => { getPost() }, []
+  React.useEffect(() => {
+    getPost()
+  }, [])
 
-  )
-
-  console.log('working hoe')
-  return (
-
-    response === null ? <h1>Loading</h1>
-      : response.map(res => (
-        <Post data={res} />
-      ))
-
+  return response === null ? (
+    <h1>Loading</h1>
+  ) : (
+    <>
+      <NewPostModal />
+      {response.map((res, i) => (
+        <Post key={res.title + i} data={res} />
+      ))}
+    </>
   )
 }
 
