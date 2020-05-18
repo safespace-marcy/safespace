@@ -6,10 +6,12 @@ import Landing from './components/Landing'
 import NavBar from './components/Navbar'
 import Register from './components/Register'
 import NewsFeed from './components/NewsFeed'
+import { ThemeProvider } from '@gympass/yoga'
 
 const App = () => {
   return (
     <Router>
+      <ThemeProvider>
         <UserProvider>
           <div>
             <NavBar />
@@ -29,6 +31,7 @@ const App = () => {
             </Switch>
           </div>
         </UserProvider>
+      </ThemeProvider>
     </Router>
   )
 }
