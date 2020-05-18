@@ -10,25 +10,25 @@ import NewsFeed from './components/NewsFeed'
 const App = () => {
   return (
     <Router>
-      <UserProvider>
-        <div>
-          <NavBar />
-          <Switch>
-            <Route path='/register'>
-              <Register />
-            </Route>
-            <Route path='/login'>
-              <Login />
-            </Route>
-            <Route exact path='/'>
-              <Landing />
-            </Route>
-            <Route path='/news'>
-              <NewsFeed />
-            </Route>
-          </Switch>
-        </div>
-      </UserProvider>
+        <UserProvider>
+          <div>
+            <NavBar />
+            <Switch>
+              <Route path='/register'>
+                <Register />
+              </Route>
+              <Route path='/login'>
+                <Login />
+              </Route>
+              <Route exact path='/'>
+                <Landing />
+              </Route>
+              <Route path='/news'>
+                <NewsFeed />
+              </Route>
+            </Switch>
+          </div>
+        </UserProvider>
     </Router>
   )
 }

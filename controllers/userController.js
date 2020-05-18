@@ -56,7 +56,7 @@ const login = async (req, res) => {
 
     if (isValidPassword) {
       const token = jwt.sign({ username: user.username }, process.env.AUTH_KEY)
-      res.cookie('safeToken', token).sendStatus(200)
+      res.cookie('safeToken', token).status(200).send(JSON.stringify(user))
     }
   } catch (err) {
     res.status(500).send(err)
@@ -106,7 +106,7 @@ const getUser = async (req, res) => {
     const userId = req.userId
     const user = await User.getById(userId)
     if (!user) throw Error('User Does Not Exist')
-    res.send(user)
+    res.status(200).send(JSON.stringify(user))
   } catch (err) {
     res.status(404).send(err)
   }
