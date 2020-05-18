@@ -1,10 +1,12 @@
 import React, { useState, useContext } from 'react'
 import { UserContext } from '../contexts/userContext'
 import { Form, Button, Container } from 'react-bootstrap'
+import { Redirect } from 'react-router-dom'
 
 const Login = () => {
   const [username, setUsername] = useState('')
   const [password, setPassword] = useState('')
+  const [isSubmitted, setIsSubmitted] = useState(false)
   const { setUser } = useContext(UserContext)
 
   const getUser = async () => fetch('/user').then(res => res.json())
@@ -26,6 +28,19 @@ const Login = () => {
         console.error('Error:', error)
       })
   }
+  
+  function submitForm(e){
+    e.preventDefault()
+    sendCredentials(username, password)
+    setIsSubmitted(true)
+  }
+  
+  function redirectToFeed(){
+    if(isSubmitted){
+      return <Redirect to='/news'/>
+    }
+  }
+  
   return (
     <Container className='justify-content-md-center' fluid='lg'>
       <Form>
@@ -48,12 +63,13 @@ const Login = () => {
           />
         </Form.Group>
         <Button
-          onClick={() => sendCredentials(username, password)}
+          onClick={submitForm}
           variant='primary'
         >
           Login
         </Button>
       </Form>
+      {isSubmitted? redirectToFeed() : ''}
     </Container>
   )
 }
