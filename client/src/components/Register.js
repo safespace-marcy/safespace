@@ -21,7 +21,7 @@ function Register () {
       })
     })
   }
-  
+
   function redirectToLogin(){
     if(isSubmitted){
       return <Redirect to='/login'/>
@@ -30,6 +30,23 @@ function Register () {
 
   function submitForm (e) {
     e.preventDefault()
+
+    async function registerUser () {
+      fetch('/user',
+        {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify({
+            username: username,
+            email: email,
+            password: password
+          })
+        })
+
+    }
+
     registerUser()
     setIsSubmitted(true)
   }
@@ -37,7 +54,7 @@ function Register () {
   return (
     <Container className='justify-content-md-center' fluid='lg'>
       <form onSubmit={submitForm} className='registerForm'>
-        <div className='form-group'>
+        <div class='form-group'>
           <label htmlFor='username'>Username:</label>
           <input
             type='text'
@@ -49,18 +66,12 @@ function Register () {
           <small id="emailHelp" class="form-text text-muted">Must be longer than 6 characters</small>
         </div>
 
-        <div className='form-group'>
+        <div class='form-group'>
           <label htmlFor='email'>Email:</label>
-          <input
-            type='text'
-            className='form-control'
-            value={email}
-            onChange={e => setEmail(e.target.value)}
-            id='email'
-          />
+          <input type='text' className='form-control' value={email} onChange={(e) => setEmail(e.target.value)} id='email' />
         </div>
 
-        <div className='form-group'>
+        <div class='form-group'>
           <label htmlFor='password'>Password:</label>
           <input
             type='password'
@@ -72,9 +83,7 @@ function Register () {
           <small id="emailHelp" class="form-text text-muted">Must be longer than 8 characters</small>
         </div>
 
-        <button type='submit' className='btn btn-primary'>
-          Sign-up
-        </button>
+        <button type='submit' class='btn btn-primary'>Sign-up</button>
       </form>
       {isSubmitted ? redirectToLogin() : ''}
     </Container>
