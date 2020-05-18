@@ -1,9 +1,9 @@
 import React, { useState } from 'react'
 import Modal from 'react-bootstrap/Modal'
-import Button from 'react-bootstrap/Button'
+import { Button } from '@gympass/yoga'
 import WritePostForm from './WritePostForm'
 
-function NewPostModal () {
+function NewPostModal (props) {
   const [show, setShow] = useState(false)
 
   const handleClose = () => setShow(false)
@@ -18,7 +18,7 @@ function NewPostModal () {
       <Modal show={show} onHide={handleClose} animation={false}>
         <Modal.Header closeButton>New Post</Modal.Header>
         <Modal.Body>
-          <WritePostForm />
+          <WritePostForm setShow={setShow} setNewPost={props.setNewPost} />
         </Modal.Body>
       </Modal>
     </>
