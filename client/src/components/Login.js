@@ -11,31 +11,31 @@ const Login = () => {
   const { setUser } = useContext(UserContext)
 
   const sendCredentials = async (username, password) => {
-      const data = { username: username, password: password }
-      fetch('/login', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(data)
-      })
+    const data = { username: username, password: password }
+    fetch('/login', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(data)
+    })
       .then(res => {
-        if(res.status === 200) return res.json()
+        if (res.status === 200) return res.json()
         throw Error('Invalid Username/Password')
       })
       .then(json => setUser(json))
       .catch((err) => console.log(err))
   }
 
-  function submitForm(e){
+  function submitForm (e) {
     e.preventDefault()
     sendCredentials(username, password)
     setIsSubmitted(true)
   }
 
-  function redirectToFeed(){
-    if(isSubmitted){
-      return <Redirect to='/news'/>
+  function redirectToFeed () {
+    if (isSubmitted) {
+      return <Redirect to='/news' />
     }
   }
 
@@ -71,7 +71,7 @@ const Login = () => {
           Login
         </Button>
       </Form>
-      {isSubmitted? redirectToFeed() : ''}
+      {isSubmitted ? redirectToFeed() : ''}
     </Container>
   )
 }
