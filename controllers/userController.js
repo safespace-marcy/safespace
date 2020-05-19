@@ -32,10 +32,7 @@ const validateInputs = (username, email, password) => {
 const register = async (req, res) => {
   try {
     const { username, email, password } = req.body
-
-    if (validateInputs(username, email, password) === false) {
-      throw Error('Invalid Username, Email, or Password.')
-    }
+    if (validateInputs(username, email, password) === false) throw Error('Invalid Credentials.')
     const saltRounds = 7
     const hashedPassword = await bcrypt.hash(password, saltRounds)
     User.add(username, email, hashedPassword)

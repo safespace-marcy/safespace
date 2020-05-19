@@ -1,12 +1,12 @@
 import React, { useState } from 'react'
 import Form from 'react-bootstrap/Form'
-import Button from 'react-bootstrap/Button'
 import Alert from 'react-bootstrap/Alert'
 
-function WritePostForm () {
+import { Input, TextArea, Button } from '@gympass/yoga'
+
+function WritePostForm (props) {
   const [title, setTitle] = useState('')
   const [body, setBody] = useState('')
-  const [community, setCommunity] = useState(1)
   const [alert, setAlert] = useState(null)
 
   function handleTitleChange (e) {
@@ -21,19 +21,15 @@ function WritePostForm () {
     setBody(currentBody)
   }
 
-  function handleCommunityChange (e) {
-    const currentCommunity = e.target.value
-    setCommunity(currentCommunity)
-  }
-
   async function handleSubmit (e) {
+    console.log('called')
     e.preventDefault()
     const newPostInit = {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'
       },
-      body: JSON.stringify({ title, body, community: Number(community) })
+      body: JSON.stringify({ title, body }) // TODO: add communityId from props
     }
     const res = await fetch('/posts', newPostInit)
     if (res.status === 401) {
@@ -43,6 +39,10 @@ function WritePostForm () {
       return warn(
         'Our computers are feeling down, please try again in a few moments.'
       )
+    }
+    if (res.status === 201) {
+      props.setNewPost(prev => !prev)
+      props.setShow(false)
     }
   }
 
@@ -55,43 +55,26 @@ function WritePostForm () {
 
   return (
     <>
+      <h3>Submit a post</h3>
       {alert && <Alert variant='warning'>{alert}</Alert>}
-      <Form onSubmit={handleSubmit}>
-        <Form.Group controlId='titleControl'>
-          <Form.Label>Title</Form.Label>
-          <Form.Control
-            value={title}
-            onChange={handleTitleChange}
-            type='text'
-            placeholder='Today I...'
-            size='lg'
-          />
-        </Form.Group>
-
-        <Form.Group controlId='bodyControl'>
-          <Form.Label>Body</Form.Label>
-          <Form.Control
-            value={body}
-            onChange={handleBodyChange}
-            as='textarea'
-            placeholder='It was new, and it was...'
-            rows='8'
-          />
-        </Form.Group>
-        {/* Hard coded communities. Next version should fetch these from our database of communities. */}
-        <Form.Group controlId='communityControl'>
-          <Form.Label>Choose a community</Form.Label>
-          <Form.Control
-            as='select'
-            value={community}
-            onChange={handleCommunityChange}
-          >
-            <option value='1'>Community 1</option>
-            <option value='2'>Community 2</option>
-            <option value='3'>Community 3</option>
-          </Form.Control>
-        </Form.Group>
-        <Button type='submit'>Submit post</Button>
+      <Form>
+        <Input
+          label='Title'
+          helper='Give your post a title'
+          maxLength={72 * 2}
+          value={title}
+          onChange={handleTitleChange}
+          onClean={() => setTitle('')}
+        />
+        <br />
+        <TextArea
+          label='Post Body'
+          helper='Share your thoughts! Remember to be considerate of yourself and others'
+          value={body}
+          onChange={handleBodyChange}
+        />
+        <br />
+        <Button onClick={handleSubmit}>Submit</Button>
       </Form>
     </>
   )
