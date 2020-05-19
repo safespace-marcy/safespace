@@ -1,6 +1,6 @@
 import React, { useState, useContext } from 'react'
 import { UserContext } from '../contexts/userContext'
-import { Form, Button, Container } from 'react-bootstrap'
+import { Alert, Form, Button, Container, Card } from 'react-bootstrap'
 import { Redirect } from 'react-router-dom'
 import { Input } from '@gympass/yoga'
 
@@ -9,6 +9,7 @@ const Login = () => {
   const [password, setPassword] = useState('')
   const [isSubmitted, setIsSubmitted] = useState(false)
   const { setUser } = useContext(UserContext)
+  const [alert, setAlert] = useState(null)
 
   const sendCredentials = async (username, password) => {
     const data = { username: username, password: password }
@@ -21,6 +22,7 @@ const Login = () => {
     })
       .then(res => {
         if (res.status === 200) return res.json()
+        warn('Invalid Username/Password')
         throw Error('Invalid Username/Password')
       })
       .then(json => setUser(json))
@@ -35,44 +37,61 @@ const Login = () => {
 
   function redirectToFeed () {
     if (isSubmitted) {
-      return <Redirect to='/news' />
+      return <Redirect to='/' />
     }
   }
 
+  function warn (warningText) {
+    setAlert(warningText)
+    window.setTimeout(() => {
+      setAlert(null)
+    }, 5000)
+  }
+
   return (
-    <Container className='justify-content-md-center' fluid='lg'>
-      <Form>
-        <div>
-          <Form.Group controlId='formBasicEmail'>
-            <Input
-              style={{width:270}}
-              label="Username"
-              helper="Enter username"
-              value={username}
-              onChange={e => setUsername(e.target.value)}
-              onClean={cleaned => setUsername(cleaned)}
-            />
-          </Form.Group>
-        </div>
-        <Form.Group controlId='formBasicPassword'>
-          <Input
-            style={{width:270}}
-            label="Password"
-            helper="Enter password"
-            value={password}
-            onChange={e => setPassword(e.target.value)}
-            onClean={cleaned => setPassword(cleaned)}
-          />
-        </Form.Group>
-        <Button
-          onClick={submitForm}
-          variant='primary'
-        >
-          Login
-        </Button>
-      </Form>
+    <div style={{ display: 'flex', justifyContent: 'center', marginTop: '10px' }}>
+      <Card style={{ width: '25rem', border: '0px' }}>
+        <Card.Body>
+          <Card.Title style={{ textAlign: 'center' }}>Log In</Card.Title>
+          <Card.Subtitle style={{ textAlign: 'center' }} className='mb-2 text-muted'>Welcome Back!</Card.Subtitle>
+          <Container style={{ marginTop: '25px' }} className='justify-content-md-center' fluid='lg'>
+            <Form>
+              {alert && <Alert variant='warning'>{alert}</Alert>}
+              <div>
+                <Form.Group>
+                  <Input
+                    style={{ width: '100%' }}
+                    type='text'
+                    label='Username'
+                    value={username}
+                    onChange={e => setUsername(e.target.value)}
+                    onClean={cleaned => setUsername(cleaned)}
+                  />
+                </Form.Group>
+              </div>
+              <div>
+                <Form.Group controlId='formBasicPassword'>
+                  <Input
+                    style={{ width: '100%' }}
+                    type='password'
+                    label='Password'
+                    value={password}
+                    onChange={e => setPassword(e.target.value)}
+                    onClean={cleaned => setPassword(cleaned)}
+                  />
+                </Form.Group>
+              </div>
+              <div style={{ textAlign: 'center' }}>
+                <Button onClick={submitForm} variant='primary'>
+                Log In
+                </Button>
+              </div>
+            </Form>
+          </Container>
+        </Card.Body>
+      </Card>
       {isSubmitted ? redirectToFeed() : ''}
-    </Container>
+    </div>
   )
 }
 
