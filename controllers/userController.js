@@ -26,7 +26,7 @@ const validateInputs = (username, email, password) => {
 const register = async (req, res) => {
   try {
     const { username, email, password } = req.body
-    
+
     if (validateInputs(username, email, password) === false) throw Error('Invalid Username, Email, or Password.')
     const saltRounds = 7
     const hashedPassword = await bcrypt.hash(password, saltRounds)
@@ -47,7 +47,7 @@ const login = async (req, res) => {
   try {
     const { username, password } = req.body
     const user = await User.getByUsername(username)
-    
+
     if (!user) {
       return res.status(401).send('User Does Not Exist.')
     }
@@ -72,7 +72,7 @@ const deleteAccount = async (req, res) => {
   try {
     const { username, email, password } = req.body
     const user = await User.getByUsername(username)
-    
+
     if (user.email !== email) throw Error('Incorrect Credentials')
 
     const isValidPassword = await bcrypt.compare(password, user.password)
@@ -81,7 +81,7 @@ const deleteAccount = async (req, res) => {
       User.deleteAccount(email)
       return res.sendStatus(200)
     }
-  res.sendStatus(401)
+    res.sendStatus(401)
   } catch (err) {
     res.status(500).send(err)
   }
