@@ -6,6 +6,7 @@ import Landing from './components/Landing'
 import NavBar from './components/Navbar'
 import Register from './components/Register'
 import NewsFeed from './components/NewsFeed'
+import Communities from './components/Communities'
 import { ThemeProvider } from '@gympass/yoga'
 
 const App = () => {
@@ -22,11 +23,14 @@ const App = () => {
               <Route path='/login'>
                 <Login />
               </Route>
-              <Route exact path='/'>
-                <Landing />
-              </Route>
               <Route path='/news'>
                 <NewsFeed />
+              </Route>
+              <Route path='/communities'>
+                <Communities />
+              </Route>
+              <Route path='/'>
+                <Landing />
               </Route>
             </Switch>
           </div>

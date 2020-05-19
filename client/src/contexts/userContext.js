@@ -12,9 +12,8 @@ export const UserProvider = ({ children }) => {
           if (res.status === 200) return res.json()
           return null
         })
-        .then(json => setUser(json))
-      : setUser(null)
-  }, [user, setUser])
+        .then(json => setUser(json)) : setUser(null)
+  }, [setUser])
   return (
     <UserContext.Provider value={{ user, setUser }}>
       {children}

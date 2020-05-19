@@ -23,7 +23,7 @@ const NavBar = () => {
                 <Nav.Link>My Account</Nav.Link>
               </LinkContainer>
               <LinkContainer to='/news'>
-                <Nav.Link>News Feed</Nav.Link>
+                <Nav.Link>Newfeed</Nav.Link>
               </LinkContainer>
               <Logout />
             </>
