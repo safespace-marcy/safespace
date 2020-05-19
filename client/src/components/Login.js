@@ -2,6 +2,7 @@ import React, { useState, useContext } from 'react'
 import { UserContext } from '../contexts/userContext'
 import { Form, Button, Container } from 'react-bootstrap'
 import { Redirect } from 'react-router-dom'
+import { Input } from '@gympass/yoga'
 
 const Login = () => {
   const [username, setUsername] = useState('')
@@ -41,22 +42,26 @@ const Login = () => {
   return (
     <Container className='justify-content-md-center' fluid='lg'>
       <Form>
-        <Form.Group controlId='formBasicEmail'>
-          <Form.Label>Username</Form.Label>
-          <Form.Control
-            type='text'
-            placeholder='Enter username'
-            value={username}
-            onChange={e => setUsername(e.target.value)}
-          />
-        </Form.Group>
+        <div>
+          <Form.Group controlId='formBasicEmail'>
+            <Input
+              style={{width:270}}
+              label="Username"
+              helper="Enter username"
+              value={username}
+              onChange={e => setUsername(e.target.value)}
+              onClean={cleaned => setUsername(cleaned)}
+            />
+          </Form.Group>
+        </div>
         <Form.Group controlId='formBasicPassword'>
-          <Form.Label>Password</Form.Label>
-          <Form.Control
-            type='password'
-            placeholder='Password'
+          <Input
+            style={{width:270}}
+            label="Password"
+            helper="Enter password"
             value={password}
             onChange={e => setPassword(e.target.value)}
+            onClean={cleaned => setPassword(cleaned)}
           />
         </Form.Group>
         <Button

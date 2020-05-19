@@ -8,45 +8,29 @@ function Register () {
   const [password, setPassword] = useState('')
   const [isSubmitted, setIsSubmitted] = useState(false)
 
-  async function registerUser () {
-    fetch('/user', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify({
-        username: username,
-        email: email,
-        password: password
-      })
-    })
-  }
-
   function redirectToLogin(){
     if(isSubmitted){
       return <Redirect to='/login'/>
     }
   }
 
+  async function registerUser () {
+    fetch('/user',
+      {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+          username: username,
+          email: email,
+          password: password
+        })
+      })
+  }
+
   function submitForm (e) {
     e.preventDefault()
-
-    async function registerUser () {
-      fetch('/user',
-        {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json'
-          },
-          body: JSON.stringify({
-            username: username,
-            email: email,
-            password: password
-          })
-        })
-
-    }
-
     registerUser()
     setIsSubmitted(true)
   }

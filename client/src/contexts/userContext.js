@@ -13,7 +13,7 @@ export const UserProvider = ({ children }) => {
       return null
     })
     .then(json => setUser(json)) : setUser(null)
-  })
+  }, [setUser])
   return (
     <UserContext.Provider value={{ user, setUser }}>
       {children}

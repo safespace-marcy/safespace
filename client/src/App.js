@@ -6,10 +6,12 @@ import Landing from './components/Landing'
 import NavBar from './components/Navbar'
 import Register from './components/Register'
 import NewsFeed from './components/NewsFeed'
+import { ThemeProvider } from '@gympass/yoga'
 
 const App = () => {
   return (
     <Router>
+      <ThemeProvider>
         <UserProvider>
           <div>
             <NavBar />
@@ -20,15 +22,16 @@ const App = () => {
               <Route path='/login'>
                 <Login />
               </Route>
-              <Route exact path='/'>
-                <Landing />
-              </Route>
               <Route path='/news'>
                 <NewsFeed />
+              </Route>
+              <Route exact path='/'>
+                <Landing />
               </Route>
             </Switch>
           </div>
         </UserProvider>
+      </ThemeProvider>
     </Router>
   )
 }
