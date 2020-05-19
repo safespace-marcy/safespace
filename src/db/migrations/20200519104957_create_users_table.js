@@ -4,7 +4,7 @@ exports.up = function (knex) {
     t.increments().primary()
     t.string('username', 32).unique().notNullable()
     t.string('email', 50).unique().notNullable()
-    t.string('password').notNullable()
+    t.text('password').notNullable()
     t.timestamp('created_at').defaultTo(knex.fn.now())
   })
 }
