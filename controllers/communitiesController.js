@@ -4,7 +4,7 @@ const Communities = require('../models/Communities')
 const getAll = async (req, res) => {
   try {
     const communities = await Communities.getAll()
-    res.status(200).json(communities)
+    res.status(200).send(JSON.stringify(communities))
   } catch (e) {
     res.send(500).json({ error: e })
   }

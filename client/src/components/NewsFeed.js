@@ -14,7 +14,7 @@ function NewsFeed () {
 
   useEffect(() => {
     getPost()
-  }, [newPost])
+  }, [])
 
   return response === null ? (
     <h1>Loading</h1>
