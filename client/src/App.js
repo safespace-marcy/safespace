@@ -5,6 +5,7 @@ import Login from './components/Login'
 import Landing from './components/Landing'
 import NavBar from './components/Navbar'
 import Register from './components/Register'
+import Home from './components/Home'
 import NewsFeed from './components/NewsFeed'
 import Communities from './components/Communities'
 import Account from './components/Account'
@@ -24,7 +25,7 @@ const App = () => {
               <Route path='/login'>
                 <Login />
               </Route>
-              <Route path='/news'>
+              <Route path='/news/:id'>
                 <NewsFeed />
               </Route>
               <Route path='/spaces'>
@@ -32,6 +33,10 @@ const App = () => {
               </Route>
               <Route path='/account'>
                 <Account />
+              </Route>
+              <Route path='/home'>
+                <Home />
+              </Route>
               </Route>
               <Route path='/'>
                 <Landing />
