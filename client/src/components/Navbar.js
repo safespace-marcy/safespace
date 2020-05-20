@@ -21,7 +21,7 @@ const NavBar = () => {
               <LinkContainer to='/account'>
                 <Nav.Link>My Account</Nav.Link>
               </LinkContainer>
-              <LinkContainer to='/news'>
+              <LinkContainer to={`/news/${user.id}`}>
                 <Nav.Link>Newfeed</Nav.Link>
               </LinkContainer>
               <LinkContainer to='/spaces'>

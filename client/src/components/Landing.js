@@ -1,10 +1,25 @@
-import React, { useContext } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import { UserContext } from '../contexts/userContext'
 import { Jumbotron, Button, Card } from 'react-bootstrap'
 import { LinkContainer } from 'react-router-bootstrap'
 
 const Landing = () => {
   const { user } = useContext(UserContext)
+  const [communities, setCommunities] = useState(null)
+
+  useEffect(() => {
+    getCommunities()
+      .then((list) => { setCommunities(list) })
+  }, [user])
+
+  const getCommunities = async () => {
+    if (user) {
+      console.log('hi')
+      const req = await fetch(`/communitiesByUser/${user.id}`)
+      const list = await req.json()
+      return list
+    }
+  }
 
 const JumbotronStyle = {
   background:'linear-gradient( rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7) ), url("https://miro.medium.com/max/8736/1*uCXBLL2_Diybb9kalmMmFg.jpeg")',

@@ -44,14 +44,15 @@ const getById = (req, res) => {
 }
 
 const getAllByUser = (req, res) => {
-  const { userId } = req
-  console.log(userId)
+  const { id } = req.params
 
-  Post.getAllByUser(userId)
-    .then(data => res.status(200).json(data))
+  Post.getAllByUser(id)
+    .then(data => {
+      return res.json(data)
+    })
     .catch(err => {
       console.log(err)
-      res.status(500).json({ error: '500 Internal Server Error' })
+      res.status(500).send(err)
     })
 }
 
