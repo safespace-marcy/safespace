@@ -5,5 +5,6 @@ const commController = require('../controllers/communitiesController')
 
 communityRouter.get('/communities', commController.getAll)
 communityRouter.get('/communities/:communityId', commController.getById)
+communityRouter.get('/communitiesByUser/:userId', commController.getByUserId)
 
 module.exports = communityRouter
