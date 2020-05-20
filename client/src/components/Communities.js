@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import {Card, Spinner} from 'react-bootstrap'
-
+import { Card, Spinner } from 'react-bootstrap'
 
 function Communities () {
   const [response, setResponse] = useState([])
@@ -15,8 +14,8 @@ function Communities () {
   }, [setResponse])
 
   return response.length === 0 ? (
-    <Spinner animation="border" role="status">
-      <span className="sr-only">Loading...</span>
+    <Spinner animation='border' role='status'>
+      <span className='sr-only'>Loading...</span>
     </Spinner>
   ) : (
     <>
