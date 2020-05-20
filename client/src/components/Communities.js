@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { Card, Spinner } from 'react-bootstrap'
+import { Card, Spinner, Button } from 'react-bootstrap'
 
 function Communities () {
   const [response, setResponse] = useState([])
@@ -18,18 +18,22 @@ function Communities () {
       <span className='sr-only'>Loading...</span>
     </Spinner>
   ) : (
-    <>
-      {response.map((res, index) => (
-        <Card key={index}>
-          <Card.Body>
-            <Card.Title>{res.name}</Card.Title>
-            <Card.Text>Some Community bio here...</Card.Text>
-            <Card.Link href='#'>Join</Card.Link>
-            <Card.Link href='#'>Visit</Card.Link>
-          </Card.Body>
-        </Card>
-      ))}
-    </>
+    <div style={{display:"flex", justifyContent:"center"}}>
+      <div style={{display:"flex", justifyContent:"space-between", marginTop:"35px"}}>
+        {response.map((res, index) => (
+          <Card style={{width:"20rem", marginBottom:"15px"}} key={index}>
+            <Card.Body>
+              <Card.Title>{res.name}</Card.Title>
+              <Card.Text>{res.description}</Card.Text>
+            </Card.Body>
+            <div style={{display:"flex", justifyContent:"center", flexWrap:"wrap"}}>
+              <Button style={{width:"50%", borderRadius:"0px"}}>Join</Button>
+              <Button variant="secondary" style={{width:"50%", borderRadius:"0px"}}>Visit</Button>
+            </div>
+          </Card>
+        ))}
+      </div>
+    </div>
   )
 }
 
