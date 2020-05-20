@@ -21,7 +21,18 @@ const getById = async (req, res) => {
   }
 }
 
+const getByUserId = async (req, res) => {
+  try {
+    const { userId } = req.params
+    const community = await Communities.getByUserId(userId)
+    res.status(200).json(community)
+  } catch (e) {
+    res.send(500).json({ error: e })
+  }
+}
+
 module.exports = {
   getAll,
-  getById
+  getById,
+  getByUserId
 }
