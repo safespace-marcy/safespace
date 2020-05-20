@@ -8,6 +8,7 @@ import Register from './components/Register'
 import Home from './components/Home'
 import NewsFeed from './components/NewsFeed'
 import Communities from './components/Communities'
+import Account from './components/Account'
 import { ThemeProvider } from '@gympass/yoga'
 
 const App = () => {
@@ -30,8 +31,12 @@ const App = () => {
               <Route path='/spaces'>
                 <Communities />
               </Route>
+              <Route path='/account'>
+                <Account />
+              </Route>
               <Route path='/home'>
                 <Home />
+              </Route>
               </Route>
               <Route path='/'>
                 <Landing />
