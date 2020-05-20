@@ -18,20 +18,22 @@ function Communities () {
       <span className='sr-only'>Loading...</span>
     </Spinner>
   ) : (
-    <div style={{display:"flex", justifyContent:"center"}}>
-      <div style={{display:"flex", justifyContent:"space-between", marginTop:"35px"}}>
-        {response.map((res, index) => (
-          <Card style={{width:"20rem", marginBottom:"15px"}} key={index}>
-            <Card.Body>
-              <Card.Title>{res.name}</Card.Title>
-              <Card.Text>{res.description}</Card.Text>
-            </Card.Body>
-            <div style={{display:"flex", justifyContent:"center", flexWrap:"wrap"}}>
-              <Button style={{width:"50%", borderRadius:"0px"}}>Join</Button>
-              <Button variant="secondary" style={{width:"50%", borderRadius:"0px"}}>Visit</Button>
-            </div>
-          </Card>
-        ))}
+    <div style={{display:"flex", justifyContent:"center", marginTop:"25px"}}>
+      <div style={{textAlign:"center"}}>
+        <div>
+          {response.map((res, index) => (
+            <Card style={{width:"50%", marginBottom:"35px"}} key={index}>
+              <Card.Body>
+                <Card.Title>{res.name}</Card.Title>
+                <Card.Text>{res.description}</Card.Text>
+              </Card.Body>
+              <div style={{display:"flex", justifyContent:"space-around", marginBottom:"8px"}}>
+                <Button style={{width:"20%"}}>Join</Button>
+                <Button style={{width:"20%"}} variant="secondary">Visit</Button>
+              </div>
+            </Card>
+          ))}
+        </div>
       </div>
     </div>
   )

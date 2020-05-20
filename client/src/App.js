@@ -9,6 +9,7 @@ import NewsFeed from './components/NewsFeed'
 import Communities from './components/Communities'
 import { ThemeProvider } from '@gympass/yoga'
 
+
 const App = () => {
   return (
     <Router>
