@@ -25,6 +25,9 @@ const NavBar = () => {
               <LinkContainer to='/news'>
                 <Nav.Link>Newfeed</Nav.Link>
               </LinkContainer>
+              <LinkContainer to='/spaces'>
+                <Nav.Link>Safe Spaces</Nav.Link>
+              </LinkContainer>
               <Logout />
             </>
           ) : (
