@@ -36,8 +36,8 @@ const Login = () => {
   }
 
   function redirectToFeed () {
-    if (user) {
-      return <Redirect to='/' />
+    if (isSubmitted) {
+      return <Redirect to='/spaces' />
     }
   }
 

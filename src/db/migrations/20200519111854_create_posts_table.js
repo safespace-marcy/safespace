@@ -2,7 +2,7 @@
 exports.up = function (knex) {
   return knex.schema.createTable('posts', (t) => {
     t.increments().primary()
-    t.string('title', 72).notNullable()
+    t.string('title', 144).notNullable()
     t.text('content').notNullable()
     t.timestamp('created_at').defaultTo(knex.fn.now())
     t.integer('user_id').notNullable()

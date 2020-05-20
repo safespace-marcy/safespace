@@ -27,7 +27,7 @@ const App = () => {
               <Route path='/news'>
                 <NewsFeed />
               </Route>
-              <Route path='/communities'>
+              <Route path='/spaces'>
                 <Communities />
               </Route>
               <Route path='/account'>
