@@ -8,7 +8,7 @@ const Login = () => {
   const [username, setUsername] = useState('')
   const [password, setPassword] = useState('')
   const [isSubmitted, setIsSubmitted] = useState(false)
-  const { setUser } = useContext(UserContext)
+  const { user, setUser } = useContext(UserContext)
   const [alert, setAlert] = useState(null)
 
   const sendCredentials = async (username, password) => {
@@ -36,7 +36,7 @@ const Login = () => {
   }
 
   function redirectToFeed () {
-    if (isSubmitted) {
+    if (user) {
       return <Redirect to='/' />
     }
   }
