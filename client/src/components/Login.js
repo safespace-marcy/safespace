@@ -36,7 +36,7 @@ const Login = () => {
   }
 
   function redirectToFeed () {
-    if (isSubmitted) {
+    if (user) {
       return <Redirect to='/spaces' />
     }
   }
