@@ -2,10 +2,12 @@ import React, { useState, useEffect } from 'react'
 import Post from './Post'
 import NewPostModal from './NewPostModal'
 import { useParams } from 'react-router-dom'
+
 function NewsFeed () {
   const [response, setResponse] = useState(null)
   const [newPost, setNewPost] = useState(false)
   const { id } = useParams()
+  
   const getPost = async () => {
     const req = await fetch(`/posts-community/${id}`)
     const response = await req.json()

@@ -11,6 +11,7 @@ import Communities from './components/Communities'
 import Account from './components/Account'
 import { ThemeProvider } from '@gympass/yoga'
 
+
 const App = () => {
   return (
     <Router>
@@ -36,7 +37,6 @@ const App = () => {
               </Route>
               <Route path='/home'>
                 <Home />
-              </Route>
               </Route>
               <Route path='/'>
                 <Landing />

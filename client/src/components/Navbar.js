@@ -8,13 +8,12 @@ const NavBar = () => {
   const { user } = useContext(UserContext)
   return (
     <Navbar bg='light' expand='lg'>
-      <Navbar.Brand href='/home'>Safespace</Navbar.Brand>
+      <LinkContainer to='/'>
+        <Navbar.Brand>Safespace</Navbar.Brand>
+      </LinkContainer>
       <Navbar.Toggle aria-controls='basic-navbar-nav' />
       <Navbar.Collapse id='basic-navbar-nav'>
         <Nav className='mr-auto'>
-          <LinkContainer to='/'>
-            <Nav.Link>Home</Nav.Link>
-          </LinkContainer>
         </Nav>
         <Nav>
           {user ? (
@@ -22,7 +21,7 @@ const NavBar = () => {
               <LinkContainer to='/account'>
                 <Nav.Link>My Account</Nav.Link>
               </LinkContainer>
-              <LinkContainer to='/news'>
+              <LinkContainer to={`/news/${user.id}`}>
                 <Nav.Link>Newfeed</Nav.Link>
               </LinkContainer>
               <LinkContainer to='/spaces'>
