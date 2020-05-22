@@ -2,6 +2,8 @@ import React, { useState, useEffect } from 'react'
 import { Redirect } from 'react-router-dom'
 import { Alert, Form, Container, Card } from 'react-bootstrap'
 import { Input } from '@gympass/yoga'
+import { colorPallet } from './Theme'
+import AvatarGen from './AvatarGen'
 
 function Register () {
   const [username, setUsername] = useState('')
@@ -10,6 +12,8 @@ function Register () {
   const [isSubmitted, setIsSubmitted] = useState(false)
   const [alert, setAlert] = useState(null)
   const [redirect, setRedirect] = useState(null)
+  const [sprite, setSprite] = useState('female')
+  const [seed, setSeed] = useState('safespace')
 
   async function registerUser () {
     fetch('/user', {
@@ -18,6 +22,7 @@ function Register () {
         'Content-Type': 'application/json'
       },
       body: JSON.stringify({
+        avatar: [sprite, seed],
         username: username,
         email: email,
         password: password
@@ -83,11 +88,13 @@ function Register () {
     <div style={{ display: 'flex', justifyContent: 'center', marginTop: '10px' }}>
       <Card style={{ width: '25rem', border: '0px' }}>
         <Card.Body>
-          <Card.Title style={{ textAlign: 'center' }}>Create an account</Card.Title>
-          <Card.Subtitle style={{ textAlign: 'center' }} className='mb-2 text-muted'>Feel free to use an alias</Card.Subtitle>
+          <Card.Title style={{ textAlign: 'center' }}><h1>S A F E S P A C E</h1></Card.Title>
+          <Card.Title style={{ textAlign: 'center', color: colorPallet.darkMarvel }}>Create an account</Card.Title>
+          <Card.Subtitle style={{ textAlign: 'center', color: colorPallet.lightMarvel }} className='mb-2 '>Feel free to use an alias</Card.Subtitle>
           <Container style={{ marginTop: '25px' }} className='justify-content-md-center' fluid='lg'>
             {alert && <Alert variant='warning'>{alert}</Alert>}
             <form onSubmit={handleSubmit} className='registerForm'>
+              <AvatarGen sprite={sprite} seed={seed} setSprite={setSprite} setSeed={setSeed}/>
               <div>
                 <Form.Group>
                   <Input

@@ -3,6 +3,7 @@ import { UserContext } from '../contexts/userContext'
 import { Alert, Form, Button, Container, Card } from 'react-bootstrap'
 import { Redirect } from 'react-router-dom'
 import { Input } from '@gympass/yoga'
+import { colorPallet } from './Theme'
 
 const Login = () => {
   const [username, setUsername] = useState('')
@@ -52,8 +53,9 @@ const Login = () => {
     <div style={{ display: 'flex', justifyContent: 'center', marginTop: '10px' }}>
       <Card style={{ width: '25rem', border: '0px' }}>
         <Card.Body>
-          <Card.Title style={{ textAlign: 'center' }}>Log In</Card.Title>
-          <Card.Subtitle style={{ textAlign: 'center' }} className='mb-2 text-muted'>Welcome Back!</Card.Subtitle>
+          <Card.Title style={{ textAlign: 'center' }}><h1>S A F E S P A C E</h1></Card.Title>
+          <Card.Title style={{ textAlign: 'center', color: colorPallet.darkMarvel }}>Log In</Card.Title>
+          <Card.Subtitle style={{ textAlign: 'center', color: colorPallet.lightMarvel }} className='mb-2'>Welcome Back!</Card.Subtitle>
           <Container style={{ marginTop: '25px' }} className='justify-content-md-center' fluid='lg'>
             <Form>
               {alert && <Alert variant='warning'>{alert}</Alert>}

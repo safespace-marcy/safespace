@@ -10,7 +10,7 @@ import NewsFeed from './components/NewsFeed'
 import Communities from './components/Communities'
 import Account from './components/Account'
 import { ThemeProvider } from '@gympass/yoga'
-
+import Community from './components/Community'
 
 const App = () => {
   return (
@@ -37,6 +37,9 @@ const App = () => {
               </Route>
               <Route path='/home'>
                 <Home />
+              </Route>
+              <Route path='/testCom/:id'>
+                <Community />
               </Route>
               <Route path='/'>
                 <Landing />

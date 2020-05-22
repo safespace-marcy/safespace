@@ -8,7 +8,7 @@ class Communities {
 
   static getById (id) {
     const queryText = 'SELECT * FROM communities WHERE id = $1'
-    return query(queryText, [id]).then(res => res.row[0])
+    return query(queryText, [id]).then(res => res.rows[0])
   }
 
   static getByUserId (userId) {
