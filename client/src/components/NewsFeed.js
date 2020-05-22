@@ -20,6 +20,9 @@ function NewsFeed () {
     getPost()
   }, [id])
 
+
+  console.log(response);
+  
   return response === null ? (
     <div>
       <Loader style={{display:"flex", alignItems:"center"}} indeterminate active>Loading Feed...</Loader>
@@ -28,7 +31,7 @@ function NewsFeed () {
     <>
       <NewPostModal setNewPost={setNewPost} />
       {response.map((res, i) => (
-        <Post key={res.title + i} data={res} />
+        <Post key={res.title + i} data={res}/>
       ))}
     </>
   )

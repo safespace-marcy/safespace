@@ -18,7 +18,7 @@ function Account () {
 
   return (
     <div>
-      <p>Hello</p>
+      <p>Hello, {user.username}</p>
       {response.map((obj) => (
         <Post data={obj} />
       ))}

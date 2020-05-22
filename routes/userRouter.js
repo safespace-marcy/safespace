@@ -9,5 +9,6 @@ userRouter.post('/user', userController.register)
 userRouter.get('/logout', userController.logout)
 userRouter.delete('/user', authenticate, userController.deleteAccount)
 userRouter.get('/user', authenticate, userController.getUser)
+userRouter.get('/user/:userId', authenticate, userController.getOtherUser)
 
 module.exports = userRouter
