@@ -2,25 +2,28 @@ import React, { useState, useEffect } from 'react'
 import Post from './Post'
 import NewPostModal from './NewPostModal'
 import { useParams } from 'react-router-dom'
+import { Loader } from 'semantic-ui-react'
 
 function NewsFeed () {
   const [response, setResponse] = useState(null)
   const [newPost, setNewPost] = useState(false)
+  console.log(newPost)
   const { id } = useParams()
-  
-  const getPost = async () => {
-    const req = await fetch(`/posts-community/${id}`)
-    const response = await req.json()
-    setResponse(response)
-    console.log(id, response)
-  }
+
 
   useEffect(() => {
+    const getPost = async () => {
+      const req = await fetch(`/posts-community/${id}`)
+      const response = await req.json()
+      setResponse(response)
+    }
     getPost()
-  }, [])
+  }, [id])
 
   return response === null ? (
-    <h1>Loading</h1>
+    <div>
+      <Loader style={{display:"flex", alignItems:"center"}} indeterminate active>Loading Feed...</Loader>
+    </div>
   ) : (
     <>
       <NewPostModal setNewPost={setNewPost} />
