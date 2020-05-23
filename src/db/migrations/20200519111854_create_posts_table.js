@@ -5,6 +5,7 @@ exports.up = function (knex) {
     t.string('title', 144).notNullable()
     t.text('content').notNullable()
     t.timestamp('created_at').defaultTo(knex.fn.now())
+    t.integer('likes')
     t.integer('user_id').notNullable()
     t.foreign('user_id').references('id').inTable('users')
     t.integer('community_id').notNullable()

@@ -29,8 +29,18 @@ class Post {
   }
 
   static getAllByCommunity (communityId) {
-    const queryText = 'SELECT * FROM posts WHERE community_id = $1'
+    const queryText = 'SELECT * FROM posts WHERE community_id = $1;'
     return db.query(queryText, [communityId]).then(response => response.rows)
+  }
+
+  static addALike (postId) {
+    'UPDATE posts SET likes=likes + 1 WHERE id=$1;'
+    return db.query(queryText, [content, postId])
+  }
+
+  static deleteALike (postId) {
+    'UPDATE posts SET likes=likes - 1 WHERE id=$1;'
+    return db.query(queryText, [content, postId])
   }
 }
 module.exports = Post
