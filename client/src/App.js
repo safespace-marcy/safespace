@@ -26,8 +26,8 @@ const App = () => {
               <Route path='/login'>
                 <Login />
               </Route>
-              <Route path='/news/:id'>
-                <NewsFeed />
+              <Route path='/news/:type/:id'>
+                <Community />
               </Route>
               <Route path='/spaces'>
                 <Communities />
@@ -37,9 +37,6 @@ const App = () => {
               </Route>
               <Route path='/home'>
                 <Home />
-              </Route>
-              <Route path='/testCom/:id'>
-                <Community />
               </Route>
               <Route path='/'>
                 <Landing />

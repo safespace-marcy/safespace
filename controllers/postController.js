@@ -91,6 +91,19 @@ const getAllByCommunity = (req, res) => {
     })
 }
 
+const getSomeByCommunity = (req, res) => {
+  const { id } = req.params
+
+  Post.getSomeByCommunity(id)
+    .then(data => {
+      return res.json(data)
+    })
+    .catch(err => {
+      console.log(err)
+      res.status(500).send(err)
+    })
+}
+
 module.exports = {
   create,
   deletePost,
@@ -99,5 +112,6 @@ module.exports = {
   getAllByUser,
   getAllByCommunity,
   liked,
-  unLiked
+  unLiked,
+  getSomeByCommunity
 }

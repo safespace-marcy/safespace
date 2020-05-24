@@ -5,7 +5,7 @@ import { Card } from 'react-bootstrap'
 function Post (props) {
   const dateCreated = new Date(props.data.created_at)
   const months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December']
-
+  
   return (
       <Item style={{width:"80%", marginLeft:"10%", marginTop:"30px", border:"2px solid black", padding:"15px", boxShadow:"2px 5px #888888"}}>
         <Item.Image src='https://react.semantic-ui.com/images/wireframe/image.png' />

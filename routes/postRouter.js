@@ -10,5 +10,5 @@ postRouter.put('/posts/:id', auth, postController.update)
 postRouter.get('/posts/:id', auth, postController.getById)
 postRouter.get('/posts-user/:id', auth, postController.getAllByUser)
 postRouter.get('/posts-community/:id', auth, postController.getAllByCommunity)
-
+postRouter.get('/posts-community/visiter/:id', auth, postController.getSomeByCommunity)
 module.exports = postRouter

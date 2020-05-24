@@ -7,13 +7,19 @@ import { Item } from 'semantic-ui-react'
 const Community = () => {
   const [posts, setPosts] = useState([])
   const [community, setCommunity] = useState({})
-  const { id } = useParams()
+  const { type,id } = useParams()
 
   useEffect(() => {
     const getPosts = async () => {
+      if(type === 'member'){
       const req = await fetch(`/posts-community/${id}`)
       const response = await req.json()
       setPosts(response)
+      }else{
+        const req = await fetch(`/posts-community/visiter/${id}`)
+        const response = await req.json()
+        setPosts(response)
+      }
     }
     const getCommunity = async() => {
       const req = await fetch(`/communities/${id}`)

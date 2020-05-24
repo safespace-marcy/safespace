@@ -41,8 +41,8 @@ const NavBar = () => {
 
               <NavDropdown title="Newsfeeds" style={{ color: 'white' }} id="basic-nav-dropdown">
               {communities.map((community) => {
-                return <NavDropdown.Item>
-                  <LinkContainer to={`/news/${community.id}`}>
+                return <NavDropdown.Item key={community.name}>
+                  <LinkContainer to={`/news/member/${community.id}`}>
                     <Nav.Link>
                     {community.name}
                     </Nav.Link>

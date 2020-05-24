@@ -7,8 +7,6 @@ import { LinkContainer } from 'react-router-bootstrap'
 const Landing = () => {
   const { user } = useContext(UserContext)
   const [communities, setCommunities] = useState(null)
-  console.log(communities)
-
 
   useEffect(() => {
     const getCommunities = async () => {
@@ -21,8 +19,6 @@ const Landing = () => {
     getCommunities()
       .then((list) => { setCommunities(list) })
   }, [user])
-
-
 
   const JumbotronStyle = {
     background: 'linear-gradient( rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7) ), url("https://miro.medium.com/max/8736/1*uCXBLL2_Diybb9kalmMmFg.jpeg")',
