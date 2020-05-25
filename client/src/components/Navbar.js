@@ -9,8 +9,15 @@ const NavBar = () => {
   const { user } = useContext(UserContext)
   return (
     <Navbar style={{ backgroundColor: colorPallet.marvel }} expand='lg'>
-      <LinkContainer style={{ color: 'white' }} to={user ? '/home' : '/'}>
-        <Navbar.Brand style={{ backgroundColor: 'white' }}><i className='fas fa-feather-alt' /> SAFESPACE</Navbar.Brand>
+      <LinkContainer style={{ color: 'white' }} to='/'>
+        <Navbar.Brand style={{
+          backgroundColor: 'white',
+          fontFamily: 'arial',
+          fontWeight: '700',
+          fontStyle: 'normal'
+        }}
+        ><i className='fas fa-feather-alt' /> SAFESPACE
+        </Navbar.Brand>
       </LinkContainer>
       <Navbar.Toggle aria-controls='basic-navbar-nav' />
       <Navbar.Collapse id='basic-navbar-nav'>

@@ -6,7 +6,6 @@ function Account () {
   const [response, setResponse] = useState([])
   const { user } = useContext(UserContext)
 
-
   useEffect(() => {
     const getPost = async () => {
       const req = await fetch(`/posts-user/${user.id}`)
@@ -18,9 +17,9 @@ function Account () {
 
   return (
     <div>
-      <p>Hello</p>
-      {response.map((obj) => (
-        <Post data={obj} />
+      <p>Hello {user.username}</p>
+      {response.map((obj, i) => (
+        <Post key={i} data={obj} />
       ))}
     </div>
   )
