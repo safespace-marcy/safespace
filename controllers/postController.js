@@ -2,9 +2,9 @@ const Post = require('../models/Posts')
 
 const create = (req, res) => {
   const { userId } = req
-  const { body, community, title } = req.body
+  const { body, id, title } = req.body
 
-  Post.create(userId, community, body, title)
+  Post.create(userId, id, body, title)
     .then(() => res.sendStatus(201))
     .catch(err => {
       console.log(err)
@@ -35,27 +35,6 @@ const update = (req, res) => {
     })
 }
 
-const liked = (req, res) => {
-  const { id } = req.params
-
-  Post.addALike(id)
-    .then(() => res.sendStatus(200))
-    .catch(err => {
-      console.log(err)
-      res.status(500).json({ error: '500 Internal Server Error' })
-    })
-}
-
-const unLiked = (req, res) => {
-  const { id } = req.params
-
-  Post.deleteALike(id)
-    .then(() => res.sendStatus(200))
-    .catch(err => {
-      console.log(err)
-      res.status(500).json({ error: '500 Internal Server Error' })
-    })
-}
 
 const getById = (req, res) => {
   const { id } = req.params
@@ -111,7 +90,5 @@ module.exports = {
   getById,
   getAllByUser,
   getAllByCommunity,
-  liked,
-  unLiked,
   getSomeByCommunity
 }

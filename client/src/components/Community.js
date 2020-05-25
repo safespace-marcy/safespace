@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react'
+import NewPostModal from './NewPostModal'
 import { Jumbotron, Tabs, Tab } from 'react-bootstrap'
 import Post from './Post'
 import { useParams } from 'react-router-dom'
@@ -7,8 +8,8 @@ import { Item } from 'semantic-ui-react'
 const Community = () => {
   const [posts, setPosts] = useState([])
   const [community, setCommunity] = useState({})
+  const [newPost, setNewPost] = useState(false)
   const { type,id } = useParams()
-
   useEffect(() => {
     const getPosts = async () => {
       if(type === 'member'){
@@ -26,10 +27,11 @@ const Community = () => {
       const res = await req.json()
       setCommunity(res)
     }
+   
     getCommunity()
     getPosts()
   },[id])
-
+  console.log(posts)
   return (
     <div>
       <Jumbotron>
@@ -41,6 +43,7 @@ const Community = () => {
       <Tabs defaultActiveKey="newsfeed" transition={false} id="noanim-tab-example">
         <Tab eventKey="newsfeed" title="Newsfeed">
             <Item.Group>
+            <NewPostModal setNewPost={setNewPost} id={id} />
               {posts.map((res, i) => {
                 return (
                   <Post key={i} data={res}/>

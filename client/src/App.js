@@ -32,6 +32,9 @@ const App = () => {
               <Route path='/spaces'>
                 <Communities />
               </Route>
+              <Route path='/ex/:id'>
+                <NewsFeed />
+              </Route>
               <Route path='/account'>
                 <Account />
               </Route>

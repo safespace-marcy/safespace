@@ -18,7 +18,7 @@ function NewPostModal (props) {
       <Modal show={show} onHide={handleClose} animation={false}>
         <Modal.Header closeButton>New Post</Modal.Header>
         <Modal.Body>
-          <WritePostForm setShow={setShow} setNewPost={props.setNewPost} />
+          <WritePostForm setShow={setShow} setNewPost={props.setNewPost} id={props.id} />
         </Modal.Body>
       </Modal>
     </>

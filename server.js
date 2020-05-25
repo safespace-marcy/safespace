@@ -8,6 +8,7 @@ const cookieParser = require('cookie-parser')
 const postRouter = require('./routes/postRouter')
 const communityRouter = require('./routes/communitiesRouter')
 const commUserRouter = require('./routes/communityUserRouter')
+const likesRouter = require('./routes/likesRouter')
 // port is specified in environment variable or default to 8080
 const port = process.env.PORT || 8080
 app.use(bodyParser.json())
@@ -19,7 +20,7 @@ app.use(userRouter)
 app.use(postRouter)
 app.use(communityRouter)
 app.use(commUserRouter)
-
+app.use(likesRouter)
 app.get('*', (req, res) => {
   res.sendFile(path.join(`${__dirname}/client/build/index.html`))
 })
