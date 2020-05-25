@@ -5,45 +5,75 @@ import { UserContext } from '../contexts/userContext'
 
 function Post (props) {
   const { user } = useContext(UserContext)
-  const [likes, setLikes] = useState([])
+  const [amtOfLikes, setAmtOfLikes] = useState([])
   const [userLiked, setUserLiked] = useState('Like')
+  // remove later
+  const [isLiked, setIsLiked] = useState(true)
   const dateCreated = new Date(props.data.created_at)
   const months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December']
-  
+  // console.log(amtOfLikes)
   useEffect(() => {
     const getLikes = async() =>{
+      
       const req = await fetch(`/likes/${props.data.id}`)
       const res = await req.json() 
-      setLikes(res)
-      for(let i = 0; i < likes.length; i++){
-        if(likes[i].user_id === user.id){
+      console.log("the amount of like are ",res)
+      setAmtOfLikes(res)
+      if (amtOfLikes.length > 0){
+      for(let i = 0; i < amtOfLikes.length; i++){
+        if(amtOfLikes[i].user_id === user.id){
           return setUserLiked('Un-Like')
         }
       }
     }
-   
+  }
   getLikes()
-  },[likes])
+  },[isLiked])
+
+  useEffect(() => {
+    const updateLiked = async () => {
+      console.log(`prop:${props.data.id} user:${user.id}`)
+      const url = `/${isLiked ? 'unLike' : 'like'}/${props.data.id}/${user.id}`
+     console.log(url)
+      const req = await fetch(url, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        }
+      })
+      const res = await req.json() 
+      setAmtOfLikes(res)
+    }
+    console.log('updated')
+    updateLiked();
+  }, [isLiked])
 
   const like = async() =>{
+    console.log(isLiked)
+    isLiked ? setIsLiked(false) : setIsLiked(true);
     const postLike = {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'
       }
     }
+    
 
-    if(userLiked === 'Un-Like'){
-      const req = await fetch(`/unlike/${props.data.id}/${user.id}`, postLike) 
-      const res = await req.json() 
-      setLikes(res)
-      setUserLiked('Like')
-    }else{ 
-      const req = await fetch(`/like/${props.data.id}/${user.id}`, postLike) 
-      const res = await req.json() 
-      setLikes(res)
-      setUserLiked('Un-Like')
-    }
+    //if(userLiked === 'Un-Like'){
+      //setUserLiked('Like')
+      // const req = await fetch(`/unlike/${props.data.id}/${user.id}`, postLike) 
+      // const res = await req.json() 
+      
+      // setAmtOfLikes(res)
+      
+    //}else{ 
+      //setUserLiked('Un-Like')
+      // const req = await fetch(`/like/${props.data.id}/${user.id}`, postLike) 
+      // const res = await req.json()
+       
+      // setAmtOfLikes(res)
+      
+    //}
   }
   
   const getComments = () =>{
@@ -62,8 +92,8 @@ function Post (props) {
             <p>{props.data.content}</p>
           </Item.Description>
           <Item.Extra>
-            <Card.Link>{likes.length}</Card.Link>
-            <Card.Link onClick={()=>{like()}} >{userLiked}</Card.Link>
+            <Card.Link>{amtOfLikes.length}</Card.Link>
+            <Card.Link onClick={like}>{isLiked ? 'Like': 'Unlike'}</Card.Link>
             <Card.Link onClick={()=>{getComments()}}>Comments</Card.Link>
           </Item.Extra>
         </Item.Content>
