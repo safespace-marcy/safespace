@@ -3,6 +3,7 @@ import Post from './Post'
 import NewPostModal from './NewPostModal'
 import { useParams } from 'react-router-dom'
 import { Loader } from 'semantic-ui-react'
+import { Item } from 'semantic-ui-react'
 
 function NewsFeed () {
   const [response, setResponse] = useState(null)
@@ -18,7 +19,7 @@ function NewsFeed () {
     }
     getPost()
   }, [id])
-
+  
   return response === null ? (
     <div>
       <Loader style={{ display: 'flex', alignItems: 'center' }} indeterminate active>Loading Feed...</Loader>
@@ -26,9 +27,11 @@ function NewsFeed () {
   ) : (
     <>
       <NewPostModal setNewPost={setNewPost} />
-      {response.map((res, i) => (
-        <Post key={res.title + i} data={res} />
-      ))}
+      <Item.Group>
+        {response.map((res, i) => (
+          <Post key={res.title + i} data={res}/>
+        ))}
+      </Item.Group>
     </>
   )
 }

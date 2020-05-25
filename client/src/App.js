@@ -9,6 +9,7 @@ import Home from './components/Home'
 import NewsFeed from './components/NewsFeed'
 import Communities from './components/Communities'
 import Account from './components/Account'
+import OtherUser from './components/OtherUserAcc'
 import { ThemeProvider } from '@gympass/yoga'
 import Community from './components/Community'
 import Chat from './components/Chat'
@@ -41,6 +42,9 @@ const App = () => {
               </Route>
               <Route path='/testCom/:id'>
                 <Community />
+              </Route>
+              <Route path='/user/:id'>
+                <OtherUser />
               </Route>
               <Route path='/inbox'>
                 <Chat />

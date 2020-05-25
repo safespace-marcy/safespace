@@ -117,10 +117,24 @@ const getUser = async (req, res) => {
   }
 }
 
+const getOtherUser = async (req, res) => {
+  try {
+    const {userId} = req.params
+    const user = await User.getById(userId)
+    if (!user) throw Error('User Does Not Exist')
+    res.status(200).send(JSON.stringify(user))
+  } catch (err) {
+    res.status(404).send(err)
+  }
+}
+
+
+
 module.exports = {
   register,
   login,
   logout,
   deleteAccount,
-  getUser
+  getUser, 
+  getOtherUser,
 }
