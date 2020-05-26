@@ -13,7 +13,6 @@ function Post (props) {
     const req = await fetch(`/user/${props.data.user_id}`)
     const userResponse = await req.json()
     setUserResponse(userResponse)
-    console.log(userResponse)
   }
   
   useEffect(() => {
@@ -27,6 +26,7 @@ function Post (props) {
             <Nav.Link><h6 class="card-subtitle mb-2 text-muted">{userResponse.username}</h6></Nav.Link>
           </LinkContainer>
         ) : ''}
+        {props.account? <Card.Link href={`/view/${props.data.id}`}>View</Card.Link> : ''}
         <Item.Image src='https://react.semantic-ui.com/images/wireframe/image.png' />
         <Item.Content>
           <Item.Header as='a'>{props.data.title}</Item.Header>
