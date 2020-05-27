@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useContext } from 'react'
-import { Item, Icon, Button } from 'semantic-ui-react'
+import { Item, Icon, Button, Dropdown } from 'semantic-ui-react'
 import { Card, Nav } from 'react-bootstrap'
 import { UserContext } from '../contexts/userContext'
 import CommentList from './CommentList'
@@ -14,7 +14,7 @@ function Post (props) {
   const [isLiked, setIsLiked] = useState(false)
   const dateCreated = new Date(props.data.created_at)
   const months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December']
-  // console.log(props.data)
+  
   useEffect(() => {
     const getLikes = async () => {
       const req = await fetch(`/likes/${props.data.id}`)
@@ -89,7 +89,14 @@ function Post (props) {
             </LinkContainer>
           ) : ''}
         </Item.Header>
-        <Button floated='right' circular icon='edit' />
+        {props.data.user_id === user.id && <Button floated='right'>
+          <Dropdown floated='right' icon='edit'>
+            <Dropdown.Menu>
+              <Dropdown.Item text='Delete' />
+              <Dropdown.Item text='Edit' />
+            </Dropdown.Menu>
+          </Dropdown>
+        </Button>}
         <Item.Meta>
           {months[dateCreated.getMonth()]} {dateCreated.getDate()}, {dateCreated.getFullYear()} {dateCreated.getHours()}:{dateCreated.getMinutes()} {dateCreated.getHours() >= 12 ? 'PM' : 'AM'}
         </Item.Meta>
