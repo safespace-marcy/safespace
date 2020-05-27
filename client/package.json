@@ -19,6 +19,9 @@
     "read-more-react": "^1.0.10",
     "semantic-ui-css": "^2.4.1",
     "semantic-ui-react": "^0.88.2",
+    "socket.io": "^2.3.0",
+    "socket.io-client": "^2.3.0",
+    "socket.io-p2p": "^2.2.0",
     "use-react-router": "^1.0.7"
   },
   "devDependencies": {

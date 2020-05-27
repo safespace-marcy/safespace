@@ -94,7 +94,7 @@ function Register () {
           <Container style={{ marginTop: '25px' }} className='justify-content-md-center' fluid='lg'>
             {alert && <Alert variant='warning'>{alert}</Alert>}
             <form onSubmit={handleSubmit} className='registerForm'>
-              <AvatarGen sprite={sprite} seed={seed} setSprite={setSprite} setSeed={setSeed}/>
+              <AvatarGen sprite={sprite} seed={seed} setSprite={setSprite} setSeed={setSeed} />
               <div>
                 <Form.Group>
                   <Input

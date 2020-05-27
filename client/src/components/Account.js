@@ -8,7 +8,6 @@ function Account () {
   const [response, setResponse] = useState([])
   const { user } = useContext(UserContext)
 
-
   useEffect(() => {
     const getPost = async () => {
       const req = await fetch(`/posts-user/${user.id}`)

@@ -15,14 +15,14 @@ const Community = () => {
       const response = await req.json()
       setPosts(response)
     }
-    const getCommunity = async() => {
+    const getCommunity = async () => {
       const req = await fetch(`/communities/${id}`)
       const res = await req.json()
       setCommunity(res)
     }
     getCommunity()
     getPosts()
-  },[id])
+  }, [id])
 
   return (
     <div>
@@ -32,26 +32,23 @@ const Community = () => {
           {community.description}
         </p>
       </Jumbotron>
-      <Tabs defaultActiveKey="newsfeed" transition={false} id="noanim-tab-example">
-        <Tab eventKey="newsfeed" title="Newsfeed">
-            <Item.Group>
-              {posts.map((res, i) => {
-                return (
-                  <Post key={i} data={res}/>
-                )
-              })}
-            </Item.Group>
+      <Tabs defaultActiveKey='newsfeed' transition={false} id='noanim-tab-example'>
+        <Tab eventKey='newsfeed' title='Newsfeed'>
+          <Item.Group>
+            {posts.map((res, i) => {
+              return (
+                <Post key={i} data={res} />
+              )
+            })}
+          </Item.Group>
         </Tab>
-        <Tab eventKey="about" title="About">
+        <Tab eventKey='about' title='About'>
           <h1>About Us</h1>
         </Tab>
-        <Tab eventKey="admins" title="Admins">
+        <Tab eventKey='admins' title='Admins'>
           <h1>List of admins here</h1>
         </Tab>
       </Tabs>
-
-
-
 
     </div>
   )

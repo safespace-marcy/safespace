@@ -8,18 +8,18 @@ function Post (props) {
   const dateCreated = new Date(props.data.created_at)
   const months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December']
   const [userResponse, setUserResponse] = useState(null)
-   
+
   const getUser = async () => {
     const req = await fetch(`/user/${props.data.user_id}`)
     const userResponse = await req.json()
     setUserResponse(userResponse)
     console.log(userResponse)
   }
-  
+
   useEffect(() => {
     getUser()
   },[])
-  
+
   return (
       <Item style={{width:"80%", marginLeft:"10%", marginTop:"30px", border:"2px solid black", padding:"15px", boxShadow:"2px 5px #888888"}}>
         {userResponse ? (
@@ -34,14 +34,14 @@ function Post (props) {
             {months[dateCreated.getMonth()]} {dateCreated.getDate()}, {dateCreated.getFullYear()} {dateCreated.getHours()}:{dateCreated.getMinutes()} {dateCreated.getHours() >= 12 ? "PM" : "AM"}
           </Item.Meta>
           <Item.Description>
-            <ReadMoreReact 
+            <ReadMoreReact
               text={props.data.content}
               min={200}
               max={500}
               ideal={300}
               readMoreText="...See More"
             />
-          </Item.Description> 
+          </Item.Description>
           <Item.Extra>
             <Card.Link href="#">Like</Card.Link>
             <Card.Link href="#">Comments</Card.Link>
