@@ -1,8 +1,11 @@
 import React, { useState, useEffect, useContext } from 'react'
 import { Item, Icon, Button } from 'semantic-ui-react'
-import { Card } from 'react-bootstrap'
+import { Card, Nav } from 'react-bootstrap'
 import { UserContext } from '../contexts/userContext'
 import CommentList from './CommentList'
+import ReadMoreReact from 'read-more-react'
+import { LinkContainer } from 'react-router-bootstrap'
+
 function Post (props) {
   const { user } = useContext(UserContext)
   const [likes, setLikes] = useState([])
@@ -27,6 +30,19 @@ function Post (props) {
 
     getLikes()
   }, [isLiked])
+
+  const [userResponse, setUserResponse] = useState(null)
+   
+  const getUser = async () => {
+    const req = await fetch(`/user/${props.data.user_id}`)
+    const userResponse = await req.json()
+    setUserResponse(userResponse)
+    console.log(userResponse)
+  }
+  
+  useEffect(() => {
+    getUser()
+  },[])
 
   const like = async () => {
     const postLike = {
@@ -64,6 +80,11 @@ function Post (props) {
   return (
 
     <Item style={{ width: '80%', marginLeft: '10%', marginTop: '30px', border: '2px solid black', padding: '15px', boxShadow: '2px 5px #888888' }}>
+      {userResponse ? (
+          <LinkContainer style={{ color: 'white' }} to={`/user/${userResponse.id}`}>
+            <Nav.Link><h6 class="card-subtitle mb-2 text-muted">{userResponse.username}</h6></Nav.Link>
+          </LinkContainer>
+        ) : ''}
       <Item.Image src='https://react.semantic-ui.com/images/wireframe/image.png' />
       <Item.Content>
         <Item.Header as='a'>{props.data.title}
@@ -73,7 +94,13 @@ function Post (props) {
           {months[dateCreated.getMonth()]} {dateCreated.getDate()}, {dateCreated.getFullYear()} {dateCreated.getHours()}:{dateCreated.getMinutes()} {dateCreated.getHours() >= 12 ? 'PM' : 'AM'}
         </Item.Meta>
         <Item.Description>
-          <p>{props.data.content}</p>
+        <ReadMoreReact 
+              text={props.data.content}
+              min={200}
+              max={500}
+              ideal={300}
+              readMoreText="...See More"
+            />
         </Item.Description>
         <Item.Extra>
           <Card.Link>{likes.length}</Card.Link>
