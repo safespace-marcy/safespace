@@ -25,7 +25,7 @@ const NavBar = () => {
 
   console.log(communities)
   return (
-    <Navbar style={{ backgroundColor: colorPallet.marvel }} expand='lg'>
+    <Navbar sticky="top" style={{ backgroundColor: colorPallet.marvel }} expand='lg'>
       <LinkContainer style={{ color: 'white' }} to={user ? '/home' : '/'}>
         <Navbar.Brand style={{ backgroundColor: 'white' }}><i className='fas fa-feather-alt' /> SAFESPACE</Navbar.Brand>
       </LinkContainer>

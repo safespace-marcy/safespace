@@ -15,6 +15,7 @@ const Community = () => {
       if(type === 'member'){
       const req = await fetch(`/posts-community/${id}`)
       const response = await req.json()
+      console.log(response)
       setPosts(response)
       }else{
         const req = await fetch(`/posts-community/visiter/${id}`)

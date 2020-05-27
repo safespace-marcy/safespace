@@ -9,6 +9,7 @@ const postRouter = require('./routes/postRouter')
 const communityRouter = require('./routes/communitiesRouter')
 const commUserRouter = require('./routes/communityUserRouter')
 const likesRouter = require('./routes/likesRouter')
+const commentsRouter = require('./routes/commentRouter')
 // port is specified in environment variable or default to 8080
 const port = process.env.PORT || 8080
 app.use(bodyParser.json())
@@ -21,6 +22,7 @@ app.use(postRouter)
 app.use(communityRouter)
 app.use(commUserRouter)
 app.use(likesRouter)
+app.use(commentsRouter)
 app.get('*', (req, res) => {
   res.sendFile(path.join(`${__dirname}/client/build/index.html`))
 })

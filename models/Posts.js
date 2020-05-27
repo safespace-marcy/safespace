@@ -11,9 +11,9 @@ class Post {
     return db.query(queryText, [postId])
   }
 
-  static update (content, postId) {
-    const queryText = 'UPDATE posts SET content = $1 WHERE id = $2'
-    return db.query(queryText, [content, postId])
+  static update (content, postId, title) {
+    const queryText = 'UPDATE posts SET content = $1, title = $3 WHERE id = $2;'
+    return db.query(queryText, [content, postId, title])
   }
 
   static getById (postId) {

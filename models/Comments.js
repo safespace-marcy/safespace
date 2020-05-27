@@ -15,6 +15,11 @@ class Comments{
     const queryText = 'UPDATE comments SET content = $1 WHERE id = $2'
     return db.query(queryText, [content, commentId])
   }
+
+  static getAll (postId) {
+    const queryText = 'SELECT * FROM comments WHERE post_id = $1'
+    return db.query(queryText, [postId])
+  }
 }
 
 module.exports = Comments

@@ -25,9 +25,9 @@ const deletePost = (req, res) => {
 
 const update = (req, res) => {
   const { id } = req.params
-  const { content } = req.body
+  const { title,content } = req.body
 
-  Post.update(content, id)
+  Post.update(content, id, title)
     .then(() => res.sendStatus(200))
     .catch(err => {
       console.log(err)
