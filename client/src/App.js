@@ -9,9 +9,11 @@ import Home from './components/Home'
 import NewsFeed from './components/NewsFeed'
 import Communities from './components/Communities'
 import Account from './components/Account'
+import Edit from './components/Edit'
 import OtherUser from './components/OtherUserAcc'
 import { ThemeProvider } from '@gympass/yoga'
 import Community from './components/Community'
+import Chat from './components/Chat'
 
 const App = () => {
   return (
@@ -39,6 +41,9 @@ const App = () => {
               <Route path='/account'>
                 <Account />
               </Route>
+              <Route path='/view/:id'>
+                <Edit />
+              </Route>
               <Route path='/home'>
                 <Home />
               </Route>
@@ -47,6 +52,9 @@ const App = () => {
               </Route>
               <Route path='/user/:id'>
                 <OtherUser />
+              </Route>
+              <Route path='/inbox'>
+                <Chat />
               </Route>
               <Route path='/'>
                 <Landing />

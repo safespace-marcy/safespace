@@ -23,14 +23,20 @@ const Home = () => {
   return (
     <div>{
       communities != null && user != null
-        ? communities.map((community) => {
-          return <Link to={`/news/${community.id}`}>
-            <h1>{community.name}</h1>
-                 </Link>
+        ? communities.map((community, i) => {
+          return (
+            <Link key={i} to={`/news/${community.id}`}>
+              <h1>{community.name}</h1>
+            </Link>
+          )
         })
-        : (<div>
-          <Loader style={{ display: 'flex', alignItems: 'center' }} indeterminate active>Loading Feed...</Loader>
-        </div>)
+        : (
+          <div>
+            <Loader style={{ display: 'flex', alignItems: 'center' }} indeterminate active>
+              Loading Feed...
+            </Loader>
+          </div>
+        )
     }
     </div>
   )

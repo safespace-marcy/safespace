@@ -32,17 +32,16 @@ function Post (props) {
   }, [isLiked])
 
   const [userResponse, setUserResponse] = useState(null)
-   
+
   const getUser = async () => {
     const req = await fetch(`/user/${props.data.user_id}`)
     const userResponse = await req.json()
     setUserResponse(userResponse)
-    console.log(userResponse)
   }
-  
+
   useEffect(() => {
     getUser()
-  },[])
+  }, [])
 
   const like = async () => {
     const postLike = {
@@ -80,27 +79,28 @@ function Post (props) {
   return (
 
     <Item style={{ width: '80%', marginLeft: '10%', marginTop: '30px', border: '2px solid black', padding: '15px', boxShadow: '2px 5px #888888' }}>
-      {userResponse ? (
-          <LinkContainer style={{ color: 'white' }} to={`/user/${userResponse.id}`}>
-            <Nav.Link><h6 class="card-subtitle mb-2 text-muted">{userResponse.username}</h6></Nav.Link>
-          </LinkContainer>
-        ) : ''}
+
       <Item.Image src='https://react.semantic-ui.com/images/wireframe/image.png' />
       <Item.Content>
         <Item.Header as='a'>{props.data.title}
+          {userResponse ? (
+            <LinkContainer to={`/user/${userResponse.id}`}>
+              <Nav.Link>{userResponse.username}</Nav.Link>
+            </LinkContainer>
+          ) : ''}
         </Item.Header>
         <Button floated='right' circular icon='edit' />
         <Item.Meta>
           {months[dateCreated.getMonth()]} {dateCreated.getDate()}, {dateCreated.getFullYear()} {dateCreated.getHours()}:{dateCreated.getMinutes()} {dateCreated.getHours() >= 12 ? 'PM' : 'AM'}
         </Item.Meta>
         <Item.Description>
-        <ReadMoreReact 
-              text={props.data.content}
-              min={200}
-              max={500}
-              ideal={300}
-              readMoreText="...See More"
-            />
+          <ReadMoreReact
+            text={props.data.content}
+            min={200}
+            max={500}
+            ideal={300}
+            readMoreText='...See More'
+          />
         </Item.Description>
         <Item.Extra>
           <Card.Link>{likes.length}</Card.Link>

@@ -14,13 +14,13 @@ function OtherUser () {
     const data = await req.json()
     return setUser(data)
   }
-  
+
   const getPosts = async () => {
     const req = await fetch(`/posts-user/${id}`)
     const data = await req.json()
     return setPosts(data)
   }
-  
+
   useEffect(() => {
     getUser()
     getPosts()
@@ -28,7 +28,7 @@ function OtherUser () {
 
   console.log(user)
   console.log(posts)
-  
+
   return (
     <div>
       <Jumbotron>
@@ -36,7 +36,7 @@ function OtherUser () {
       </Jumbotron>
       <Item.Group>
         {posts.map((res, i) => (
-          <Post key={i} data={res}/>
+          <Post key={i} data={res} />
         ))}
       </Item.Group>
     </div>
