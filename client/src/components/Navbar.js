@@ -4,7 +4,7 @@ import { UserContext } from '../contexts/userContext'
 import { Navbar, Nav, NavDropdown } from 'react-bootstrap'
 import { LinkContainer } from 'react-router-bootstrap'
 import { colorPallet } from './Theme'
-import { Dropdown } from '@gympass/yoga';
+import { Dropdown } from '@gympass/yoga'
 
 const NavBar = () => {
   const { user } = useContext(UserContext)
@@ -25,7 +25,7 @@ const NavBar = () => {
 
   console.log(communities)
   return (
-    <Navbar sticky="top" style={{ backgroundColor: colorPallet.marvel }} expand='lg'>
+    <Navbar sticky='top' style={{ backgroundColor: colorPallet.marvel }} expand='lg'>
       <LinkContainer style={{ color: 'white' }} to={user ? '/home' : '/'}>
         <Navbar.Brand style={{ backgroundColor: 'white' }}><i className='fas fa-feather-alt' /> SAFESPACE</Navbar.Brand>
       </LinkContainer>
@@ -33,24 +33,24 @@ const NavBar = () => {
       <Navbar.Collapse id='basic-navbar-nav'>
         <Nav className='mr-auto' />
         <Nav>
-          {user && communities != null? (
+          {user && communities != null ? (
             <>
               <LinkContainer style={{ color: 'white' }} to='/account'>
                 <Nav.Link>My Account</Nav.Link>
               </LinkContainer>
 
-              <NavDropdown title="Newsfeeds" style={{ color: 'white' }} id="basic-nav-dropdown">
-              {communities.map((community) => {
-                return <NavDropdown.Item key={community.name}>
-                  <LinkContainer to={`/news/member/${community.id}`}>
-                    <Nav.Link>
-                    {community.name}
-                    </Nav.Link>
-                  </LinkContainer>  
-                </NavDropdown.Item>
+              <NavDropdown title='Newsfeeds' style={{ color: 'white' }} id='basic-nav-dropdown'>
+                {communities.map((community) => {
+                  return <NavDropdown.Item key={community.name}>
+                    <LinkContainer to={`/news/member/${community.id}`}>
+                      <Nav.Link>
+                        {community.name}
+                      </Nav.Link>
+                    </LinkContainer>
+                         </NavDropdown.Item>
                 })}
               </NavDropdown>
-              
+
               <LinkContainer style={{ color: 'white' }} to='/spaces'>
                 <Nav.Link>Safe Spaces</Nav.Link>
               </LinkContainer>

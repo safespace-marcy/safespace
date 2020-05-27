@@ -3,7 +3,6 @@ import { UserContext } from '../contexts/userContext'
 import { Jumbotron, Button, Card } from 'react-bootstrap'
 import { LinkContainer } from 'react-router-bootstrap'
 
-
 const Landing = () => {
   const { user } = useContext(UserContext)
   const [communities, setCommunities] = useState(null)

@@ -13,21 +13,19 @@ function NewPostModal (props) {
   return (
     // <>
     <div>
-      <Navbar fixed="bottom">
-      <Button size='medium' style={{ color: colorPallet.marvel }} circular icon='add' onClick={handleShow}/>
-    
-      <Modal show={show} onHide={handleClose} animation={false}>
-        <Modal.Header closeButton>New Post</Modal.Header>
-        <Modal.Body>
-          <WritePostForm setShow={setShow} setNewPost={props.setNewPost} id={props.id} />
-        </Modal.Body>
-      </Modal>
+      <Navbar fixed='bottom'>
+        <Button size='medium' style={{ color: colorPallet.marvel }} circular icon='add' onClick={handleShow} />
+
+        <Modal show={show} onHide={handleClose} animation={false}>
+          <Modal.Header closeButton>New Post</Modal.Header>
+          <Modal.Body>
+            <WritePostForm setShow={setShow} setNewPost={props.setNewPost} id={props.id} />
+          </Modal.Body>
+        </Modal>
       </Navbar>
-      </div>
-    
-     
-    
-     //</>
+    </div>
+
+  // </>
   )
 }
 

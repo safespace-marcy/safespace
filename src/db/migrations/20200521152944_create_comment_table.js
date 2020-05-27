@@ -1,5 +1,5 @@
 
-exports.up = function(knex) {
+exports.up = function (knex) {
   return knex.schema.createTable('comments', (t) => {
     t.increments().primary()
     t.text('content').notNullable()
@@ -9,8 +9,8 @@ exports.up = function(knex) {
     t.integer('post_id').notNullable()
     t.foreign('post_id').references('id').inTable('posts')
   })
-};
+}
 
-exports.down = function(knex) {
+exports.down = function (knex) {
   return knex.schema.dropTable('comments')
-};
+}

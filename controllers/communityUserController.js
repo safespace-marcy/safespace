@@ -14,21 +14,20 @@ const getAll = async (req, res) => {
 const join = async (req, res) => {
   const { userId, communityId } = req.body
   Communities.join(userId, communityId)
-  .then(() => res.sendStatus(200))
-  .catch(err => {
-    console.log(err)
-    res.status(500).json({ error: '500 Internal Server Error' })
-  })
+    .then(() => res.sendStatus(200))
+    .catch(err => {
+      console.log(err)
+      res.status(500).json({ error: '500 Internal Server Error' })
+    })
 }
 
 const leave = async (req, res) => {
   Communities.leave(userId, communityId)
-  .then(() => res.sendStatus(200))
-  .catch(err => {
-    console.log(err)
-    res.status(500).json({ error: '500 Internal Server Error' })
-  })
-
+    .then(() => res.sendStatus(200))
+    .catch(err => {
+      console.log(err)
+      res.status(500).json({ error: '500 Internal Server Error' })
+    })
 }
 
 module.exports = {

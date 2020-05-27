@@ -25,7 +25,7 @@ const deletePost = (req, res) => {
 
 const update = (req, res) => {
   const { id } = req.params
-  const { title,content } = req.body
+  const { title, content } = req.body
 
   Post.update(content, id, title)
     .then(() => res.sendStatus(200))
@@ -34,7 +34,6 @@ const update = (req, res) => {
       res.status(500).json({ error: '500 Internal Server Error' })
     })
 }
-
 
 const getById = (req, res) => {
   const { id } = req.params

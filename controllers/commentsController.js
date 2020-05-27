@@ -1,6 +1,6 @@
 const Comment = require('../models/Comments')
 
-const create = (req,res) => {
+const create = (req, res) => {
   const { userId } = req
   const { postId, content } = req.body
 
@@ -23,7 +23,7 @@ const deleteComment = (req, res) => {
     })
 }
 
-const update = (req,res) => {
+const update = (req, res) => {
   const { userId } = req
   const { postId, content } = req.body
 

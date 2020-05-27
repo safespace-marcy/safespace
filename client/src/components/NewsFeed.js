@@ -10,7 +10,6 @@ function NewsFeed () {
   console.log(newPost)
   const { id } = useParams()
 
-
   useEffect(() => {
     const getPost = async () => {
       const req = await fetch(`/posts-community/${id}`)
@@ -22,7 +21,7 @@ function NewsFeed () {
 
   return response === null ? (
     <div>
-      <Loader style={{display:"flex", alignItems:"center"}} indeterminate active>Loading Feed...</Loader>
+      <Loader style={{ display: 'flex', alignItems: 'center' }} indeterminate active>Loading Feed...</Loader>
     </div>
   ) : (
     <>

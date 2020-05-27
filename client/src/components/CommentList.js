@@ -1,30 +1,30 @@
 import React, { useState, useEffect, useContext } from 'react'
 import { Button, Comment, Form, Header } from 'semantic-ui-react'
 console.log('hi')
-const CommentList = (props) =>{
+const CommentList = (props) => {
   const comments = props.data
   console.log(comments)
   console.log('hi')
-  return(
+  return (
     <Comment.Group>
-    <Header as='h3' dividing>
+      <Header as='h3' dividing>
       Comments
-    </Header>
+      </Header>
 
-      {comments.map((res)=>{
-      return (<Comment>
-        <Comment.Avatar src='https://react.semantic-ui.com/images/wireframe/image.png' />
-        <Comment.Content>
-      <Comment.Author as='a'>{res.user_id}</Comment.Author>
-          <Comment.Metadata>
-            <div>{res.created_at}</div>
-          </Comment.Metadata>
-          <Comment.Text>{res.content}</Comment.Text>
-        </Comment.Content>
-      </Comment>)
+      {comments.map((res) => {
+        return (<Comment>
+          <Comment.Avatar src='https://react.semantic-ui.com/images/wireframe/image.png' />
+          <Comment.Content>
+            <Comment.Author as='a'>{res.user_id}</Comment.Author>
+            <Comment.Metadata>
+              <div>{res.created_at}</div>
+            </Comment.Metadata>
+            <Comment.Text>{res.content}</Comment.Text>
+          </Comment.Content>
+                </Comment>)
       })}
-  </Comment.Group>
+    </Comment.Group>
 
-    )
+  )
 }
 export default CommentList

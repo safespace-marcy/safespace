@@ -9,7 +9,7 @@ function WritePostForm (props) {
   const [body, setBody] = useState('')
   const [alert, setAlert] = useState(null)
   const id = props.id
-  
+
   function handleTitleChange (e) {
     const currentTitle = e.target.value
     // as long as 2 commit messages
@@ -24,7 +24,7 @@ function WritePostForm (props) {
 
   async function handleSubmit (e) {
     console.log('called')
-    
+
     // console.log(id)
     e.preventDefault()
     const newPostInit = {

@@ -19,17 +19,16 @@ function Communities () {
       .then((json) => setResponse(json))
   }, [setResponse])
 
-
   async function join (userId, communityId) {
-   setCommunity(communityId)
-   const newPostInit = {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json'
-    },
-    body: JSON.stringify({ userId, communityId })
-  }
-  const res = await fetch('/join', newPostInit)
+    setCommunity(communityId)
+    const newPostInit = {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({ userId, communityId })
+    }
+    const res = await fetch('/join', newPostInit)
     if (res.status === 500) {
       console.log(
         'Our computers are feeling down, please try again in a few moments.'
@@ -43,8 +42,7 @@ function Communities () {
   async function visit (communityId) {
     setCommunity(communityId)
     return setVisit(true)
-   }
-
+  }
 
   return response.length === 0 ? (
     <Spinner animation='border' role='status'>
@@ -63,8 +61,8 @@ function Communities () {
                 <Card.Text>{res.description}</Card.Text>
               </Card.Body>
               <div style={{ display: 'flex', justifyContent: 'space-around', marginBottom: '8px' }}>
-                <Button style={{ width: '20%' }} onClick={()=> join(user.id, res.id)}>Join</Button>
-                <Button style={{ width: '20%' }} onClick={()=> visit(res.id)}variant='secondary'>Visit</Button>
+                <Button style={{ width: '20%' }} onClick={() => join(user.id, res.id)}>Join</Button>
+                <Button style={{ width: '20%' }} onClick={() => visit(res.id)} variant='secondary'>Visit</Button>
               </div>
             </Card>
           ))}

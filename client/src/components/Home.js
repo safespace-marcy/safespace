@@ -29,7 +29,7 @@ const Home = () => {
                  </Link>
         })
         : (<div>
-          <Loader style={{display:"flex", alignItems:"center"}} indeterminate active>Loading Feed...</Loader>
+          <Loader style={{ display: 'flex', alignItems: 'center' }} indeterminate active>Loading Feed...</Loader>
         </div>)
     }
     </div>
