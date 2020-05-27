@@ -6,7 +6,6 @@ import { LinkContainer } from 'react-router-bootstrap'
 const Landing = () => {
   const { user } = useContext(UserContext)
   const [communities, setCommunities] = useState(null)
-  console.log(communities)
 
   useEffect(() => {
     const getCommunities = async () => {

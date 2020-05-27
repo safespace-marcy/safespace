@@ -24,8 +24,8 @@ function Account () {
       </Jumbotron>
       <Item.Group>
         {response.map((obj, i) => (
-        <Post key={i} data={obj} account={true}/>
-         ))}
+          <Post key={i} data={obj} account />
+        ))}
       </Item.Group>
     </div>
   )

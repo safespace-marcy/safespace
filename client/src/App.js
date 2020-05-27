@@ -29,11 +29,14 @@ const App = () => {
               <Route path='/login'>
                 <Login />
               </Route>
-              <Route path='/news/:id'>
-                <NewsFeed />
+              <Route path='/news/:type/:id'>
+                <Community />
               </Route>
               <Route path='/spaces'>
                 <Communities />
+              </Route>
+              <Route path='/ex/:id'>
+                <NewsFeed />
               </Route>
               <Route path='/account'>
                 <Account />
