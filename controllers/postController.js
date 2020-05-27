@@ -2,9 +2,9 @@ const Post = require('../models/Posts')
 
 const create = (req, res) => {
   const { userId } = req
-  const { body, community, title } = req.body
+  const { body, id, title } = req.body
 
-  Post.create(userId, community, body, title)
+  Post.create(userId, id, body, title)
     .then(() => res.sendStatus(201))
     .catch(err => {
       console.log(err)
@@ -25,9 +25,9 @@ const deletePost = (req, res) => {
 
 const update = (req, res) => {
   const { id } = req.params
-  const { content } = req.body
+  const { title, content } = req.body
 
-  Post.update(content, id)
+  Post.update(content, id, title)
     .then(() => res.sendStatus(200))
     .catch(err => {
       console.log(err)
@@ -69,11 +69,25 @@ const getAllByCommunity = (req, res) => {
     })
 }
 
+const getSomeByCommunity = (req, res) => {
+  const { id } = req.params
+
+  Post.getSomeByCommunity(id)
+    .then(data => {
+      return res.json(data)
+    })
+    .catch(err => {
+      console.log(err)
+      res.status(500).send(err)
+    })
+}
+
 module.exports = {
   create,
   deletePost,
   update,
   getById,
   getAllByUser,
-  getAllByCommunity
+  getAllByCommunity,
+  getSomeByCommunity
 }

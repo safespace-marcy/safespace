@@ -11,9 +11,9 @@ class Post {
     return db.query(queryText, [postId])
   }
 
-  static update (content, postId) {
-    const queryText = 'UPDATE posts SET content = $1 WHERE id = $2'
-    return db.query(queryText, [content, postId])
+  static update (content, postId, title) {
+    const queryText = 'UPDATE posts SET content = $1, title = $3 WHERE id = $2;'
+    return db.query(queryText, [content, postId, title])
   }
 
   static getById (postId) {
@@ -29,7 +29,12 @@ class Post {
   }
 
   static getAllByCommunity (communityId) {
-    const queryText = 'SELECT * FROM posts WHERE community_id = $1'
+    const queryText = 'SELECT * FROM posts WHERE community_id = $1;'
+    return db.query(queryText, [communityId]).then(response => response.rows)
+  }
+
+  static getSomeByCommunity (communityId) {
+    const queryText = 'SELECT * FROM posts WHERE community_id = $1 LIMIT 2;'
     return db.query(queryText, [communityId]).then(response => response.rows)
   }
 }

@@ -8,6 +8,7 @@ class CommunityUsers {
 
   // adds user to a community
   static join (userId, communityId) {
+    console.log(userId, communityId)
     const queryText =
       'INSERT INTO community_users (user_id, community_id) VALUES ($1, $2)'
     return query(queryText, [userId, communityId])
