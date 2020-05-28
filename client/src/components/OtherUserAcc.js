@@ -1,5 +1,5 @@
 import React, { useState, useContext, useEffect } from 'react'
-import Post from './Post'
+import Post from './NewPost'
 import { useParams } from 'react-router-dom'
 import { Item } from 'semantic-ui-react'
 import { Jumbotron } from 'react-bootstrap'
@@ -12,13 +12,13 @@ function OtherUser () {
   const getUser = async () => {
     const req = await fetch(`/user/${id}`)
     const data = await req.json()
-    return setUser(data)
+    setUser(data)
   }
 
   const getPosts = async () => {
     const req = await fetch(`/posts-user/${id}`)
     const data = await req.json()
-    return setPosts(data)
+    setPosts(data)
   }
 
   useEffect(() => {
@@ -26,19 +26,18 @@ function OtherUser () {
     getPosts()
   }, [])
 
-  console.log(user)
-  console.log(posts)
-
   return (
     <div>
       <Jumbotron>
         <h1>{user.username}</h1>
       </Jumbotron>
-      <Item.Group>
-        {posts.map((res, i) => (
-          <Post key={i} data={res} />
-        ))}
-      </Item.Group>
+      <div style={{ width: '65%', margin: '0 auto' }}>
+        <Item.Group>
+          {posts.map((res, i) => (
+            <Post key={i} data={res} />
+          ))}
+        </Item.Group>
+      </div>
     </div>
   )
 }

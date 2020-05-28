@@ -3,6 +3,8 @@ import { UserContext } from '../contexts/userContext'
 import { Redirect, useLocation } from 'react-router-dom'
 import { Button, Card, Image, Comment, Header, Form, Item, Dropdown } from 'semantic-ui-react'
 import ReadMoreReact from 'read-more-react'
+import { LinkContainer } from 'react-router-bootstrap'
+import { Nav } from 'react-bootstrap'
 import CommentList from './CommentList'
 import Update from './Update'
 
@@ -23,6 +25,7 @@ const Post = ({data}) => {
   const [isLiked, setIsLiked] = useState(false) // current user clicked 'like'
   const [isChanged, setIsChanged] = useState(false)
   const [show, setShow] = useState(false)
+  
 
   useEffect(() => {
     const getLikes = async () => {
@@ -113,6 +116,19 @@ const Post = ({data}) => {
 
   const {sprite, seed, username} = author || {sprite: 'jdenticon', seed: '2f', username: 'User'}
   const avatar = `https://avatars.dicebear.com/api/${sprite}/${seed}.svg`
+  
+  
+  const [userResponse, setUserResponse] = useState(null)
+
+  const getUser = async () => {
+    const req = await fetch(`/user/${data.user_id}`)
+    const userResponse = await req.json()
+    setUserResponse(userResponse)
+  }
+
+  useEffect(() => {
+    getUser()
+  }, [])
 
   return (
     <Card fluid>
@@ -130,7 +146,13 @@ const Post = ({data}) => {
         </Button>}
         <Image floated='right' size='mini' src={avatar} />
         <Card.Header>{title}</Card.Header>
-        <Card.Meta>By {username}</Card.Meta>
+        <Card.Meta>
+          {userResponse ? (
+            <LinkContainer to={`/user/${userResponse.id}`}>
+              <Nav.Link>By {userResponse.username}</Nav.Link>
+            </LinkContainer>
+          ) : ''}
+        </Card.Meta>
         <Card.Meta>{dateCreated.toLocaleString()}</Card.Meta>
         <Card.Description>
           <ReadMoreReact
