@@ -4,15 +4,18 @@ import { UserContext } from '../contexts/userContext'
 import { Item } from 'semantic-ui-react'
 import { Jumbotron } from 'react-bootstrap'
 
+/**
+ * Account Page: Shows all posts for logged in user
+ */
 function Account () {
-  const [response, setResponse] = useState([])
+  const [posts, setPosts] = useState([])
   const { user } = useContext(UserContext)
 
   useEffect(() => {
     const getPost = async () => {
-      const req = await fetch(`/posts-user/${user.id}`)
-      const data = await req.json()
-      return setResponse(data)
+      const res = await fetch(`/posts-user/${user.id}`)
+      const rawPosts = await res.json()
+      return setPosts(rawPosts)
     }
     getPost()
   }, [])
@@ -23,7 +26,7 @@ function Account () {
         <h1>Hello, {user.username}</h1>
       </Jumbotron>
       <Item.Group>
-        {response.map((obj, i) => (
+        {posts.map((obj, i) => (
           <Post key={i} data={obj} account />
         ))}
       </Item.Group>
