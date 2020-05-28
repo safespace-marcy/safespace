@@ -53,7 +53,7 @@ const App = () => {
               <Route path='/user/:id'>
                 <OtherUser />
               </Route>
-              <Route path='/inbox'>
+              <Route path='/chat'>
                 <Chat />
               </Route>
               <Route path='/'>

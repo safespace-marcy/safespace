@@ -1,7 +1,8 @@
 import React, { useState, useEffect, useContext, useRef } from 'react'
-import { TextArea, Button, Container, Comment, Header, Icon, Image } from 'semantic-ui-react'
-import { Navbar } from 'react-bootstrap'
-import Message from './Message.js'
+import { TextArea, Button, Container, Comment, Header, Icon, Image, Radio, Label, Menu, Tab } from 'semantic-ui-react'
+import { Navbar, Modal } from 'react-bootstrap'
+import Message from './Message'
+import OnlineUsers from './OnlineUsers'
 import { colorPallet } from './Theme'
 import { UserContext } from '../contexts/userContext'
 import io from 'socket.io-client'
@@ -13,6 +14,7 @@ const Chat = () => {
   const [chatLog, setChatLog] = useState([])
   const [contact, setContact] = useState({})
   const [onlineUsers, setOnlineUsers] = useState([])
+  const [modalShow, setModalShow] = useState(false)
 
   const socketRef = useRef()
 
@@ -78,41 +80,48 @@ const Chat = () => {
 
   // This ensures that the chat always shows the most recent message
   useEffect(() => {
-    const chatBox = document.getElementById('chatBox')
-    chatBox.scrollTop = chatBox.scrollHeight
+    if(document.getElementById('chatBox')){
+      const chatBox = document.getElementById('chatBox')
+      chatBox.scrollTop = chatBox.scrollHeight
+    }
+
   })
 
-  return (
-    <div>
-      <div style={{display:"flex", justifyContent:"center", flexDirection:"column", marginLeft:"10%"}}>
-        <div>{
-            onlineUsers.map((user, index) => {
-              return (
-                <Button
-                  key={index}
-                  onClick={() => {
-                    chooseContact(user)
-                  }} content={user.username}
-                />
-              )
-            })
-          }</div>
-        <Header as='h1' style={{ color: colorPallet.lightMarvel , marginTop:"30px"}}>
-          <Icon name='fa-inbox' style={{ color: colorPallet.darkMarvel }} />
-          <Header.Content>Safespace Chat</Header.Content>
-        </Header>
-        <Header as='h3' style={{  }}>
-          <Image circular src='https://react.semantic-ui.com/images/avatar/large/patrick.png' />
-          Person You're talking to
-        </Header>
-      <Button
-        onClick={() => {
-          goOnline(yourId)
-        }} content='Contacts' style={{ width: '88.5%' }}
-      />
-    </div>
-    <Container fluid style={{display:"flex", justifyContent:"center"}}>
-        <Comment.Group id='chatBox' style={{marginTop: '10px ', overflow: 'auto', height: '500px', border:"3px solid #a7abaf", width:"87%", padding:"15px" }}>
+  const panes = [
+  {
+    menuItem: { key: 'users', icon: 'users', content: 'Users' },
+    render: () => {
+      return onlineUsers.map((user, index) => {
+        if(user.socketId !== yourId){
+          return (
+
+              <Comment
+                style={{marginLeft:"25px", marginTop:"20px"}}
+                key={index}
+                onClick={() => {
+                  chooseContact(user)
+                }} >
+                <Comment.Avatar src={`https://react.semantic-ui.com/images/avatar/small/elliot.jpg`} />
+                <Comment.Content>
+                  <Comment.Author as='a'>{user.username}</Comment.Author>
+                </Comment.Content>
+              </Comment>
+
+          )
+        }
+
+      })
+    },
+  },
+  {
+    menuItem: (
+      <Menu.Item key='messages'>
+        Messages<Label>{chatLog.length}</Label>
+      </Menu.Item>
+    ),
+    render: () => {
+      return(
+        <Comment.Group id='chatBox' style={{marginTop: '10px ', overflow: 'auto', height: '300px', border:"3px solid #a7abaf", width:"100%", padding:"25px" }}>
           {
             chatLog.map((message, index) => {
               return (
@@ -121,21 +130,42 @@ const Chat = () => {
             })
           }
         </Comment.Group>
-        <Navbar fixed='bottom' expand='lg' style={{ backgroundColor: colorPallet.darkMarvel, display:"flex", justifyContent:"center" }}>
-          <Container>
-            <div style={{ display: 'flex', justifyContent: 'center', width: '100%' }}>
-              <TextArea value={message} onChange={handleChange} style={{ width: '100%', height: '40px', fontSize: '22px' }} />
-              <Button
-                onClick={() => {
-                  sendMessage()
-                  setMessage('')
-                }} content='Send'
-              />
-            </div>
-          </Container>
-        </Navbar>
+      )
+       }
+  },
+]
 
-      </Container>
+
+
+  return (
+    <div>
+      <Navbar expand='lg'>
+        <Container>
+          <Header as='h1' style={{color: colorPallet.lightMarvel }}>
+            <Icon name='fa-inbox' style={{ color: colorPallet.darkMarvel }} />
+            <Header.Content>Safespace Chat</Header.Content>
+          </Header>
+        </Container>
+      </Navbar>
+      <Navbar expand='lg'>
+        <Container>
+          <Radio toggle onChange={() => goOnline(yourId)} label="Go Online"/>
+        </Container>
+      </Navbar>
+      <Tab panes={panes} />
+      <Navbar fixed='bottom' expand='lg' style={{ backgroundColor: colorPallet.darkMarvel, display:"flex", justifyContent:"center" }}>
+        <Container>
+          <div style={{ display: 'flex', justifyContent: 'center', width: '100%' }}>
+            <TextArea value={message} onChange={handleChange} style={{ width: '100%', height: '40px', fontSize: '22px' }} />
+            <Button
+              onClick={() => {
+                sendMessage()
+                setMessage('')
+              }} content='Send'
+            />
+          </div>
+        </Container>
+      </Navbar>
     </div>
   )
 }

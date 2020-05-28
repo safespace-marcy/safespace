@@ -14,7 +14,7 @@ module.exports = (socket) => {
       }
     }
     onlineUsers.push(userRef)
-    socket.broadcast.emit('update', onlineUsers)
+    io.emit('update', onlineUsers)
     console.log(onlineUsers)
   })
   // Sends the message to sender and specified reciever
@@ -29,7 +29,7 @@ module.exports = (socket) => {
         onlineUsers.splice(i, 1)
       }
     }
-    socket.emit('update', onlineUsers)
+    io.emit('update', onlineUsers)
     console.log(onlineUsers)
   })
 
