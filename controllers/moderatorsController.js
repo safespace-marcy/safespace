@@ -3,9 +3,8 @@ const Mods = require('../models/Mods')
 const getAllByCommunity = async (req, res) => {
   const { communityId } = req.params
   try {
-    const rawModsArr = await Mods.getAllByCommunity(communityId)
-    // TODO: map and clean before res
-    res.status(200).json(rawMods)
+    const moderatorArr = await Mods.getAllByCommunity(communityId)
+    res.status(200).json(moderatorArr)
   } catch (e) {
     res.status(500).json({ error: e })
   }
