@@ -16,7 +16,7 @@ const deletePost = (req, res) => {
   const { id } = req.params
 
   Post.delete(id)
-    .then(data => res.json(data.rows))
+    .then(data => res.status(200))
     .catch(err => {
       console.log(err)
       res.status(500).send(err)

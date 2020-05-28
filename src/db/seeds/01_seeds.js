@@ -17,47 +17,65 @@ exports.seed = async function (knex) {
     [{
       username: 'seedUser1',
       email: 'seeduser1@mail.com',
-      password: makeHashedPass(SEED_USER_PASSWORD)
+      password: makeHashedPass(SEED_USER_PASSWORD),
+      sprite: 'human',
+      seed: 'F8dj8'
     },
     {
       username: 'seal125',
       email: 'wee@woo.com',
-      password: makeHashedPass(SEED_USER_PASSWORD)
+      password: makeHashedPass(SEED_USER_PASSWORD),
+      sprite: 'human',
+      seed: 'F8dj7'
     },
     {
       username: 'pHarbo',
       email: 'pharbo@mail.com',
-      password: makeHashedPass(SEED_USER_PASSWORD)
+      password: makeHashedPass(SEED_USER_PASSWORD),
+      sprite: 'human',
+      seed: 'F8dj6'
     },
     {
       username: 'enmanuelD',
       email: 'enmanuel@mail.com',
-      password: makeHashedPass(SEED_USER_PASSWORD)
+      password: makeHashedPass(SEED_USER_PASSWORD),
+      sprite: 'human',
+      seed: 'F8dj5'
     },
     {
       username: 'devonteG',
       email: 'devG@mail.com',
-      password: makeHashedPass(SEED_USER_PASSWORD)
+      password: makeHashedPass(SEED_USER_PASSWORD),
+      sprite: 'human',
+      seed: 'F8dj4'
     },
     {
       username: 'anneDHya',
       email: 'anneD@mail.com',
-      password: makeHashedPass(SEED_USER_PASSWORD)
+      password: makeHashedPass(SEED_USER_PASSWORD),
+      sprite: 'human',
+      seed: 'F8dj3'
     },
     {
       username: 'cieloRey',
       email: 'cielo@mail.com',
-      password: makeHashedPass(SEED_USER_PASSWORD)
+      password: makeHashedPass(SEED_USER_PASSWORD),
+      sprite: 'human',
+      seed: 'F8dj2'
     },
     {
       username: 'flipzChoco',
       email: 'choco@mail.com',
-      password: makeHashedPass(SEED_USER_PASSWORD)
+      password: makeHashedPass(SEED_USER_PASSWORD),
+      sprite: 'human',
+      seed: 'F8dj1'
     },
     {
       username: 'true_color',
       email: 'colors@mail.com',
-      password: makeHashedPass(SEED_USER_PASSWORD)
+      password: makeHashedPass(SEED_USER_PASSWORD),
+      sprite: 'human',
+      seed: 'F8djA'
     }
     ])
 }
