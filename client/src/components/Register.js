@@ -45,7 +45,7 @@ function Register () {
    */
   const validateInputs = (username, email, password) => {
     const usernameRegex = /\W/i
-    const emailRegex = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/
+    const emailRegex = /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/
 
     if (usernameRegex.test(username)) {
       warn('Oops, that username seems wrong. Try removing those special characters!')

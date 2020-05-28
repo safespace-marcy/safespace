@@ -1,4 +1,4 @@
-import React, { useState, useContext, useEffect } from 'react'
+import React, { useState, useEffect } from 'react'
 import { useParams } from 'react-router-dom'
 import { Item } from 'semantic-ui-react'
 
@@ -13,7 +13,7 @@ function Edit () {
       return setResponse(data)
     }
     getPost()
-  }, [])
+  }, [id])
 
   const deletePost = () => {
     fetch(`/posts/${id}`, {

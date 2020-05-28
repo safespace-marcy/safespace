@@ -21,6 +21,7 @@ const communityRouter = require('./routes/communitiesRouter')
 const commUserRouter = require('./routes/communityUserRouter')
 const likesRouter = require('./routes/likesRouter')
 const commentsRouter = require('./routes/commentRouter')
+const modsRouter = require('./routes/moderatorsRouter')
 // port is specified in environment variable or default to 8080
 const port = process.env.PORT || 8080
 
@@ -38,6 +39,7 @@ app.use(communityRouter)
 app.use(commUserRouter)
 app.use(likesRouter)
 app.use(commentsRouter)
+app.use(modsRouter)
 app.get('*', (req, res) => {
   res.sendFile(path.join(`${__dirname}/client/build/index.html`))
 })

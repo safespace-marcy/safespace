@@ -1,32 +1,41 @@
 import React, { useState, useContext, useEffect } from 'react'
-import Post from './Post'
+import Post from './NewPost'
 import { UserContext } from '../contexts/userContext'
 import { Item } from 'semantic-ui-react'
-import { Jumbotron } from 'react-bootstrap'
+import { Jumbotron, Button } from 'react-bootstrap'
 
+/**
+ * Account Page: Shows all posts for logged in user
+ */
 function Account () {
-  const [response, setResponse] = useState([])
+  const [posts, setPosts] = useState([])
+  const [showing, setShowing] = useState(false)
   const { user } = useContext(UserContext)
 
   useEffect(() => {
     const getPost = async () => {
-      const req = await fetch(`/posts-user/${user.id}`)
-      const data = await req.json()
-      return setResponse(data)
+      const res = await fetch(`/posts-user/${user.id}`)
+      const rawPosts = await res.json()
+      return setPosts(rawPosts)
     }
     getPost()
-  }, [])
+  }, [showing])
 
+  // incomplete
   return (
     <div>
-      <Jumbotron>
-        <h1>Hello, {user.username}</h1>
-      </Jumbotron>
-      <Item.Group>
-        {response.map((obj, i) => (
-          <Post key={i} data={obj} account />
-        ))}
-      </Item.Group>
+      {!showing ? <Button onClick={() => setShowing(p => !p)}>Show All My Posts</Button>
+        :
+      <>
+        <Jumbotron>
+          <h1>Hello, {user?.username}</h1>
+        </Jumbotron>
+        <Item.Group>
+          {posts?.map((obj, i) => (
+            <Post key={i} data={obj} account />
+          ))}
+        </Item.Group>
+      </>}
     </div>
   )
 }

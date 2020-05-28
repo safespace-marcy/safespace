@@ -14,6 +14,7 @@ import OtherUser from './components/OtherUserAcc'
 import { ThemeProvider } from '@gympass/yoga'
 import Community from './components/Community'
 import Chat from './components/Chat'
+import CreateCommunity from './components/CreateCommunity'
 
 const App = () => {
   return (
@@ -55,6 +56,9 @@ const App = () => {
               </Route>
               <Route path='/chat'>
                 <Chat />
+              </Route>
+              <Route path='/create-community'>
+                <CreateCommunity />
               </Route>
               <Route path='/'>
                 <Landing />
