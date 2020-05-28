@@ -8,8 +8,10 @@ import { Item, Card } from 'semantic-ui-react'
 const Community = () => {
   const [posts, setPosts] = useState([])
   const [community, setCommunity] = useState({})
+  const [moderators, setModerators] = useState([])
   const [newPost, setNewPost] = useState(false)
   const { type, id } = useParams()
+  
   useEffect(() => {
     const getPosts = async () => {
       if (type === 'member') {
@@ -22,23 +24,31 @@ const Community = () => {
         setPosts(response)
       }
     }
+    
+    const getModerators = async () => {
+      const req = await fetch(`/moderators/${id}`)
+      const res = await req.json()
+      // console.log(res.map(obj => obj.username))
+      setModerators(res)
+    }
+    
     const getCommunity = async () => {
       const req = await fetch(`/communities/${id}`)
       const res = await req.json()
-      console.log(res)
       setCommunity(res)
     }
 
+    getModerators()
     getCommunity()
     getPosts()
   }, [id])
-  console.log(posts)
+  
   return (
     <div>
       <Jumbotron>
-        <h1>{community.name}</h1>
+        <h1>{community.display_name}</h1>
         <p>
-          {community.description}
+          {community.headline}
         </p>
       </Jumbotron>
       <Tabs defaultActiveKey='newsfeed' transition={false} id='noanim-tab-example'>
@@ -47,19 +57,19 @@ const Community = () => {
           <div style={{ width: '65%', margin: '0 auto' }}>
             <Card.Group>
               <NewPostModal setNewPost={setNewPost} id={id} />
-              {posts.map((res, i) => {
-                return (
-                  <Post key={i} data={res} />
-                )
-              })}
+              {posts.map((res, i) => <Post key={i} data={res} />)}
             </Card.Group>
           </div>
         </Tab>
         <Tab eventKey='about' title='About'>
           <h1>About Us</h1>
+          <h3>{community.description}</h3>
         </Tab>
         <Tab eventKey='admins' title='Admins'>
           <h1>List of admins here</h1>
+          <ul>
+            {moderators.map((moderator, i) => <li key={i}>{moderator.username}</li>)}
+          </ul>
         </Tab>
       </Tabs>
 
