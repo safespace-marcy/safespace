@@ -7,7 +7,9 @@ const create = (req, res) => {
   Comment.create(userId, postId, content)
     .then(() => res.sendStatus(201))
     .catch((err) => {
-      res.status(500).json({ error: "500 Internal Server Error" });
+      res
+        .status(500)
+        .json({ error: "500 Internal Server Error", details: err });
     });
 };
 
