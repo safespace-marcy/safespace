@@ -17,7 +17,7 @@ function WritePostForm (props) {
       console.log(props.title, props.body)
       setUpdate(props.update)
       console.log(update)
-      if(update){
+      if (update) {
         setTitle(props.title)
         setBody(props.body)
         console.log(title, body)
@@ -26,8 +26,6 @@ function WritePostForm (props) {
 
     isAnUpdate()
   }, [update])
-
-  
 
   function handleTitleChange (e) {
     const currentTitle = e.target.value
@@ -47,23 +45,23 @@ function WritePostForm (props) {
     // console.log(id)
     e.preventDefault()
     let newPostInit
-    if (update){
+    if (update) {
       newPostInit = {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json'
         },
-        body: JSON.stringify({ title, body, postId }) 
+        body: JSON.stringify({ title, body, postId })
       }
-    }else{
+    } else {
       newPostInit = {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'
         },
-        body: JSON.stringify({ title, body, communityId }) 
+        body: JSON.stringify({ title, body, communityId })
       }
-  }
+    }
 
     const res = await fetch('/posts', newPostInit)
     if (res.status === 401) {

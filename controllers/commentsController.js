@@ -33,7 +33,6 @@ const update = (req, res) => {
       console.log(err)
       res.status(500).json({ error: '500 Internal Server Error' })
     })
-    
 }
 
 const getAll = (req, res) => {

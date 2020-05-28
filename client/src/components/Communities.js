@@ -20,14 +20,14 @@ function Communities () {
       .then((json) => setResponse(json))
   }, [setResponse])
 
-  const checkCommunities = async(id,json) => {
+  const checkCommunities = async (id, json) => {
     const req = await fetch(`/communitiesByUser/${id}`)
     const res = await req.json()
     console.log(res)
     console.log(json)
-    for(let i = 0; i < res.length; i++){
-      for(let t = 0; t < json.length; t++){
-        if(res[i].id === json[t].id){
+    for (let i = 0; i < res.length; i++) {
+      for (let t = 0; t < json.length; t++) {
+        if (res[i].id === json[t].id) {
           json.splice(t, 1)
         }
       }
