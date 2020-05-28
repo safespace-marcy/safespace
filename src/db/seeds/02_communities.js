@@ -4,6 +4,13 @@ exports.seed = async function (knex) {
   return knex('communities').insert([
     {
       owner_id: 1,
+      name: 'mindful_morning',
+      display_name: "Mindful Morning",
+      headline: "Mindfulness helps us cope with our feelings. Join us to share mindful practice stories, tips, and resources!",
+      description: "Coming soon!"
+    },
+    {
+      owner_id: 1,
       name: 'home_warriors',
       display_name: 'Home Warriors',
       headline: 'Join us in sharing our experiences with domestic violence',

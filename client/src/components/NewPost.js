@@ -174,7 +174,7 @@ const Post = ({data}) => {
             {isCommentsShowing && <CommentList data={comments} />}
             <Form reply>
       <Form.TextArea width={12} onChange={handleCommentChange} />
-      <Button onClick={() => createComment()} content='Add Reply' labelPosition='left' icon='edit' primary />
+      <Button onClick={() => createComment()} content='Add Reply' labelPosition='left' icon='edit' secondary />
     </Form>
           </Comment.Group>
         </Card.Content>
