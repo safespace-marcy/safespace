@@ -17,3 +17,7 @@ exports.up = function (knex) {
     t.timestamp('created_at').defaultTo(knex.fn.now())
   })
 }
+
+exports.down = function (knex) {
+  return knex.schema.dropTable('communities')
+}
