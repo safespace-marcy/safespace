@@ -1,4 +1,4 @@
-/** users. t = table */
+      /** users. t = table */
 exports.up = function (knex) {
   return knex.schema.createTable('users', (t) => {
     t.increments().primary()
