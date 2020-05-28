@@ -27,12 +27,53 @@ const getByUserId = async (req, res) => {
     const community = await Communities.getByUserId(userId)
     res.status(200).json(community)
   } catch (e) {
-    res.send(500).json({ error: e })
+    res.status(500).json({ error: e })
   }
 }
+
+/** Creates a new community */
+const createCommunity = async (req, res) => {
+  const { userId } = req
+  const {
+    communityName,
+    displayName,
+    headline,
+    description,
+    sprite,
+    seed
+  } = req.body
+  console.log(communityName,
+    displayName,
+    headline,
+    description,
+    sprite,
+    seed)
+  try {
+    const addedCommunity = await Communities.create(
+      userId,
+      communityName,
+      displayName,
+      headline,
+      description,
+      sprite,
+      seed
+    )
+    console.log(addedCommunity)
+    res.status(200).json(addedCommunity)
+  } catch (e) {
+    res.status(500).json({ error: e })
+  }
+}
+
+const updateCommunity = async (req, res) => {}
+
+const deleteCommunity = async (req, res) => {}
 
 module.exports = {
   getAll,
   getById,
-  getByUserId
+  getByUserId,
+  createCommunity,
+  updateCommunity,
+  deleteCommunity
 }

@@ -128,11 +128,22 @@ const getOtherUser = async (req, res) => {
   }
 }
 
+const getAll = async (req, res) => {
+  try {
+    const users = await User.getAllUsers()
+    const cleanUsers = users.map(user => ({ ...user, password: null }))
+    res.status(200).json(cleanUsers)
+  } catch (e) {
+    res.status(404).json({ error: e })
+  }
+}
+
 module.exports = {
   register,
   login,
   logout,
   deleteAccount,
   getUser,
-  getOtherUser
+  getOtherUser,
+  getAll
 }
