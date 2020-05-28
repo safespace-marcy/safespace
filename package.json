@@ -18,8 +18,9 @@
   },
   "homepage": "https://github.com/safespace-marcy/safespace#readme",
   "devDependencies": {
+    "eslint": "^7.1.0",
     "nodemon": "^2.0.4",
-    "standard": "^14.3.4"
+    "prettier": "2.0.5"
   },
   "dependencies": {
     "bcrypt": "^4.0.1",
