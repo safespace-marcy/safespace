@@ -23,18 +23,18 @@ class Post {
   }
 
   static getAllByUser (userId) {
-    const queryText = 'SELECT * FROM posts WHERE user_id = $1;'
+    const queryText = 'SELECT * FROM posts WHERE user_id = $1 ORDER BY id DESC;'
     return db.query(queryText, [userId])
       .then((response) => response.rows)
   }
 
   static getAllByCommunity (communityId) {
-    const queryText = 'SELECT * FROM posts WHERE community_id = $1;'
+    const queryText = 'SELECT * FROM posts WHERE community_id = $1 ORDER BY id DESC;'
     return db.query(queryText, [communityId]).then(response => response.rows)
   }
 
   static getSomeByCommunity (communityId) {
-    const queryText = 'SELECT * FROM posts WHERE community_id = $1 LIMIT 2;'
+    const queryText = 'SELECT * FROM posts WHERE community_id = $1 LIMIT 2 ORDER BY id DESC;'
     return db.query(queryText, [communityId]).then(response => response.rows)
   }
 }

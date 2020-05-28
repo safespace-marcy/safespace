@@ -2,7 +2,7 @@ const db = require('../db')
 
 class Comments {
   static create (userId, postId, content) {
-    const queryText = 'INSERT INTO comments (user_id, post_id, content, title) VALUES ($1, $2, $3);'
+    const queryText = 'INSERT INTO comments (user_id, post_id, content) VALUES ($1, $2, $3);'
     return db.query(queryText, [userId, postId, content])
   }
 

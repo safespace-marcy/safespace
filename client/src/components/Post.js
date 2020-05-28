@@ -1,20 +1,24 @@
 import React, { useState, useEffect, useContext } from 'react'
-import { Item, Icon, Button } from 'semantic-ui-react'
+import { Item, Icon, Button, Dropdown, Form } from 'semantic-ui-react'
 import { Card, Nav } from 'react-bootstrap'
 import { UserContext } from '../contexts/userContext'
 import CommentList from './CommentList'
 import ReadMoreReact from 'read-more-react'
 import { LinkContainer } from 'react-router-bootstrap'
+import WritePostForm from './WritePostForm'
+import Update from './Update'
 
 function Post (props) {
+  const [newPost, setNewPost] = useState(false)
   const { user } = useContext(UserContext)
   const [likes, setLikes] = useState([])
   const [comments, setComments] = useState(null)
   const [isCommentsShowing, setIsCommentsShowing] = useState(false)
   const [isLiked, setIsLiked] = useState(false)
   const dateCreated = new Date(props.data.created_at)
+  const [userComment, setUserComment] = useState()
   const months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December']
-  // console.log(props.data)
+  const [show, setShow] = useState(false)
   useEffect(() => {
     const getLikes = async () => {
       const req = await fetch(`/likes/${props.data.id}`)
@@ -76,6 +80,33 @@ function Post (props) {
     }
   }
 
+  const deletePost = (id) => {
+    fetch(`/posts/${id}`, {
+      method: 'DELETE',
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    })
+  }
+
+  function handleCommentChange (e) {
+    const currentComment = e.target.value
+    setUserComment(currentComment)
+  }
+
+  const createComment = async () => {
+    const postId = props.data.id
+    const content = userComment
+    const postComment = {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({ postId, content })
+    }
+    const req = await fetch('/comments', postComment)
+    const res = await req
+  }
   return (
 
     <Item style={{ width: '80%', marginLeft: '10%', marginTop: '30px', border: '2px solid black', padding: '15px', boxShadow: '2px 5px #888888' }}>
@@ -89,7 +120,17 @@ function Post (props) {
             </LinkContainer>
           ) : ''}
         </Item.Header>
-        <Button floated='right' circular icon='edit' />
+        {props.data.user_id === user.id && <Button floated='right'>
+          <Dropdown floated='right' icon='edit'>
+            <Dropdown.Menu>
+              <Dropdown.Item text='Delete' onClick={() => deletePost(props.data.id)} />
+              <Dropdown.Item text='Edit'>
+                <Update setNewPost={setNewPost} id={props.data.id} title={props.data.title} body={props.data.content} />
+              </Dropdown.Item>
+            </Dropdown.Menu>
+          </Dropdown>
+        </Button>}
+
         <Item.Meta>
           {months[dateCreated.getMonth()]} {dateCreated.getDate()}, {dateCreated.getFullYear()} {dateCreated.getHours()}:{dateCreated.getMinutes()} {dateCreated.getHours() >= 12 ? 'PM' : 'AM'}
         </Item.Meta>
@@ -107,9 +148,14 @@ function Post (props) {
           <Card.Link onClick={() => like()}>{isLiked ? 'Un-Like' : 'Like'}</Card.Link>
           <Card.Link onClick={() => getComments()}>Comments</Card.Link>
         </Item.Extra>
-        <div>
-          {isCommentsShowing && <CommentList data={comments} />}
-        </div>
+
+        {isCommentsShowing && <CommentList data={comments} />}
+
+        <Form>
+          <Form.TextArea width={12} onChange={handleCommentChange} />
+          <Form.Button content='Add Reply' labelPosition='right' icon='edit' primary onClick={() => createComment()} />
+        </Form>
+
       </Item.Content>
     </Item>
 

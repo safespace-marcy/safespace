@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import Form from 'react-bootstrap/Form'
 import Alert from 'react-bootstrap/Alert'
 
@@ -8,7 +8,24 @@ function WritePostForm (props) {
   const [title, setTitle] = useState('')
   const [body, setBody] = useState('')
   const [alert, setAlert] = useState(null)
-  const id = props.id
+  const [update, setUpdate] = useState(false)
+  const communityId = props.id
+  const postId = props.postId
+  useEffect(() => {
+    const isAnUpdate = () => {
+      console.log(props.update)
+      console.log(props.title, props.body)
+      setUpdate(props.update)
+      console.log(update)
+      if (update) {
+        setTitle(props.title)
+        setBody(props.body)
+        console.log(title, body)
+      }
+    }
+
+    isAnUpdate()
+  }, [update])
 
   function handleTitleChange (e) {
     const currentTitle = e.target.value
@@ -27,13 +44,25 @@ function WritePostForm (props) {
 
     // console.log(id)
     e.preventDefault()
-    const newPostInit = {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify({ title, body, id }) // TODO: add communityId from props
+    let newPostInit
+    if (update) {
+      newPostInit = {
+        method: 'PUT',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ title, body, postId })
+      }
+    } else {
+      newPostInit = {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ title, body, communityId })
+      }
     }
+
     const res = await fetch('/posts', newPostInit)
     if (res.status === 401) {
       return warn('Connection Error. Please try again later!')
@@ -44,7 +73,7 @@ function WritePostForm (props) {
       )
     }
     if (res.status === 201) {
-      props.setNewPost(prev => !prev)
+      // props.setNewPost(prev => !prev)
       props.setShow(false)
     }
   }
