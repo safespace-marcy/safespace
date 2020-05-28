@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react'
 import Form from 'react-bootstrap/Form'
 import Alert from 'react-bootstrap/Alert'
-
-import { Input, TextArea, Button } from '@gympass/yoga'
+import Button from 'react-bootstrap/Button'
+import { Input, TextArea } from '@gympass/yoga'
 
 function WritePostForm (props) {
   const [title, setTitle] = useState('')

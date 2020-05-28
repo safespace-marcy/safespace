@@ -32,7 +32,6 @@ const Community = () => {
     getCommunity()
     getPosts()
   }, [id])
-  console.log(posts)
   return (
     <div>
       <Jumbotron>

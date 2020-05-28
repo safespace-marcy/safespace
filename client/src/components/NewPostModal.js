@@ -14,7 +14,7 @@ function NewPostModal (props) {
     // <>
     <div>
       <Navbar fixed='bottom'>
-        <Button size='medium' style={{ color: colorPallet.marvel }} circular icon='add' onClick={handleShow} />
+        <Button label="Write Post" labelPosition="left" size='massive' color="green" style={{ color: colorPallet.marvel }} circular icon='edit' onClick={handleShow} />
 
         <Modal show={show} onHide={handleClose} animation={false}>
           <Modal.Header closeButton>New Post</Modal.Header>
