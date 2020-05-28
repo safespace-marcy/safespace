@@ -2,7 +2,6 @@ import React, { useState, useEffect, useContext, useRef } from 'react'
 import { TextArea, Button, Container, Comment, Header, Icon, Image, Radio, Label, Menu, Tab } from 'semantic-ui-react'
 import { Navbar, Modal } from 'react-bootstrap'
 import Message from './Message'
-import OnlineUsers from './OnlineUsers'
 import { colorPallet } from './Theme'
 import { UserContext } from '../contexts/userContext'
 import io from 'socket.io-client'
@@ -89,7 +88,7 @@ const Chat = () => {
 
   const panes = [
   {
-    menuItem: { key: 'users', icon: 'users', content: 'Users' },
+    menuItem: { key: 'users', icon: 'users', content: 'Online Users' },
     render: () => {
       return onlineUsers.map((user, index) => {
         if(user.socketId !== yourId){
