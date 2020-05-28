@@ -23,7 +23,7 @@ function NewsFeed () {
     <div>
       <Loader style={{ display: 'flex', alignItems: 'center' }} indeterminate active>Loading Feed...</Loader>
     </div>
-  ) : (
+    ) : (
     <>
       <NewPostModal setNewPost={setNewPost} />
       <Item.Group>

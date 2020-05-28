@@ -113,13 +113,14 @@ function Post (props) {
 
       <Item.Image src='https://react.semantic-ui.com/images/wireframe/image.png' />
       <Item.Content>
-        <Item.Header as='a'>{props.data.title}
-          {userResponse ? (
+        <Item.Header as='a'>
+          {props.data.title}
+        </Item.Header>
+        {userResponse ? (
             <LinkContainer to={`/user/${userResponse.id}`}>
               <Nav.Link>{userResponse.username}</Nav.Link>
             </LinkContainer>
           ) : ''}
-        </Item.Header>
         {props.data.user_id === user.id && <Button floated='right'>
           <Dropdown floated='right' icon='edit'>
             <Dropdown.Menu>
