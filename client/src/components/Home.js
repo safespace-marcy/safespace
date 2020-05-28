@@ -1,44 +1,47 @@
-import React, { useContext, useEffect, useState } from 'react'
-import { UserContext } from '../contexts/userContext'
-import { Loader } from 'semantic-ui-react'
-import { Link } from 'react-router-dom'
+import React, { useContext, useEffect, useState } from "react";
+import { UserContext } from "../contexts/userContext";
+import { Loader } from "semantic-ui-react";
+import { Link } from "react-router-dom";
 
 const Home = () => {
-  const { user } = useContext(UserContext)
-  const [communities, setCommunities] = useState(null)
+  const { user } = useContext(UserContext);
+  const [communities, setCommunities] = useState(null);
 
   useEffect(() => {
     const getCommunities = async () => {
       if (user) {
-        const req = await fetch(`/communitiesByUser/${user.id}`)
-        const list = await req.json()
-        console.log(list)
-        return list
+        const req = await fetch(`/communitiesByUser/${user.id}`);
+        const list = await req.json();
+        return list;
       }
-    }
-    getCommunities()
-      .then((list) => { setCommunities(list) })
-  }, [user])
+    };
+    getCommunities().then((list) => {
+      setCommunities(list);
+    });
+  }, [user]);
 
   return (
-    <div>{
-      communities != null && user != null
-        ? communities.map((community, i) => {
+    <div>
+      {communities != null && user != null ? (
+        communities.map((community, i) => {
           return (
             <Link key={i} to={`/news/${community.id}`}>
               <h1>{community.name}</h1>
             </Link>
-          )
+          );
         })
-        : (
-          <div>
-            <Loader style={{ display: 'flex', alignItems: 'center' }} indeterminate active>
-              Loading Feed...
-            </Loader>
-          </div>
-        )
-    }
+      ) : (
+        <div>
+          <Loader
+            style={{ display: "flex", alignItems: "center" }}
+            indeterminate
+            active
+          >
+            Loading Feed...
+          </Loader>
+        </div>
+      )}
     </div>
-  )
-}
-export default Home
+  );
+};
+export default Home;
