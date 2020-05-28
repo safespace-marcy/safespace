@@ -16,8 +16,24 @@ function Communities () {
         if (res.status === 200) return res.json()
         return []
       })
+      .then((json) => checkCommunities(user.id, json))
       .then((json) => setResponse(json))
   }, [setResponse])
+
+  const checkCommunities = async(id,json) => {
+    const req = await fetch(`/communitiesByUser/${id}`)
+    const res = await req.json()
+    console.log(res)
+    console.log(json)
+    for(let i = 0; i < res.length; i++){
+      for(let t = 0; t < json.length; t++){
+        if(res[i].id === json[t].id){
+          json.splice(t, 1)
+        }
+      }
+    }
+    return json
+  }
 
   async function join (userId, communityId) {
     setCommunity(communityId)

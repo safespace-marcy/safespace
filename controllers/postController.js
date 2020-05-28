@@ -2,9 +2,9 @@ const Post = require('../models/Posts')
 
 const create = (req, res) => {
   const { userId } = req
-  const { body, id, title } = req.body
+  const { body, communityId, title } = req.body
 
-  Post.create(userId, id, body, title)
+  Post.create(userId, communityId, body, title)
     .then(() => res.sendStatus(201))
     .catch(err => {
       console.log(err)
@@ -24,11 +24,10 @@ const deletePost = (req, res) => {
 }
 
 const update = (req, res) => {
-  const { id } = req.params
-  const { title, content } = req.body
+  const { title, body, postId } = req.body
 
-  Post.update(content, id, title)
-    .then(() => res.sendStatus(200))
+  Post.update(body, postId, title)
+    .then(() => res.sendStatus(201))
     .catch(err => {
       console.log(err)
       res.status(500).json({ error: '500 Internal Server Error' })
