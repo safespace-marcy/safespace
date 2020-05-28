@@ -5,6 +5,8 @@ exports.up = function (knex) {
     t.string('username', 32).unique().notNullable()
     t.string('email', 50).unique().notNullable()
     t.text('password').notNullable()
+    t.string('sprite')
+    t.string('seed')
     t.timestamp('created_at').defaultTo(knex.fn.now())
   })
 }

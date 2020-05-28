@@ -3,8 +3,8 @@ import { Card, Spinner, Button } from 'react-bootstrap'
 import { UserContext } from '../contexts/userContext'
 import { Redirect } from 'react-router-dom'
 
+/**  */
 function Communities () {
-  const [alert, setAlert] = useState(null)
   const [response, setResponse] = useState([])
   const [community, setCommunity] = useState()
   const [joined, setJoined] = useState(false)

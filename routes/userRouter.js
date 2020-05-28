@@ -10,5 +10,6 @@ userRouter.get('/logout', userController.logout)
 userRouter.delete('/user', authenticate, userController.deleteAccount)
 userRouter.get('/user', authenticate, userController.getUser)
 userRouter.get('/user/:userId', authenticate, userController.getOtherUser)
+userRouter.get('/all-users', authenticate, userController.getAll)
 
 module.exports = userRouter

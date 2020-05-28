@@ -1,29 +1,35 @@
 import React, { useContext, useEffect, useState } from 'react'
-import Logout from './Logout'
 import { UserContext } from '../contexts/userContext'
 import { Navbar, Nav, NavDropdown } from 'react-bootstrap'
+import { Redirect } from 'react-router-dom'
 import { LinkContainer } from 'react-router-bootstrap'
 import { colorPallet } from './Theme'
-import { Dropdown } from '@gympass/yoga'
 
 const NavBar = () => {
-  const { user } = useContext(UserContext)
+  const { user, setUser } = useContext(UserContext)
   const [communities, setCommunities] = useState(null)
+  const [loggedOut, setLoggedOut] = useState(false)
 
   useEffect(() => {
     const getCommunities = async () => {
       if (user) {
         const req = await fetch(`/communitiesByUser/${user.id}`)
         const list = await req.json()
-        console.log(list)
         return list
       }
     }
     getCommunities()
       .then((list) => { setCommunities(list) })
-  }, [user])
+  }, [user, setCommunities])
 
-  console.log(communities)
+  useEffect(() => {
+    if (loggedOut) {
+      fetch('/logout')
+        .then(() => setUser(null))
+        .then(() => setLoggedOut(true))
+    }
+  }, [loggedOut])
+
   return (
     <Navbar sticky='top' style={{ backgroundColor: colorPallet.marvel }} expand='lg'>
       <LinkContainer style={{ color: 'white' }} to='/'>
@@ -48,7 +54,7 @@ const NavBar = () => {
 
               <NavDropdown title='Newsfeeds' style={{ color: 'white' }} id='basic-nav-dropdown'>
                 {communities.map((community) => {
-                  return <NavDropdown.Item key={community.name}>
+                  return <NavDropdown.Item style={{ color: 'white' }} key={community.name}>
                     <LinkContainer to={`/news/member/${community.id}`}>
                       <Nav.Link>
                         {community.name}
@@ -59,9 +65,13 @@ const NavBar = () => {
               </NavDropdown>
 
               <LinkContainer style={{ color: 'white' }} to='/spaces'>
-                <Nav.Link>Safe Spaces</Nav.Link>
+                <Nav.Link>Spaces</Nav.Link>
               </LinkContainer>
-              <Logout />
+              <LinkContainer style={{ color: 'white' }} to='/chat'>
+                <Nav.Link>Chat</Nav.Link>
+              </LinkContainer>
+              <Nav.Link onClick={() => setLoggedOut(true)}>Logout</Nav.Link>
+              {loggedOut && <Redirect to='/' />}
             </>
 
           ) : (
