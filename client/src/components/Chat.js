@@ -1,6 +1,9 @@
 import React, { useState, useEffect, useContext, useRef } from 'react'
-import { TextArea, Button, Container, Comment, Header, Icon, Image, Radio, Label, Menu, Tab } from 'semantic-ui-react'
-import { Navbar, Modal } from 'react-bootstrap'
+import {
+  TextArea, Button, Container, Comment,
+  Header, Icon, Image, Radio,
+  Label, Menu, Tab } from 'semantic-ui-react'
+import { Navbar, Modal, Overlay, Tooltip, OverlayTrigger } from 'react-bootstrap'
 import Message from './Message'
 import { colorPallet } from './Theme'
 import { UserContext } from '../contexts/userContext'
@@ -14,12 +17,15 @@ const Chat = () => {
   const [contact, setContact] = useState({})
   const [onlineUsers, setOnlineUsers] = useState([])
   const [modalShow, setModalShow] = useState(false)
+  const [isOnline, setIsOnline] = useState(false)
+  const [newMessage, setNewMessage] = useState(0)
 
   const socketRef = useRef()
 
   // Upon recieving messages, this functions updates its chatlog with the most recent chats
   const receivedMessage = (message) => {
     setChatLog((oldMsgs) => [...oldMsgs, message])
+    setNewMessage((msgCount) => msgCount + 1)
   }
 
   // Gets the current time in MM/DD/YYYY HH:MM AM/PM format
@@ -67,6 +73,13 @@ const Chat = () => {
       sprite: user.sprite
     }
     socketRef.current.emit('online', userRef)
+    setIsOnline(true)
+  }
+
+  // Signals to the server that the user is offline
+  const goOffline = () => {
+    socketRef.current.emit('go offline')
+    setIsOnline(false)
   }
 
   // This listens for socket.io events and executes callbacks in response
@@ -114,17 +127,22 @@ const Chat = () => {
   },
   {
     menuItem: (
-      <Menu.Item key='messages'>
-        Messages<Label>{chatLog.length}</Label>
+      <Menu.Item onClick={() => setNewMessage(0)} key='messages'>
+        Messages<Label>{newMessage}</Label>
       </Menu.Item>
     ),
     render: () => {
       return(
-        <Comment.Group id='chatBox' style={{marginTop: '10px ', overflow: 'auto', height: '300px', border:"3px solid #a7abaf", width:"100%", padding:"25px" }}>
+        <Comment.Group size="large" id='chatBox' style={{marginTop: '10px ', overflow: 'auto', height: '300px', border:"3px solid #a7abaf", width:"100%", padding:"25px" }}>
           {
             chatLog.map((message, index) => {
+              if(message.socketId === yourId){
+                return (
+                  <Message key={index} isPrivate={true} message={message.body} author={message.username} sentAt={message.sentAt} />
+                )
+              }
               return (
-                <Message key={index} message={message.body} author={message.username} sentAt={message.sentAt} />
+                <Message key={index} isPrivate={false} message={message.body} author={message.username} sentAt={message.sentAt} />
               )
             })
           }
@@ -148,7 +166,34 @@ const Chat = () => {
       </Navbar>
       <Navbar expand='lg'>
         <Container>
-          <Radio toggle onChange={() => goOnline(yourId)} label="Go Online"/>
+          <OverlayTrigger
+        key='overlay'
+        placement='right'
+        overlay={
+          <Tooltip id={`tooltip-right`}>
+            Anyone can private message you when online.
+          </Tooltip>
+        }
+      >
+      <Radio toggle onChange={() => {
+          isOnline ? goOffline() : goOnline(yourId)}
+
+        } label={isOnline ? 'Online' : 'Offline'}/>
+      </OverlayTrigger>{' '}
+        <div>
+          {contact.socketId &&
+            <Comment
+              style={{marginLeft:"25px", marginTop:"20px"}}
+              key="contact"
+              >
+              <Comment.Avatar src={`https://react.semantic-ui.com/images/avatar/small/joe.jpg`} />
+              <Comment.Content>
+                Private Messaging:
+                <Comment.Author as='a'>{` ${contact.username}`}</Comment.Author>
+              </Comment.Content>
+            </Comment>
+          }
+        </div>
         </Container>
       </Navbar>
       <Tab panes={panes} />

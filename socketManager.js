@@ -15,14 +15,28 @@ module.exports = (socket) => {
     }
     onlineUsers.push(userRef)
     io.emit('update', onlineUsers)
-    console.log(onlineUsers)
   })
   // Sends the message to sender and specified reciever
   socket.on('send message', (body) => {
-    io.to(socket.id).emit('message', body)
-    io.to(body.socketId).emit('message', body)
+    if (!body.socketId) {
+      io.to(socket.id).emit('message', body)
+      socket.broadcast.emit('message', body)
+    } else {
+      io.to(socket.id).emit('message', body)
+      io.to(body.socketId).emit('message', body)
+    }
+
   })
-  // Removes users from onlineUsers array upon disconnection
+  // Removes users from onlineUsers array upon going offline
+  socket.on('go offline', () => {
+    for(let i = 0; i < onlineUsers.length; i+=1){
+      if(onlineUsers[i].socketId === socket.id){
+        onlineUsers.splice(i, 1)
+      }
+    }
+    io.emit('update', onlineUsers)
+  })
+  // Removes users from onlineUsers array upon disconnection from socket
   socket.on('disconnect', () => {
     for(let i = 0; i < onlineUsers.length; i+=1){
       if(onlineUsers[i].socketId === socket.id){
@@ -30,7 +44,6 @@ module.exports = (socket) => {
       }
     }
     io.emit('update', onlineUsers)
-    console.log(onlineUsers)
   })
 
 }
