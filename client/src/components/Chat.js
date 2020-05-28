@@ -106,14 +106,13 @@ const Chat = () => {
       return onlineUsers.map((user, index) => {
         if(user.socketId !== yourId){
           return (
-
               <Comment
                 style={{marginLeft:"25px", marginTop:"20px"}}
                 key={index}
                 onClick={() => {
                   chooseContact(user)
                 }} >
-                <Comment.Avatar src={`https://react.semantic-ui.com/images/avatar/small/elliot.jpg`} />
+                <Comment.Avatar style={{width:"50px", height: "55px"}} src={`https://avatars.dicebear.com/api/${user.sprite}/${user.seed}.svg`} />
                 <Comment.Content>
                   <Comment.Author as='a'>{user.username}</Comment.Author>
                 </Comment.Content>
@@ -133,20 +132,22 @@ const Chat = () => {
     ),
     render: () => {
       return(
-        <Comment.Group size="large" id='chatBox' style={{marginTop: '10px ', overflow: 'auto', height: '300px', border:"3px solid #a7abaf", width:"100%", padding:"25px" }}>
-          {
-            chatLog.map((message, index) => {
-              if(message.socketId === yourId){
+        <div style={{display:"flex", justifyContent:"center"}}>
+          <Comment.Group size="large" id='chatBox' style={{marginTop: '25px', overflow: 'auto', height: '400px', border:"3px solid #a7abaf", width:"100%", padding:"25px" }}>
+            {
+              chatLog.map((message, index) => {
+                if(message.socketId === yourId){
+                  return (
+                    <Message key={index} isPrivate={true} message={message.body} author={message.username} sentAt={message.sentAt} sprite={message.sprite} seed={message.seed} yourId={yourId} contact={contact}/>
+                  )
+                }
                 return (
-                  <Message key={index} isPrivate={true} message={message.body} author={message.username} sentAt={message.sentAt} />
+                  <Message key={index} isPrivate={false} message={message.body} author={message.username} sentAt={message.sentAt} sprite={message.sprite} seed={message.seed} yourId={yourId} contact={contact}/>
                 )
-              }
-              return (
-                <Message key={index} isPrivate={false} message={message.body} author={message.username} sentAt={message.sentAt} />
-              )
-            })
-          }
-        </Comment.Group>
+              })
+            }
+          </Comment.Group>
+        </div>
       )
        }
   },
@@ -180,13 +181,19 @@ const Chat = () => {
 
         } label={isOnline ? 'Online' : 'Offline'}/>
       </OverlayTrigger>{' '}
+
         <div>
+          { contact.socketId && <Button
+            onClick={() => {
+              setContact({})
+            }} content='Leave private'
+          />}
           {contact.socketId &&
             <Comment
-              style={{marginLeft:"25px", marginTop:"20px"}}
+              style={{marginLeft:"25px", marginTop:"10px"}}
               key="contact"
               >
-              <Comment.Avatar src={`https://react.semantic-ui.com/images/avatar/small/joe.jpg`} />
+              <Comment.Avatar style={{width:"50px", height: "55px"}} src={`https://avatars.dicebear.com/api/${contact.sprite}/${contact.seed}.svg`} />
               <Comment.Content>
                 Private Messaging:
                 <Comment.Author as='a'>{` ${contact.username}`}</Comment.Author>
@@ -194,6 +201,8 @@ const Chat = () => {
             </Comment>
           }
         </div>
+
+
         </Container>
       </Navbar>
       <Tab panes={panes} />
