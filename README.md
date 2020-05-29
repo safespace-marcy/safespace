@@ -58,7 +58,7 @@ See [CONTRIBUTING.md](CONTRIBUTING.md) for contribution guidelines.
 
 ## Style Guide
 
-This project adheres to the [StandardJS Style Guide](https://github.com/standard/standard).
+This project adheres to the [Eslint Guide](https://github.com/eslint/eslint) and [Prettier](https://github.com/prettier/prettier).
 
 ## Entity-Relationship Diagram
 
