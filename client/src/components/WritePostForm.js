@@ -14,7 +14,7 @@ function WritePostForm(props) {
   useEffect(() => {
     const isAnUpdate = () => {
       setUpdate(props.update);
-    
+
       if (update) {
         setTitle(props.title);
         setBody(props.body);

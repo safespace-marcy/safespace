@@ -1,81 +1,81 @@
-const bcrypt = require('bcrypt')
+const bcrypt = require("bcrypt");
 
 /** Must be exec'd synhronously for it to work */
-function makeHashedPass (plainTxtPassword) {
-  const saltRounds = 7
-  const hash = bcrypt.hashSync(plainTxtPassword, saltRounds)
-  return hash
+function makeHashedPass(plainTxtPassword) {
+  const saltRounds = 7;
+  const hash = bcrypt.hashSync(plainTxtPassword, saltRounds);
+  return hash;
 }
 
 exports.seed = async function (knex) {
-  await knex('users').del()
+  await knex("users").del();
 
-  const SEED_USER_PASSWORD = 'helloThereKid!77'
+  const SEED_USER_PASSWORD = "helloThereKid!77";
 
   // 9 users
-  return knex('users').insert(
-    [{
-      username: 'seedUser1',
-      email: 'seeduser1@mail.com',
+  return knex("users").insert([
+    {
+      username: "hdaytona",
+      email: "holly@mail.com",
       password: makeHashedPass(SEED_USER_PASSWORD),
-      sprite: 'human',
-      seed: 'F8dj8'
+      sprite: "female",
+      seed: "134567dzm,lc",
     },
     {
-      username: 'seal125',
-      email: 'wee@woo.com',
+      username: "seal125",
+      email: "wee@woo.com",
       password: makeHashedPass(SEED_USER_PASSWORD),
-      sprite: 'human',
-      seed: 'F8dj7'
+      sprite: "female",
+      seed: "seal1scool",
     },
     {
-      username: 'pHarbo',
-      email: 'pharbo@mail.com',
+      username: "enmanuelD",
+      email: "enmanuel@mail.com",
       password: makeHashedPass(SEED_USER_PASSWORD),
-      sprite: 'human',
-      seed: 'F8dj6'
+      sprite: "human",
+      seed: "F8dj5",
     },
     {
-      username: 'enmanuelD',
-      email: 'enmanuel@mail.com',
+      username: "devonte202",
+      email: "devg@mail.com",
       password: makeHashedPass(SEED_USER_PASSWORD),
-      sprite: 'human',
-      seed: 'F8dj5'
+      sprite: "male",
+      seed: "devonte",
     },
     {
-      username: 'devonteG',
-      email: 'devG@mail.com',
+      username: "koolkat",
+      email: "mdln@mail.com",
       password: makeHashedPass(SEED_USER_PASSWORD),
-      sprite: 'human',
-      seed: 'F8dj4'
+      sprite: "female",
+      seed: "wdwa",
     },
     {
-      username: 'anneDHya',
-      email: 'anneD@mail.com',
+      username: "cieloRey",
+      email: "cielo@mail.com",
       password: makeHashedPass(SEED_USER_PASSWORD),
-      sprite: 'human',
-      seed: 'F8dj3'
+      sprite: "human",
+      seed: "F8dj2",
     },
     {
-      username: 'cieloRey',
-      email: 'cielo@mail.com',
+      username: "cindyxz",
+      email: "cindia@mail.com",
       password: makeHashedPass(SEED_USER_PASSWORD),
-      sprite: 'human',
-      seed: 'F8dj2'
+      sprite: "female",
+      seed: "wdaki",
     },
     {
-      username: 'flipzChoco',
-      email: 'choco@mail.com',
+      username: "sword_nick",
+      email: "nick@mail.com",
       password: makeHashedPass(SEED_USER_PASSWORD),
-      sprite: 'human',
-      seed: 'F8dj1'
+      sprite: "male",
+      seed: "fif8eh3fd",
     },
     {
-      username: 'true_color',
-      email: 'colors@mail.com',
+      username: "paulyy",
+      email: "paul@mail.com",
       password: makeHashedPass(SEED_USER_PASSWORD),
-      sprite: 'human',
-      seed: 'F8djA'
-    }
-    ])
-}
+      sprite: "male",
+      seed: "rawxges3466hbdhla;p[042195kfksufnm,xcu4093jnvksudme,kow3jri2i",
+    },
+  ]);
+};
