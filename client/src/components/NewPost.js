@@ -10,6 +10,8 @@ import {
   Form,
   Item,
   Dropdown,
+  Icon,
+  Label
 } from "semantic-ui-react";
 import ReadMoreReact from "read-more-react";
 import { LinkContainer } from "react-router-bootstrap";
@@ -188,16 +190,27 @@ const Post = ({ data }) => {
         style={{ display: "flex", justifyContents: "space-between" }}
       >
         <Card.Description style={{ marginRight: "4px" }}>
-          {likes.length}
+           <Button as='div' labelPosition='left'>
+              <Label as='a' basic pointing='right'>
+                {likes.length}
+              </Label>
+              <Button style={isLiked ? {color:"#1FB6FF"} : {color:"white"}} onClick={() => likePost()} color="black" icon>
+                <Icon name='heart' />
+                {isLiked ? "Liked" : "Like"}
+              </Button>
+            </Button>
+
         </Card.Description>
-        <Card.Description
-          style={{ marginRight: "4px" }}
-          onClick={() => likePost()}
-        >
-          {isLiked ? "Un-Like" : "Like"}
+        <Card.Description>
+
         </Card.Description>
         <Card.Description onClick={() => getComments()}>
-          Comments
+          <Button color="black" animated>
+            <Button.Content style={{color:'white'}} visible>Comments</Button.Content>
+            <Button.Content hidden>
+              <Icon name='arrow right' />
+            </Button.Content>
+          </Button>
         </Card.Description>
       </Card.Content>
 

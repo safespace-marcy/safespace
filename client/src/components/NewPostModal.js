@@ -18,8 +18,8 @@ function NewPostModal(props) {
           label="Write Post"
           labelPosition="left"
           size="massive"
-          color="green"
-          style={{ color: colorPallet.marvel }}
+          color="black"
+          style={{ backgroundColor: colorPallet.marvel }}
           circular
           icon="edit"
           onClick={handleShow}

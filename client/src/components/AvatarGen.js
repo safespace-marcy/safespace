@@ -23,9 +23,6 @@ const AvatarGen = ({ seed, setSeed, sprite, setSprite }) => {
     return randomString;
   };
 
-  useEffect(() => {
-    setSeed(stringGenerator());
-  }, [setSeed]);
 
   return (
     <div style={{ marginBottom: "22px" }}>

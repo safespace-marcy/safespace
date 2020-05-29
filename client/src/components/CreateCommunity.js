@@ -4,6 +4,8 @@ import { Redirect } from "react-router-dom";
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
 import Alert from "react-bootstrap/Alert";
+import Card from "react-bootstrap/Card";
+import Container from "react-bootstrap/Container";
 import { Input, TextArea } from "@gympass/yoga";
 import AvatarPicker from "./AvatarGen";
 
@@ -14,7 +16,7 @@ const CreateCommunity = () => {
     displayName: "",
     headline: "",
     description: "",
-    seed: "",
+    seed: "safespace",
     sprite: "jdenticon",
   };
 
@@ -103,8 +105,17 @@ const CreateCommunity = () => {
   } = values;
 
   return (
-    <div>
-      <h2>Create Your Own Community</h2>
+    <div style={{ display: "flex", justifyContent: "center", marginTop: "10px" }}>
+      <Card style={{ width: "25rem", border: "0px" }}>
+        <Card.Body>
+          <Card.Title style={{ textAlign: "center" }}>
+            <h1>Create a Community</h1>
+          </Card.Title>
+          <Container
+            style={{ marginTop: "25px" }}
+            className="justify-content-md-center"
+            fluid="lg"
+          >
 
       <Form onSubmit={handleSubmit}>
         <AvatarPicker
@@ -113,34 +124,44 @@ const CreateCommunity = () => {
           setSeed={setAvatarSeed}
           setSprite={setAvatarType}
         />
-        <br />
-        <Input
-          name="communityName"
-          value={communityName}
-          onChange={handleChange}
-          type="text"
-          label="Community Name"
-          helper="This name is more like a 'username' and so must be unique"
-        />
-        <br />
-        <Input
-          name="displayName"
-          value={displayName}
-          onChange={handleChange}
-          type="text"
-          label="Display Name"
-          helper="This is the name others will see"
-        />
-        <br />
-        <Input
-          name="headline"
-          value={headline}
-          onChange={handleChange}
-          type="text"
-          label="Headline"
-          helper="Briefly summarize your community to attract like-minded people"
-        />
-        <br />
+        <div>
+          <Form.Group>
+            <Input
+              name="communityName"
+              value={communityName}
+              onChange={handleChange}
+              type="text"
+              label="Community Name"
+              helper="This name is more like a 'username' and so must be unique"
+            />
+          </Form.Group>
+        </div>
+        <div>
+          <Form.Group>
+            <Input
+              name="displayName"
+              value={displayName}
+              onChange={handleChange}
+              type="text"
+              label="Display Name"
+              helper="This is the name others will see"
+            />
+          </Form.Group>
+        </div>
+        <div>
+          <Form.Group>
+            <Input
+              name="headline"
+              value={headline}
+              onChange={handleChange}
+              type="text"
+              label="Headline"
+              helper="Briefly summarize your community to attract like-minded people"
+            />
+          </Form.Group>
+        </div>
+        <div>
+          <Form.Group>
         <TextArea
           name="description"
           value={description}
@@ -148,6 +169,8 @@ const CreateCommunity = () => {
           label="Description"
           helper="Tell everyone what this community is about!"
         />
+      </Form.Group>
+    </div>
         <>
           <h3>Description Suggestions</h3>
           <ul>
@@ -166,9 +189,13 @@ const CreateCommunity = () => {
               {err}
             </Alert>
           ))}
-        <Button type="submit">Create</Button>
+        <Button type="submit">Create Community</Button>
       </Form>
       {completed && <Redirect to="/" />}
+    </Container>
+  </Card.Body>
+</Card>
+
     </div>
   );
 };
