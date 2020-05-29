@@ -16,6 +16,7 @@
     "react-router-bootstrap": "^0.25.0",
     "react-router-dom": "^5.2.0",
     "react-scripts": "3.4.1",
+    "react-spring": "^8.0.27",
     "read-more-react": "^1.0.10",
     "semantic-ui-css": "^2.4.1",
     "semantic-ui-react": "^0.88.2",

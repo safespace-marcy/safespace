@@ -7,8 +7,8 @@ module.exports = (socket) => {
   socket.emit('your id', socket.id)
   // Saves connected user to an array
   socket.on('online', (userRef) => {
-    for(let i = 0; i < onlineUsers.length; i+=1){
-      if(onlineUsers[i].userId === userRef.userId){
+    for (let i = 0; i < onlineUsers.length; i += 1) {
+      if (onlineUsers[i].userId === userRef.userId) {
         socket.broadcast.emit('update', onlineUsers)
         return 'Already Online'
       }
@@ -25,12 +25,11 @@ module.exports = (socket) => {
       io.to(socket.id).emit('message', body)
       io.to(body.socketId).emit('message', body)
     }
-
   })
   // Removes users from onlineUsers array upon going offline
   socket.on('go offline', () => {
-    for(let i = 0; i < onlineUsers.length; i+=1){
-      if(onlineUsers[i].socketId === socket.id){
+    for (let i = 0; i < onlineUsers.length; i += 1) {
+      if (onlineUsers[i].socketId === socket.id) {
         onlineUsers.splice(i, 1)
       }
     }
@@ -38,12 +37,11 @@ module.exports = (socket) => {
   })
   // Removes users from onlineUsers array upon disconnection from socket
   socket.on('disconnect', () => {
-    for(let i = 0; i < onlineUsers.length; i+=1){
-      if(onlineUsers[i].socketId === socket.id){
+    for (let i = 0; i < onlineUsers.length; i += 1) {
+      if (onlineUsers[i].socketId === socket.id) {
         onlineUsers.splice(i, 1)
       }
     }
     io.emit('update', onlineUsers)
   })
-
 }

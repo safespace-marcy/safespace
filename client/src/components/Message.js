@@ -9,7 +9,7 @@ const Message = (props) => {
         <Comment.Author>{props.author}</Comment.Author>
         <Comment.Metadata>
           <div>{props.sentAt}</div>
-          {props.isPrivate && <div style={{color:"red"}}>{`${props.author} private messaged you`}</div>}
+          {props.isPrivate && <div style={{ color: 'red' }}>{`${props.author} private messaged you`}</div>}
         </Comment.Metadata>
         <Comment.Text>
           <p>
