@@ -71,8 +71,8 @@ function Communities() {
       {joined && <Redirect to={`/news/member/${community}`} />}
       <div style={{ textAlign: "center" }}>
 
-        <h1>Safe Spaces To Join!</h1>
-        <LinkContainer to='create-community'>
+        <h1 style={{marginBottom:"20px"}} >Safe Spaces To Join!</h1>
+        <LinkContainer style={{marginBottom:"20px"}} to='create-community'>
           <Button>Create a Community</Button>
         </LinkContainer>
 
@@ -80,8 +80,8 @@ function Communities() {
           {response.map((res, index) => (
             <Card style={{ marginBottom: "35px" }} key={index}>
               <Card.Body>
-                <Card.Title>{res.name}</Card.Title>
-                <Card.Text>{res.description}</Card.Text>
+                <Card.Title>{res.display_name}</Card.Title>
+                <Card.Text>{res.headline}</Card.Text>
               </Card.Body>
               <div
                 style={{

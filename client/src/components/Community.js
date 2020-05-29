@@ -48,6 +48,9 @@ const Community = () => {
   return (
     <div>
       <Jumbotron>
+        <Feed.Event>
+          <Feed.Label style={{width:"50px"}} image={`https://avatars.dicebear.com/api/${community.sprite}/${community.seed}.svg`} />
+        </Feed.Event>
         <h1>{community.display_name}</h1>
         <p>{community.headline}</p>
       </Jumbotron>

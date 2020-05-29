@@ -85,8 +85,8 @@ const Landing = () => {
                   Create a space for yourself and others to gather around a shared experiences and provide support and motivation for one another.
 
               </Card.Text>
-              <LinkContainer to='/spaces'>
-                <Button variant='primary'>Browse Communities</Button>
+              <LinkContainer to='/create-community'>
+                <Button variant='primary'>Create a Community</Button>
               </LinkContainer>
             </Card.Body>
           </Card>
@@ -100,7 +100,9 @@ const Landing = () => {
             <Card.Text>
               Communicate with others and learn better ways to to cope from people who have dealt with and have overcamed the same experiences as you.
             </Card.Text>
-            <Button variant="primary">Find a Mentor</Button>
+            <LinkContainer to='/chat'>
+              <Button variant="primary">Find a Mentor</Button>
+            </LinkContainer>
           </Card.Body>
         </Card>
       </div>
@@ -113,7 +115,9 @@ const Landing = () => {
             <Card.Text>
               Have a space to tell your story and to be heard.
             </Card.Text>
-            <Button variant="primary">Tell Your Story</Button>
+            <LinkContainer to='/spaces'>
+            <Button variant="primary">Browse Communites</Button>
+            </LinkContainer>
           </Card.Body>
         </Card>
       </div>
