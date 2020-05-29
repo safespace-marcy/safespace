@@ -106,6 +106,7 @@ function Post(props) {
   }
 
   const createComment = async () => {
+    console.log('hello')
     const postId = props.data.id;
     const content = userComment;
     const postComment = {

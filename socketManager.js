@@ -18,11 +18,10 @@ module.exports = (socket) => {
   });
   // Sends the message to sender and specified reciever
   socket.on("send message", (body) => {
+    io.to(socket.id).emit("message", body);
     if (!body.socketId) {
-      io.to(socket.id).emit("message", body);
       socket.broadcast.emit("message", body);
     } else {
-      io.to(socket.id).emit("message", body);
       io.to(body.socketId).emit("message", body);
     }
   });

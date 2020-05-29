@@ -10,8 +10,8 @@ import {
   Form,
   Item,
   Dropdown,
-  Label,
-  Icon
+  Icon,
+  Label
 } from "semantic-ui-react";
 import ReadMoreReact from "read-more-react";
 import { LinkContainer } from "react-router-bootstrap";
@@ -189,25 +189,24 @@ const Post = ({ data }) => {
         extra
         style={{ display: "flex", justifyContents: "space-between" }}
       >
+        <Card.Description style={{ marginRight: "4px" }}>
+           <Button as='div' labelPosition='left'>
+              <Label as='a' basic pointing='right'>
+                {likes.length}
+              </Label>
+              <Button style={isLiked ? {color:"#1FB6FF"} : {color:"white"}} onClick={() => likePost()} color="black" icon>
+                <Icon name='heart' />
+                {isLiked ? "Liked" : "Like"}
+              </Button>
+            </Button>
+
+        </Card.Description>
         <Card.Description>
-        <Button as='div' labelPosition='left'>
-          <Label as='a' basic pointing='right'>
-            {likes.length}
-          </Label>
-          <Button icon
-            color='black'
-            style={isLiked ? { marginRight: "4px", color:"#1FB6FF" } : { marginRight: "4px", color:"white" }}
-            onClick={() => likePost()}
-            >
-            <Icon name='heart' />
-            {isLiked ? "Liked" : "Like"}
-          </Button>
-        </Button>
 
         </Card.Description>
         <Card.Description onClick={() => getComments()}>
-          <Button animated>
-            <Button.Content visible>Comments</Button.Content>
+          <Button color="black" animated>
+            <Button.Content style={{color:'white'}} visible>Comments</Button.Content>
             <Button.Content hidden>
               <Icon name='arrow right' />
             </Button.Content>
@@ -221,7 +220,6 @@ const Post = ({ data }) => {
           <Form reply>
             <Form.TextArea width={12} onChange={handleCommentChange} />
             <Button
-              style={{color:"#1FB6FF"}}
               onClick={() => createComment()}
               content="Add Reply"
               labelPosition="left"

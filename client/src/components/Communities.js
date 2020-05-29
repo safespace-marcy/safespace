@@ -1,7 +1,8 @@
 import React, { useState, useEffect, useContext } from "react";
-import { Card, Spinner, Button } from "react-bootstrap";
+import { Card, Spinner, Button, Jumbotron } from "react-bootstrap";
 import { UserContext } from "../contexts/userContext";
 import { Redirect } from "react-router-dom";
+import { LinkContainer } from "react-router-bootstrap";
 
 /** Wraps list of communities */
 function Communities() {
@@ -69,9 +70,15 @@ function Communities() {
       {visited && <Redirect to={`/news/visiter/${community}`} />}
       {joined && <Redirect to={`/news/member/${community}`} />}
       <div style={{ textAlign: "center" }}>
-        <div>
+
+        <h1>Safe Spaces To Join!</h1>
+        <LinkContainer to='create-community'>
+          <Button>Create a Community</Button>
+        </LinkContainer>
+
+        <div style={{marginLeft:'20vw',marginRight:'20vw'}}>
           {response.map((res, index) => (
-            <Card style={{ width: "50%", marginBottom: "35px" }} key={index}>
+            <Card style={{ marginBottom: "35px" }} key={index}>
               <Card.Body>
                 <Card.Title>{res.name}</Card.Title>
                 <Card.Text>{res.description}</Card.Text>
@@ -84,13 +91,13 @@ function Communities() {
                 }}
               >
                 <Button
-                  style={{ width: "20%" }}
+                  style={{ width: "22%" }}
                   onClick={() => join(user.id, res.id)}
                 >
                   Join
                 </Button>
                 <Button
-                  style={{ width: "20%" }}
+                  style={{ width: "22%" }}
                   onClick={() => visit(res.id)}
                   variant="secondary"
                 >
