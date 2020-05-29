@@ -30,8 +30,7 @@ exports.seed = async function (knex) {
       display_name: "Healings Giants",
       headline:
         "Healing Giants have magical powers of recovery from serious illness",
-      description:
-        "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam.",
+      description: "How are you recovering and healing?",
       sprite: "jdenticon",
       seed: "56jk45j",
     },
