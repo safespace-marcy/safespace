@@ -10,6 +10,8 @@ import {
   Form,
   Item,
   Dropdown,
+  Label,
+  Icon
 } from "semantic-ui-react";
 import ReadMoreReact from "read-more-react";
 import { LinkContainer } from "react-router-bootstrap";
@@ -187,17 +189,29 @@ const Post = ({ data }) => {
         extra
         style={{ display: "flex", justifyContents: "space-between" }}
       >
-        <Card.Description style={{ marginRight: "4px" }}>
-          {likes.length}
-        </Card.Description>
-        <Card.Description
-          style={{ marginRight: "4px" }}
-          onClick={() => likePost()}
-        >
-          {isLiked ? "Un-Like" : "Like"}
+        <Card.Description>
+        <Button as='div' labelPosition='left'>
+          <Label as='a' basic pointing='right'>
+            {likes.length}
+          </Label>
+          <Button icon
+            color='black'
+            style={isLiked ? { marginRight: "4px", color:"#1FB6FF" } : { marginRight: "4px", color:"white" }}
+            onClick={() => likePost()}
+            >
+            <Icon name='heart' />
+            {isLiked ? "Liked" : "Like"}
+          </Button>
+        </Button>
+
         </Card.Description>
         <Card.Description onClick={() => getComments()}>
-          Comments
+          <Button animated>
+            <Button.Content visible>Comments</Button.Content>
+            <Button.Content hidden>
+              <Icon name='arrow right' />
+            </Button.Content>
+          </Button>
         </Card.Description>
       </Card.Content>
 
@@ -207,6 +221,7 @@ const Post = ({ data }) => {
           <Form reply>
             <Form.TextArea width={12} onChange={handleCommentChange} />
             <Button
+              style={{color:"#1FB6FF"}}
               onClick={() => createComment()}
               content="Add Reply"
               labelPosition="left"
