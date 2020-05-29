@@ -6,8 +6,8 @@ import { useSpring, animated } from 'react-spring'
 
 
 const Landing = () => {
-  const { user } = useContext(UserContext)
-  const [communities, setCommunities] = useState(null)
+  const { user } = useContext(UserContext);
+  const [communities, setCommunities] = useState(null);
 
   const fadeInLeft = useSpring({
     from: {
@@ -34,23 +34,25 @@ const Landing = () => {
   useEffect(() => {
     const getCommunities = async () => {
       if (user) {
-        const req = await fetch(`/communitiesByUser/${user.id}`)
-        const list = await req.json()
-        return list
+        const req = await fetch(`/communitiesByUser/${user.id}`);
+        const list = await req.json();
+        return list;
       }
-    }
-    getCommunities()
-      .then((list) => { setCommunities(list) })
-  }, [user])
+    };
+    getCommunities().then((list) => {
+      setCommunities(list);
+    });
+  }, [user]);
 
 
   const JumbotronStyle = {
-    background: 'linear-gradient( rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7) ), url("https://img.rawpixel.com/s3fs-private/rawpixel_images/website_content/v211batch11-aum-561-cummunity_2.jpg?w=1200&dpr=1&fit=default&crop=default&q=65&vib=3&con=3&usm=15&bg=F4F4F3&ixlib=js-2.2.1&s=f0977b16acfb162ea9b439acec79e19e")',
-    backgroundPosition: 'center 35%',
-    backgroundSize: 'cover',
-    height: '350px',
-    borderRadius: '0px'
-  }
+    background:
+      'linear-gradient( rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7) ), url("https://img.rawpixel.com/s3fs-private/rawpixel_images/website_content/v211batch11-aum-561-cummunity_2.jpg?w=1200&dpr=1&fit=default&crop=default&q=65&vib=3&con=3&usm=15&bg=F4F4F3&ixlib=js-2.2.1&s=f0977b16acfb162ea9b439acec79e19e")',
+    backgroundPosition: "center 35%",
+    backgroundSize: "cover",
+    height: "350px",
+    borderRadius: "0px",
+  };
 
   return (
     <div>
@@ -67,9 +69,9 @@ const Landing = () => {
             </p>
           </div>
         </div>
-        <div style={{ display: 'flex', justifyContent: 'center' }}>
-          <LinkContainer to='/register' style={{ marginTop: '18px' }}>
-            <Button className='marvel-btn'>Create An Account</Button>
+        <div style={{ display: "flex", justifyContent: "center" }}>
+          <LinkContainer to="/register" style={{ marginTop: "18px" }}>
+            <Button className="marvel-btn">Create An Account</Button>
           </LinkContainer>
         </div>
       </Jumbotron>
@@ -96,9 +98,12 @@ const Landing = () => {
           <Card.Body>
             <Card.Title>Find Mentorship</Card.Title>
             <Card.Text>
-                Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+              Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do
+              eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
+              enim ad minim veniam, quis nostrud exercitation ullamco laboris
+              nisi ut aliquip ex ea commodo consequat.
             </Card.Text>
-            <Button variant='primary'>Find a Mentor</Button>
+            <Button variant="primary">Find a Mentor</Button>
           </Card.Body>
         </Card>
       </div>
@@ -109,15 +114,21 @@ const Landing = () => {
           <Card.Body>
             <Card.Title>Tell Your Story</Card.Title>
             <Card.Text>
-                Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+              Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do
+              eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
+              enim ad minim veniam, quis nostrud exercitation ullamco laboris
+              nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in
+              reprehenderit in voluptate velit esse cillum dolore eu fugiat
+              nulla pariatur. Excepteur sint occaecat cupidatat non proident,
+              sunt in culpa qui officia deserunt mollit anim id est laborum.
             </Card.Text>
-            <Button variant='primary'>Tell Your Story</Button>
+            <Button variant="primary">Tell Your Story</Button>
           </Card.Body>
         </Card>
       </div>
       </animated.div>
     </div>
-  )
-}
+  );
+};
 
-export default Landing
+export default Landing;

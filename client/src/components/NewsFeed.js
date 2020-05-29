@@ -1,27 +1,32 @@
-import React, { useState, useEffect } from 'react'
-import Post from './Post'
-import NewPostModal from './NewPostModal'
-import { useParams } from 'react-router-dom'
-import { Loader, Item } from 'semantic-ui-react'
+import React, { useState, useEffect } from "react";
+import Post from "./Post";
+import NewPostModal from "./NewPostModal";
+import { useParams } from "react-router-dom";
+import { Loader, Item } from "semantic-ui-react";
 
-function NewsFeed () {
-  const [response, setResponse] = useState(null)
-  const [newPost, setNewPost] = useState(false)
-  console.log(newPost)
-  const { id } = useParams()
+function NewsFeed() {
+  const [response, setResponse] = useState(null);
+  const [newPost, setNewPost] = useState(false);
+  const { id } = useParams();
 
   useEffect(() => {
     const getPost = async () => {
-      const req = await fetch(`/posts-community/${id}`)
-      const response = await req.json()
-      setResponse(response)
-    }
-    getPost()
-  }, [id])
+      const req = await fetch(`/posts-community/${id}`);
+      const response = await req.json();
+      setResponse(response);
+    };
+    getPost();
+  }, [id]);
 
   return response === null ? (
     <div>
-      <Loader style={{ display: 'flex', alignItems: 'center' }} indeterminate active>Loading Feed...</Loader>
+      <Loader
+        style={{ display: "flex", alignItems: "center" }}
+        indeterminate
+        active
+      >
+        Loading Feed...
+      </Loader>
     </div>
   ) : (
     <>
@@ -32,7 +37,7 @@ function NewsFeed () {
         ))}
       </Item.Group>
     </>
-  )
+  );
 }
 
-export default NewsFeed
+export default NewsFeed;
