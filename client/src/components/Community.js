@@ -17,10 +17,12 @@ const Community = () => {
       if (type === "member") {
         const req = await fetch(`/posts-community/${id}`);
         const response = await req.json();
+        console.log(response, "member");
         setPosts(response);
       } else {
         const req = await fetch(`/posts-community/visiter/${id}`);
         const response = await req.json();
+        console.log(response, "visiter");
         setPosts(response);
       }
     };
@@ -59,9 +61,8 @@ const Community = () => {
           <div style={{ width: "65%", margin: "0 auto" }}>
             <Card.Group>
               <NewPostModal setNewPost={setNewPost} id={id} />
-              {posts.map((res, i) => (
-                <Post key={i} data={res} />
-              ))}
+              {Array.isArray(posts) &&
+                posts.map((res, i) => <Post key={i} data={res} />)}
             </Card.Group>
           </div>
         </Tab>

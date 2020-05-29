@@ -10,7 +10,7 @@ function NewPostModal(props) {
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
   const contextRef = createRef();
-  
+
   return (
     <div>
       <Navbar fixed="bottom">

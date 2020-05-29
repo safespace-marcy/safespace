@@ -3,7 +3,7 @@ import { Card, Spinner, Button } from "react-bootstrap";
 import { UserContext } from "../contexts/userContext";
 import { Redirect } from "react-router-dom";
 
-/**  */
+/** Wraps list of communities */
 function Communities() {
   const [response, setResponse] = useState([]);
   const [community, setCommunity] = useState();
