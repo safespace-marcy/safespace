@@ -41,7 +41,7 @@ app.use(likesRouter);
 app.use(commentsRouter);
 app.use(modsRouter);
 app.get("*", (req, res) => {
-  res.sendFile(path.join(`${__dirname}/client/build/index.html`));
+  res.sendFile(path.join(__dirname + "/client/build/index.html"));
 });
 
 // Server is active on specified port
