@@ -1,5 +1,7 @@
 /// <reference types="node" />
 
 declare module "@gympass/yoga" {
-  export let ThemeProvider: any;
+  export const ThemeProvider: any;
+  export const Input: any;
+  export const Dropdown: any;
 }
