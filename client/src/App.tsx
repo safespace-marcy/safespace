@@ -5,7 +5,6 @@ import Login from "./components/Login";
 import Landing from "./components/Landing";
 import NavBar from "./components/Navbar";
 import Register from "./components/Register";
-import Home from "./components/Home";
 import NewsFeed from "./components/NewsFeed";
 import Communities from "./components/Communities";
 import Account from "./components/Account";
@@ -16,7 +15,7 @@ import Community from "./components/Community";
 import Chat from "./components/Chat";
 import CreateCommunity from "./components/CreateCommunity";
 
-const App = () => {
+const App: React.FC = () => {
   return (
     <Router>
       <ThemeProvider>
@@ -44,9 +43,6 @@ const App = () => {
               </Route>
               <Route path="/view/:id">
                 <Edit />
-              </Route>
-              <Route path="/home">
-                <Home />
               </Route>
               <Route path="/testCom/:id">
                 <Community />

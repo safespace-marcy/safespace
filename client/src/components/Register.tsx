@@ -10,8 +10,8 @@ function Register() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [isSubmitted, setIsSubmitted] = useState(false);
-  const [alert, setAlert] = useState(null);
-  const [redirect, setRedirect] = useState(null);
+  const [alert, setAlert] = useState("");
+  const [redirect, setRedirect] = useState(<></>);
   const [sprite, setSprite] = useState("female");
   const [seed, setSeed] = useState("safespace");
 
@@ -30,10 +30,10 @@ function Register() {
     });
   }
 
-  function warn(warningText) {
+  function warn(warningText: string) {
     setAlert(warningText);
     window.setTimeout(() => {
-      setAlert(null);
+      setAlert("");
     }, 5000);
   }
 
@@ -43,7 +43,11 @@ function Register() {
    * @param {string} email - The user's email address
    * @param {string} password - The user's password (to be hashed client-side and server-side)
    */
-  const validateInputs = (username, email, password) => {
+  const validateInputs = (
+    username: string,
+    email: string,
+    password: string
+  ) => {
     const usernameRegex = /\W/i;
     const emailRegex = /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/;
 
@@ -72,7 +76,7 @@ function Register() {
     return true;
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = (e: any) => {
     e.preventDefault();
     if (validateInputs(username, email, password)) {
       registerUser();
@@ -127,8 +131,8 @@ function Register() {
                     label="Username"
                     helper="Username must be longer than 6 characters"
                     value={username}
-                    onChange={(e) => setUsername(e.target.value)}
-                    onClean={(cleaned) => setUsername(cleaned)}
+                    onChange={(e: any) => setUsername(e.target.value)}
+                    onClean={(cleaned: string) => setUsername(cleaned)}
                   />
                 </Form.Group>
               </div>
@@ -140,8 +144,8 @@ function Register() {
                     label="Email"
                     helper="Enter an email address"
                     value={email}
-                    onChange={(e) => setEmail(e.target.value)}
-                    onClean={(cleaned) => setEmail(cleaned)}
+                    onChange={(e: any) => setEmail(e.target.value)}
+                    onClean={(cleaned: string) => setEmail(cleaned)}
                   />
                 </Form.Group>
               </div>
@@ -153,8 +157,8 @@ function Register() {
                     label="Password"
                     helper="Enter password longer than 8 characters"
                     value={password}
-                    onChange={(e) => setPassword(e.target.value)}
-                    onClean={(cleaned) => setPassword(cleaned)}
+                    onChange={(e: any) => setPassword(e.target.value)}
+                    onClean={(cleaned: string) => setPassword(cleaned)}
                   />
                 </Form.Group>
               </div>
