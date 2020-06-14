@@ -9,11 +9,11 @@ const Login = () => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [isSubmitted, setIsSubmitted] = useState(false);
-  const { user, setUser } = useContext(UserContext);
-  const [alert, setAlert] = useState(null);
+  const { user, setUser }: any = useContext(UserContext);
+  const [alert, setAlert] = useState("");
 
-  const sendCredentials = async (username, password) => {
-    const data = { username: username, password: password };
+  const sendCredentials = async (username: string, password: string) => {
+    const data: object = { username: username, password: password };
     fetch("/login", {
       method: "POST",
       headers: {
@@ -30,7 +30,7 @@ const Login = () => {
       .catch((err) => console.log(err));
   };
 
-  function submitForm(e) {
+  function submitForm(e: any) {
     e.preventDefault();
     sendCredentials(username, password);
     setIsSubmitted(true);
@@ -42,10 +42,10 @@ const Login = () => {
     }
   }
 
-  function warn(warningText) {
+  function warn(warningText: string) {
     setAlert(warningText);
     window.setTimeout(() => {
-      setAlert(null);
+      setAlert("");
     }, 5000);
   }
 
@@ -83,8 +83,8 @@ const Login = () => {
                     type="text"
                     label="Username"
                     value={username}
-                    onChange={(e) => setUsername(e.target.value)}
-                    onClean={(cleaned) => setUsername(cleaned)}
+                    onChange={(e: any) => setUsername(e.target.value)}
+                    onClean={(cleaned: string) => setUsername(cleaned)}
                   />
                 </Form.Group>
               </div>
@@ -95,8 +95,8 @@ const Login = () => {
                     type="password"
                     label="Password"
                     value={password}
-                    onChange={(e) => setPassword(e.target.value)}
-                    onClean={(cleaned) => setPassword(cleaned)}
+                    onChange={(e: any) => setPassword(e.target.value)}
+                    onClean={(cleaned: string) => setPassword(cleaned)}
                   />
                 </Form.Group>
               </div>
