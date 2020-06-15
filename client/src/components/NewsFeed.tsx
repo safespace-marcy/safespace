@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from "react";
-import Post from "./Post";
+import Post from "./NewPost";
 import NewPostModal from "./NewPostModal";
 import { useParams } from "react-router-dom";
 import { Loader, Item } from "semantic-ui-react";
 
 function NewsFeed() {
-  const [response, setResponse] = useState(null);
+  const [response, setResponse] = useState([]);
   const [newPost, setNewPost] = useState(false);
   const { id } = useParams();
 
@@ -32,7 +32,7 @@ function NewsFeed() {
     <>
       <NewPostModal setNewPost={setNewPost} />
       <Item.Group>
-        {response.map((res, i) => (
+        {response.map((res: any, i: number) => (
           <Post key={res.title + i} data={res} />
         ))}
       </Item.Group>
