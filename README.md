@@ -74,3 +74,7 @@ This project adheres to the [Eslint Guide](https://github.com/eslint/eslint) and
 - Sign Up - `/signup`
 - Homepage - `/` If logged in
 - Post Form - `/add-post`
+
+## App is deployed here:
+
+[https://safespace-marcy.herokuapp.com](https://safespace-marcy.herokuapp.com)
