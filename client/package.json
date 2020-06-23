@@ -33,7 +33,6 @@
   },
   "devDependencies": {
     "@types/react": "^16.9.36",
-    "eslint": "^7.1.0",
     "eslint-plugin-react": "^7.20.0",
     "styled-components": "^5.1.0",
     "typescript": "^3.9.5"
