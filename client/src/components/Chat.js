@@ -1,3 +1,4 @@
+/* eslint-disable react/display-name */
 import React, { useState, useEffect, useContext, useRef } from "react";
 import {
   TextArea,
@@ -77,10 +78,10 @@ const Chat = () => {
       seed: user.seed,
       sprite: user.sprite,
       sentAt: getTime(),
-      socketId: contact.socketId
-    }
-    socketRef.current.emit('send message', messageObject)
-  }
+      socketId: contact.socketId,
+    };
+    socketRef.current.emit("send message", messageObject);
+  };
   // Sets the message state as the input is populated
   const handleChange = (e) => {
     setMessage(e.target.value);

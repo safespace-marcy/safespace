@@ -6,7 +6,7 @@ import { Jumbotron } from "react-bootstrap";
 
 function OtherUser() {
   const { id } = useParams();
-  const [user, setUser] = useState("");
+  const [user, setUser] = useState({ username: "" });
   const [posts, setPosts] = useState([]);
 
   const getUser = async () => {

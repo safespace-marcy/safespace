@@ -7,6 +7,12 @@
     "@testing-library/jest-dom": "^4.2.4",
     "@testing-library/react": "^9.5.0",
     "@testing-library/user-event": "^7.2.1",
+    "@types/jest": "^26.0.0",
+    "@types/node": "^14.0.13",
+    "@types/react-dom": "^16.9.8",
+    "@types/react-router-bootstrap": "^0.24.5",
+    "@types/react-router-dom": "^5.1.5",
+    "@types/socket.io-client": "^1.4.33",
     "axios": "^0.19.2",
     "bootstrap": "^4.5.0",
     "jquery": "^3.5.1",
@@ -26,9 +32,10 @@
     "use-react-router": "^1.0.7"
   },
   "devDependencies": {
-    "eslint": "^7.1.0",
+    "@types/react": "^16.9.36",
     "eslint-plugin-react": "^7.20.0",
-    "styled-components": "^5.1.0"
+    "styled-components": "^5.1.0",
+    "typescript": "^3.9.5"
   },
   "peerDependencies": {
     "styled-components": ">= 3"

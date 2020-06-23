@@ -7,26 +7,27 @@ import { Jumbotron, Button } from "react-bootstrap";
 /**
  * Account Page: Shows all posts for logged in user
  */
+
 function Account() {
   const [posts, setPosts] = useState([]);
-  const { user } = useContext(UserContext);
-  const [userResponse, setUserResponse] = useState(null);
+  const { user }: any = useContext(UserContext);
+  const [userResponse, setUserResponse] = useState({});
 
   const getUser = async () => {
     const req = await fetch(`/user/${user.id}`);
-    const userResponse = await req.json();
-    setUserResponse(userResponse);
+    const res = await req.json();
+    setUserResponse(res);
   };
 
   useEffect(() => {
     getUser();
-  }, []);
+  }, [userResponse]);
 
   useEffect(() => {
     const getPost = async () => {
-      const res = await fetch(`/posts-user/${user.id}`);
-      const rawPosts = await res.json();
-      return setPosts(rawPosts);
+      const req = await fetch(`/posts-user/${user.id}`);
+      const res = await req.json();
+      return setPosts(res);
     };
     getPost();
   }, [user]);
@@ -40,7 +41,7 @@ function Account() {
           </Jumbotron>
           <div style={{ width: "65%", margin: "0 auto" }}>
             <Card.Group>
-              {posts.map((res, i) => (
+              {posts.map((res: any, i) => (
                 <Post key={res.title + i} data={res} />
               ))}
             </Card.Group>

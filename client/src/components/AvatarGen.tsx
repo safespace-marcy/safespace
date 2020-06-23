@@ -3,14 +3,19 @@ import { Image, Button } from "react-bootstrap";
 import { Dropdown } from "@gympass/yoga";
 import { colorPallet } from "./Theme";
 
-/**
- * Generated avatar. Props are values from useState
- * @param {string} seed   random string
- * @param {function} setSeed   sets seed
- * @param {string} sprite    type of avatar from api
- * @param {function} setSprite    set sprite
- */
-const AvatarGen = ({ seed, setSeed, sprite, setSprite }) => {
+interface AvatarProps {
+  seed: string;
+  sprite: string;
+  setSeed: any;
+  setSprite: any;
+}
+
+const AvatarGen: React.FC<AvatarProps> = ({
+  seed,
+  setSeed,
+  sprite,
+  setSprite,
+}) => {
   /** Generates a random string */
   const stringGenerator = () => {
     const characters = "abcdefghijklmnopqrstuvwxyz123456789";
@@ -22,7 +27,6 @@ const AvatarGen = ({ seed, setSeed, sprite, setSprite }) => {
     }
     return randomString;
   };
-
 
   return (
     <div style={{ marginBottom: "22px" }}>
@@ -44,7 +48,7 @@ const AvatarGen = ({ seed, setSeed, sprite, setSprite }) => {
           { label: "Robot", value: "bottts" },
           { label: "Jdenticon", value: "jdenticon" },
         ]}
-        onChange={(choice) => setSprite(choice.value)}
+        onChange={(choice: any) => setSprite(choice.value)}
       />
     </div>
   );
